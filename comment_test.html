@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评论demo</title>
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <style type="text/css">.comont_box{display: none;}
+        .show{display: block;}
+        .msg_box{background-color: #666; padding: 5px;color: #fff}
+        .msg_box.danger{background-color: #f58384;}
+        .msg_box.success{background-color: green;}
+</style>
+</head>
+<body>
+    <div id="commont_html">
+        <div class="left_box">
+            <ul>
+                <li v-for="(info,index) in weibo_list">
+                    第{{index+1}}条 {{info.name}}
+                    <el-button @click="show_commont_box(info)">评论</el-button>
+                    <div class="comont_box" v-bind:class="{'show':info.common_open}" >
+                        <el-input suffix-icon="el-icon-more" v-model="info.temp_common_content" @keyup.enter.native="send_commont(info)" ></el-input>
+
+                        
+                        <el-button @click="send_commont(info)" type="success">发送</el-button>
+                        <ul>
+                            <li v-for="commont in info.common_list">{{commont}}  
+                            <el-button @click="delete_commont(info,commont)" type="danger">删除</el-button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <smith-msg > 你还好吗？ </smith-msg>
+        <smith-msg type="danger" kk="sss"> 确定要删除吗？ </smith-msg>
+        <smith-msg type="success"> 添加成功！ </smith-msg>
+
+    </div>
+
+    <script type="text/javascript">
+
+        // 全局组件
+        // 写new Vue的前面
+        // 错误提醒、成功提醒、警告提醒
+        // slot 插槽，接收自定义组件，盒子里面的内容或html节点
+        // props  父组件的数据需要通过 prop 才能下发到子组件中
+        Vue.component("smith-msg",{
+            props:['type','kk'],
+            template:"<div class='msg_box' :class='type'>{{kk}}  <span><slot></slot></span></div>"
+        })
+        new Vue({
+            el:'#commont_html',
+            data:{
+                weibo_list:[
+                        {
+                            name:'光棍节',
+                            common_open:false,
+                            temp_common_content:'',//临时微博内容
+                            common_list:[] //评论列表
+                        },
+                        {
+                            name:'圣诞节',
+                            common_open:false,
+                            temp_common_content:'',
+                            common_list:[]
+                        },
+                ]
+            },
+            methods:{
+                show_commont_box:function (info) {
+                    // 显示评论框
+                    info.common_open = !info.common_open
+                },
+                send_commont:function (info) {
+                    // 发布评论
+                    // 获取输入框内容
+                    info.common_list.push(info.temp_common_content)
+                    info.temp_common_content = ''
+                },
+                delete_commont:function (info,commont) {
+                    // 评论是哪一个微博的？
+                    var cur_delete_commont_index = info.common_list.indexOf(commont)
+
+                    info.common_list.splice(cur_delete_commont_index,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
