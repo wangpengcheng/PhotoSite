@@ -182,7 +182,7 @@
         <div class="btns">
           <ul>
             <li sn="88344662" title="圣诞装饰红色星和古董婴儿鞋"><a href="javascript:void(0)" id="goodsinfo_add"> 下载原图</a></li>
-            <li sn="88344662" title="圣诞装饰红色星和古董婴儿鞋"><a href="javascript:void(0)" class="red" id="forward">查看评论</a></li>
+            <li sn="88344662" title="圣诞装饰红色星和古董婴儿鞋"><a href="./photo_commets_page.html" class="red" id="forward">查看评论</a></li>
           </ul>
         </div>
       </div>
@@ -1050,29 +1050,28 @@
   </div>
 </div>
 <div class="sidebar">
-  <ul>
-    <a href="javascript:void(0)">
-          <li class="n0"></li>
-          <div class="qr">
-            <img src="themes/meisu2017/imgs/img136.jpg">
-            <p>扫码加客服微信<br>  发现更多惊喜</p>
-          </div>
+    <ul>
+        <!--     <a href="">
+                  <li class='n0'></li>
+                  <div class="qr">
+                      <img src="./htmlimg/img136.jpg"/>
+                      <p>扫码加客服微信<br>	发现更多惊喜</p>
+                  </div>
+                </a>
+            <a href="">
+              <li class='n1'></li>
+            </a>
+            <a href="">
+              <li class='n2'></li>
+            </a>
+            <a href="" target="_blank">
+              <li class='n3' title="""></li>
+            </a> -->
+        <a href="">
+            <li class='n4'></li>
         </a>
-    <a href="flow.php">
-      <li class="n1"></li>
-    </a>
-    <a href="user.php?act=collection_list">
-      <li class="n2"></li>
-    </a>
-    <a href="http://p.qiao.baidu.com/cps/chat?siteId=11146853&amp;userId=24453643" target="_blank">
-      <li class="n3" title="在线咨询"></li>
-    </a>
-    <a href="#all_toper">
-      <li class="n4"></li>
-    </a>
-  </ul>
+    </ul>
 </div>
-
 <div id="authorization" class="d_none">
   <div class="transfer_wap_n">
     <input type="text" class="ui_input" name="authorized_name" id="authorized_name" value="" placeholder="被授权用户的公司全称" maxlength="50" autocomplete="off">
@@ -1344,7 +1343,7 @@ $(function(){
           if(data.error=='0'){
             $("#similar_goods_list").html(data.content.similar_goods_list);
             $("#username_goods_list").html(data.content.username_goods_list);
-            $(".container").rowGrid({itemSelector: ".item", minMargin: 10, maxMargin: 25, firstItemClass: "first-item"});
+           // $(".container").rowGrid({itemSelector: ".item", minMargin: 10, maxMargin: 25, firstItemClass: "first-item"});
           }
         },"json");
 });
