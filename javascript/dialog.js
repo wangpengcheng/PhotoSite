@@ -353,6 +353,7 @@ $(function(){
     
 	
 	//下载授权书弹窗
+    /*
 	$('.user_record table .xiazai').click(function(e){
 		var rec_id = $(this).attr('rec_id');
 		var _this = $(this);
@@ -371,12 +372,12 @@ $(function(){
 				 if($(ele).is('.on')){
 			                a_id=$(ele).attr('id');
 			          	}
-			})
+			});
 			if(a_id==0 && new_name==''){
 				dialog('请选择一个需要授权的用户',2);return false;
 			}
 				loading(1);
-				$.post("user.php?act=ajax_pdf",
+				$.post("http://www.meisupic.com/user.php?act=ajax_pdf",
 					{
 						title:new_name,a_id:a_id,rec_id:rec_id
 					},
@@ -386,7 +387,7 @@ $(function(){
 				      		layer.close(index);
 				      		var html = '<p class="xiazai_redown" rec_id="'+rec_id+'"><a href="javascript:void(0)">'+data.authorized_name+'</a></p>';
 				      		_this.parent().html(html);
-				      		windows_url('pdf.php?id='+data.content);
+				      		windows_url('http://www.meisupic.com/pdf.php?id='+data.content);
 					  }else{
 					  	dialog(data.message,1);
 					  }
@@ -399,20 +400,21 @@ $(function(){
 		$(".user_record table .xiazai_redown").on("click",function(e){
 		var rec_id = $(this).attr('rec_id');
 		loading(1);
-		$.post("user.php?act=ajax_pdf",
+		$.post("http://www.meisupic.com/user.php?act=ajax_pdf",
 			{
 				rec_id:rec_id
 			},
 		    function(data){
 		    loading(2);	
 		      if(data.error=='0'){
-		      		windows_url('pdf.php?id='+data.content);
+		      		windows_url('http://www.meisupic.com/pdf.php?id='+data.content);
 			  }else{
 			  	dialog(data.message,1);
 			  }
 		    },"json");
 	   return false;
 	})
+	*/
 	//	登录弹窗
    $('#login').click(function(){
    	    var index = layer.open({
