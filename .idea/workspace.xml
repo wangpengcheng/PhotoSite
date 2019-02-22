@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54bc66c9-cdda-4318-b729-bff5f88af760" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/javascript/dialog.js" afterPath="$PROJECT_DIR$/javascript/dialog.js" />
       <change beforePath="$PROJECT_DIR$/user_page.html" afterPath="$PROJECT_DIR$/user_page.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -161,16 +159,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hand_photo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hand_photo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="34" column="94" lean-forward="true" selection-start-line="34" selection-start-column="94" selection-end-line="34" selection-end-column="94" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="topic.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/topic.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -201,8 +189,8 @@
       <file leaf-file-name="user_page.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="1729" column="33" lean-forward="false" selection-start-line="1729" selection-start-column="33" selection-end-line="1729" selection-end-column="33" />
+            <state relative-caret-position="635">
+              <caret line="1740" column="18" lean-forward="false" selection-start-line="1740" selection-start-column="18" selection-end-line="1740" selection-end-column="18" />
               <folding>
                 <element signature="e#3513#3519#0" expanded="true" />
                 <element signature="e#3519#3525#0" expanded="true" />
@@ -304,7 +292,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>王鹏程</find>
       <find>footer</find>
       <find>foo</find>
       <find>入口</find>
@@ -334,6 +321,7 @@
       <find>账号</find>
       <find>下载记录</find>
       <find>user_manage2</find>
+      <find>我的首页</find>
     </findStrings>
     <replaceStrings>
       <replace>嵋素</replace>
@@ -467,12 +455,12 @@
       <workItem from="1550568031010" duration="13255000" />
       <workItem from="1550643773377" duration="16151000" />
       <workItem from="1550712973185" duration="8395000" />
-      <workItem from="1550748717695" duration="9487000" />
+      <workItem from="1550748717695" duration="12236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60542000" />
+    <option name="totallyTimeSpent" value="63291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -511,14 +499,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hand_photo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10332">
-          <caret line="369" column="19" lean-forward="true" selection-start-line="369" selection-start-column="19" selection-end-line="369" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/confirm_success.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2212">
@@ -1281,10 +1261,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/jquery-1.12.3.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="3" column="14672" lean-forward="false" selection-start-line="3" selection-start-column="14672" selection-end-line="3" selection-end-column="14672" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/user_page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="1729" column="33" lean-forward="false" selection-start-line="1729" selection-start-column="33" selection-end-line="1729" selection-end-column="33" />
+        <state relative-caret-position="635">
+          <caret line="1740" column="18" lean-forward="false" selection-start-line="1740" selection-start-column="18" selection-end-line="1740" selection-end-column="18" />
           <folding>
             <element signature="e#3513#3519#0" expanded="true" />
             <element signature="e#3519#3525#0" expanded="true" />

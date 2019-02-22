@@ -1715,27 +1715,32 @@
         hide_all();
         //设置点击切换
         $("#down_load_button").click(function () {
-            console.log("<<<<<1.0");
             hide_all();
+            $(".user_home").hide();
             $(".user_manage1").show();
-            console.log("<<<<<1.1");
-            $("li.cl").remove();
-            $this.addClass("cl");
+            $(".c1").removeClass("c1");
+            $("#down_load_button").addClass("c1");
         });
         $("#collection_manage_button").click(function () {
-            console.log("<<<<<2.0");
             hide_all();
+            $(".user_home").hide();
+            $(".c1").removeClass("c1");
             $(".user_collection").show();
-            console.log("<<<<<2.1");
-            $this.addClass("cl");
+            $("#collection_manage_button").addClass("c1");
         });
         $("#my_histroy_button").click(function () {
             hide_all();
+            $(".user_home").hide();
+            $(".c1").removeClass("c1");
             $(".user_footprint").show();
+            $("#my_histroy_button").addClass("c1");
         });
         $("#my_manage_button").click(function () {
             hide_all();
+            $(".user_home").hide();
+            $(".c1").removeClass("c1");
             $(".user_manage2").show();
+            $("#my_manage_button").addClass("c1");
         })
 
     });
