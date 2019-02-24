@@ -494,7 +494,7 @@
         </div>
         <form id="ECS_LOGINFORM" name="ECS_LOGINFORM" method="post">
             <div class="login_form">
-                <input type="text" name="login_username" id="login_username" placeholder="手机号">
+                <input type="text" name="login_username" id="login_username" placeholder="用户名/手机号">
                 <input type="password" name="login_password" id="login_password" placeholder="登录密码">
                 <div class="rem">
                     <input name="checkbox" type="checkbox" value="" id="login_remember">
@@ -508,8 +508,6 @@
             </div>
         </form>
         <p>还没有账号？<a href="#" class="zhuce">马上注册</a></p>
-
-
     </div>
 </div>
 
@@ -524,13 +522,11 @@
 
         <h4 class="mt15">您可以使用花瓣网账号和密码直接登录</h4>
         <div class="login_form">
-            <input type="text" placeholder="手机号/花瓣网账号">
+            <input type="text" placeholder="用户名/手机号">
             <input type="password" placeholder="登录密码">
             <div class="rem">
                 <input name="checkbox" type="checkbox" value="" id="check5">
                 <label for="check5"></label>
-
-
                 <span class="lt">记住密码</span>　
                 <span class="rg"><a href="">忘记密码？</a></span>　　　
             </div>
@@ -539,7 +535,7 @@
             <a href="#">登录</a>
         </div>
 
-        <p>还没有账号？<a href="#" class="zhuce">马上注册</a></p>
+        <p>还没有账号？<a class="zhuce">马上注册</a></p>
 
 
     </div>
@@ -592,15 +588,14 @@
             <input id="agreement" name="agreement" value="1" type="checkbox" hidden="">
             <div class="mt40 body">
                 <ul>
+                    <li><input type="text" name="extend_field102" class="txt" id="extend_field102" value="" placeholder="昵称（必填）" maxlength="20"></li>
+                    <li><input type="password" name="password" class="txt" id="password" value="" placeholder="密码" maxlength="20"></li>
+                    <li><input type="password" name="confirm_password" class="txt" id="confirm_password" value="" placeholder="确认密码" maxlength="20"></li>
                     <li><input type="text" name="extend_field5" class="txt" id="extend_field5" value="" placeholder="请输入手机号" maxlength="11"></li>
                     <li><input type="text" name="sms_code" class="txt txt01" id="sms_code" value="" placeholder="手机验证码" style="border-right: 0;width: 216px !important" maxlength="6">
                         <input type="button" id="getcode" name="" class="btn_n" value="获取验证码">
 
                     </li>
-                    <li><input type="text" name="extend_field102" class="txt" id="extend_field102" value="" placeholder="昵称（必填）" maxlength="20"></li>
-                    <li><input type="password" name="password" class="txt" id="password" value="" placeholder="密码" maxlength="20"></li>
-                    <li><input type="password" name="confirm_password" class="txt" id="confirm_password" value="" placeholder="确认密码" maxlength="20"></li>
-
                 </ul>
             </div>
         </form>
