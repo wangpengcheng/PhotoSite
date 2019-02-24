@@ -1,381 +1,387 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>编辑信息</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=1220"><link rel="shortcut icon" href="./favicon.ico" />
-    <link rel="icon" href="./animated_favicon.gif" type="image/gif" />
-  <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/reset.css">
-  <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/ion.checkRadio.css">
-  <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/header.css">
-  <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/common.css">
-  <link rel="stylesheet" href="http://www.meisubq.com/static/common/layui/css/layui.css">
-  <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/login.css">
-<link rel="stylesheet" href="http://www.meisubq.com/static/front/webuploader/webuploader.css">
-<link rel="stylesheet" href="http://www.meisubq.com/static/front/css/edit-info.css">
-<link rel="stylesheet" href="http://www.meisubq.com/static/front/css/easydropdown.css">
-  <script src="./js/common.js"></script>
+    <title>编辑信息</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1220">
+    <link rel="shortcut icon" href="./favicon.ico"/>
+    <link rel="icon" href="./animated_favicon.gif" type="image/gif"/>
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/reset.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/ion.checkRadio.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/header.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/common.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/common/layui/css/layui.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/login.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/webuploader/webuploader.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/edit-info.css">
+    <link rel="stylesheet" href="http://www.meisubq.com/static/front/css/easydropdown.css">
+    <script src="./js/common.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <div>
     <!--头部-->
-  <div class="header">
-    <div class="wrapper">
-      <div class="logo" style="margin-top: 0px; margin-right: 0px;">
-        <a href=""><img class="logo-normal" src="./htmlimg/logo1.png"/></a>
-      </div>
-      <div class="nav" style="margin-left: 15px;">
-        <ul>
-          <li style="padding-left: 10px;padding-right: 10px;"><a href="./index.html">首页</a></li>
-          <li style="padding-left: 10px;padding-right: 10px;"><a href="./topic.html">精选专辑</a></li>
-          <li style="padding-left: 10px;padding-right: 10px;"><a href="./hand_photo.html">上传图片</a></li>
-          <!--<li style="padding-left: 10px;padding-right: 10px;"><a href="./zhuanti.html">专题</a></li>-->
-          <li style="padding-left: 10px;padding-right: 10px;"><a href="./researcher_relsult.html"><font color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a></li>
-        </ul>
-      </div>
-      <div class="right">
+    <div class="header">
+        <div class="wrapper">
+            <div class="logo" style="margin-top: 0px; margin-right: 0px;">
+                <a href=""><img class="logo-normal" src="./htmlimg/logo1.png"/></a>
+            </div>
+            <div class="nav" style="margin-left: 15px;">
+                <ul>
+                    <li style="padding-left: 10px;padding-right: 10px;"><a href="./index.html">首页</a></li>
+                    <li style="padding-left: 10px;padding-right: 10px;"><a href="./topic.html">精选专辑</a></li>
+                    <li style="padding-left: 10px;padding-right: 10px;"><a href="./hand_photo.html">上传图片</a></li>
+                    <!--<li style="padding-left: 10px;padding-right: 10px;"><a href="./zhuanti.html">专题</a></li>-->
+                    <li style="padding-left: 10px;padding-right: 10px;"><a href="./researcher_relsult.html"><font
+                            color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a></li>
+                </ul>
+            </div>
+            <div class="right">
 
-        <div class="user" style="display:inline-block" >
-          <div class="user-hd">
-            <a href="/copyright/manage/personal-page">
-              <span>1811784...</span>
-            </a>
-          </div>
-          <div class="user-bd">
-            <ul>
-              <li><a href="/copyright/manage/works">下载记录</a></li>
-              <li><a href="/copyright/manage/sales">收藏夹</a></li>
-              <li><a href="/copyright/manage/monitors">我的足迹</a></li>
-              <li><a href="/copyright/manage/account">账户管理</a></li>
-              <li><a href="/copyright/manage/message">系统消息</a></li>
-              <li><a href="/logout">退出</a></li>
-            </ul>
-          </div>
+                <div class="user" style="display:inline-block">
+                    <div class="user-hd">
+                        <a href="/copyright/manage/personal-page">
+                            <span>1811784...</span>
+                        </a>
+                    </div>
+                    <div class="user-bd">
+                        <ul>
+                            <li><a href="/copyright/manage/works">下载记录</a></li>
+                            <li><a href="/copyright/manage/sales">收藏夹</a></li>
+                            <li><a href="/copyright/manage/monitors">我的足迹</a></li>
+                            <li><a href="/copyright/manage/account">账户管理</a></li>
+                            <li><a href="/copyright/manage/message">系统消息</a></li>
+                            <li><a href="/logout">退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="un-login" style="display:none">
+                    <ul>
+                        <li><a href="javascript:;">登录</a></li>
+                        <li>|</li>
+                        <li><a href="javascript:;">注册</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="un-login" style="display:none" >
-          <ul>
-            <li><a href="javascript:;">登录</a></li>
-            <li>|</li>
-            <li><a href="javascript:;">注册</a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <div class="container3 wrapper">
-  <div class="pop-edit" id="pop-edit" style="display: none;">
-    <div class="pop_head">
-      <h4>提示</h4>
+    <div class="pop-edit" id="pop-edit" style="display: none;">
+        <div class="pop_head">
+            <h4>提示</h4>
+        </div>
+        <div class="txt">
+            <p align="center">您还未实名认证，请先实名认证！</p>
+        </div>
     </div>
-    <div class="txt">
-      <p align="center">您还未实名认证，请先实名认证！</p>
+    <div class="head">
+        <h2>上传图片</h2>
     </div>
-  </div>
-  <div class="head">
-    <h2>上传图片</h2>
-  </div>
-  <form id="edit-form" action="" method="post" onkeydown="if(event.keyCode==13){return false;}">
-    <div class="body">
-      <div class="images-info item">
-        <div class="item-head">
-          <h4>上传图片<span style="color: #949393">（同一系列相同信息的可批量上传，单次最多20张）</span></h4>
-        </div>
-        <div class="c2-uploadarea">
-          <div class="plus">
-            <i></i><br><span>上传作品</span>
-          </div>
-          <ul class="images-ul" style="display: none;">
-            <li>
-              <div class="mini-plus">
-                <i></i><br><span>上传作品</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="body-foot">
-          <ul>
-            <li>涉及到肖像授权，请同时上传PDF格式人像授权书，<a href="/static/front/file/肖像权使用授权声明.docx">下载模板</a>
-              &nbsp;&nbsp;&nbsp;<a id="upload-pdf-btn">上传授权书</a>
-              &nbsp;&nbsp;&nbsp;<a class="hide auth-cert-name" target="_blank">证书名称.pdf</a>
-              &nbsp;&nbsp;&nbsp;<a class="hide auth-cert-del-btn">删除</a>
-            </li>
-            <li>图片格式仅限<span style="color: #FC4349">JPG、PNG，不低于400万像素，最大20M</span></li>
-            <li>可编辑类图需要上传<span style="color: #FC4349">相同命名的“JPG封面图（20M以内）＋EPS/PSD格式源文件”，暂不支持AI格式。</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="creation-info item">
-        <div class="item-head">
-          <h4>创作信息</h4>
-        </div>
-        <div class="item-body">
-          <dl class="prod-type">
-            <dd>
-              <label class="label">作品类型
-                <div class="prod-type-hint">
-                  <em id="pth-em"></em>
-                  <div class="hint-content" style="">
-                    <ul>
-                      <li>
-                        <h2>摄影</h2>
-                        <p>人物照片、动植物照片、风景照片、艺术摄影等</p>
-                      </li>
-                      <li>
-                        <h2>美术作品</h2>
-                        <p>绘画、插画、漫画、海报、书法、字体、雕塑、表情包、工业设计、陶瓷类工艺品等</p>
-                      </li>
-                      <li>
-                        <h2>工程图</h2>
-                        <p>工程设计图、产品设计图等施工图纸</p>
-                      </li>
-                    </ul>
-                  </div>
+    <form id="edit-form" action="" method="post" onkeydown="if(event.keyCode==13){return false;}">
+        <div class="body">
+            <div class="images-info item">
+                <div class="item-head">
+                    <h4>上传图片<span style="color: #949393">（同一系列相同信息的可批量上传，单次最多20张）</span></h4>
                 </div>
-              </label>
-              <ul>
-                <li class="on photoProductRegist"><a href="#" data-id="photoProductRegist" class="p-type-a">摄影</a></li>
-                <li class="artProductRegist sublist">
-                  <a href="#" data-id="artProductRegist" class="p-type-a">美术作品</a>
-                  <dl>
-                    <dd><a href="javascript:void(0)">全部美术作品</a></dd>
-                    <dd><a href="javascript:void(0)">绘画</a></dd>
-                    <dd><a href="javascript:void(0)">海报</a></dd>
-                    <dd><a href="javascript:void(0)">UI设计</a></dd>
-                    <dd><a href="javascript:void(0)">VI设计</a></dd>
-                    <dd><a href="javascript:void(0)">字体</a></dd>
-                    <dd><a href="javascript:void(0)">室内设计</a></dd>
-                  </dl>
-                </li>
-                <li class="chartProductRegist"><a href="#" data-id="chartProductRegist" class="p-type-a">工程图</a></li>
-                <input type="hidden" name="worksType" value="photoProductRegist"/>
-                <input type="hidden" name="creativePurpose" id="creativePurpose"/>
-              </ul>
-            </dd>
-          </dl>
-          <dl class="prod-name">
-            <dd class="pname-dd">
-              <label class="label">作品名称</label>
-              <input type="text" name="worksFullName" value="" maxlength="30"/>
-              <div id="ipn-description"></div>
-            </dd>
-            <dd class="done-date">
-              <label>完成日期</label>
-              <!--日历-->
-              <input type="text" name="creationDate" id="inputCompleteDate" value=""
-                     onClick="WdatePicker()"/>
-            </dd>
-            <dd class="addr" id="addr1">
-              <label>创作地点</label>
-              <!--级联-->
+                <div class="c2-uploadarea">
+                    <div class="plus">
+                        <i></i><br><span>上传作品</span>
+                    </div>
+                    <ul class="images-ul" style="display: none;">
+                        <li>
+                            <div class="mini-plus">
+                                <i></i><br><span>上传作品</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body-foot">
+                    <ul>
+                        <li>涉及到肖像授权，请同时上传PDF格式人像授权书，<a href="/static/front/file/肖像权使用授权声明.docx">下载模板</a>
+                            &nbsp;&nbsp;&nbsp;<a id="upload-pdf-btn">上传授权书</a>
+                            &nbsp;&nbsp;&nbsp;<a class="hide auth-cert-name" target="_blank">证书名称.pdf</a>
+                            &nbsp;&nbsp;&nbsp;<a class="hide auth-cert-del-btn">删除</a>
+                        </li>
+                        <li>图片格式仅限<span style="color: #FC4349">JPG、PNG，不低于400万像素，最大20M</span></li>
+                        <li>可编辑类图需要上传<span style="color: #FC4349">相同命名的“JPG封面图（20M以内）＋EPS/PSD格式源文件”，暂不支持AI格式。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="creation-info item">
+                <div class="item-head">
+                    <h4>创作信息</h4>
+                </div>
+                <div class="item-body">
+                    <dl class="prod-type">
+                        <dd>
+                            <label class="label">作品类型
+                                <div class="prod-type-hint">
+                                    <em id="pth-em"></em>
+                                    <div class="hint-content" style="">
+                                        <ul>
+                                            <li>
+                                                <h2>摄影</h2>
+                                                <p>人物照片、动植物照片、风景照片、艺术摄影等</p>
+                                            </li>
+                                            <li>
+                                                <h2>美术作品</h2>
+                                                <p>绘画、插画、漫画、海报、书法、字体、雕塑、表情包、工业设计、陶瓷类工艺品等</p>
+                                            </li>
+                                            <li>
+                                                <h2>工程图</h2>
+                                                <p>工程设计图、产品设计图等施工图纸</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </label>
+                            <ul>
+                                <li class="on photoProductRegist"><a href="#" data-id="photoProductRegist"
+                                                                     class="p-type-a">摄影</a></li>
+                                <li class="artProductRegist sublist">
+                                    <a href="#" data-id="artProductRegist" class="p-type-a">美术作品</a>
+                                    <dl>
+                                        <dd><a href="javascript:void(0)">全部美术作品</a></dd>
+                                        <dd><a href="javascript:void(0)">绘画</a></dd>
+                                        <dd><a href="javascript:void(0)">海报</a></dd>
+                                        <dd><a href="javascript:void(0)">UI设计</a></dd>
+                                        <dd><a href="javascript:void(0)">VI设计</a></dd>
+                                        <dd><a href="javascript:void(0)">字体</a></dd>
+                                        <dd><a href="javascript:void(0)">室内设计</a></dd>
+                                    </dl>
+                                </li>
+                                <li class="chartProductRegist"><a href="#" data-id="chartProductRegist"
+                                                                  class="p-type-a">工程图</a></li>
+                                <input type="hidden" name="worksType" value="photoProductRegist"/>
+                                <input type="hidden" name="creativePurpose" id="creativePurpose"/>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="prod-name">
+                        <dd class="pname-dd">
+                            <label class="label">作品名称</label>
+                            <input type="text" name="worksFullName" value="" maxlength="30"/>
+                            <div id="ipn-description"></div>
+                        </dd>
+                        <dd class="done-date">
+                            <label>完成日期</label>
+                            <!--日历-->
+                            <input type="text" name="creationDate" id="inputCompleteDate" value=""
+                                   onClick="WdatePicker()"/>
+                        </dd>
+                        <dd class="addr" id="addr1">
+                            <label>创作地点</label>
+                            <!--级联-->
 
-              <select class="first-select" name="">
-                <option value="中国">中国</option>
-                <option value="海外">海外</option>
-              </select>
-              <div class="div-select">
-                <select name="" id="dd1" class="province">
-                  <!--<option value=""></option>-->
-                </select>
-                <font class="prov-font1" style="display: none">请选择创作省份</font>
-                <select name="" id="dd2" class="last-select city">
-                  <!--<option value="">市/区</option>-->
-                </select>
-                <font class="prov-font2" style="display: none">请选择创作城市</font>
-                <select name="" class="district" style="display: none;">
-                  <option value="creationCity"></option>
-                </select>
-              </div>
-              <div class="div-input" style="display: none;">
-                <input type="text" class="txt1" name="creationCountry" id="creationCountry"
-                       value="中国" placeholder="国家"/>
-                <input type="hidden" name="creationProvince" id="creationProvince" value="">
-                <input type="text" name="creationCity" id="creationCity" value="" placeholder="城市"/>
-              </div>
-            </dd>
-          </dl>
-          <dl class="publish">
-            <dd class="whether">
-              <label class="label">是否发表</label>
-              <ul>
-                <li class="on last"><a href="#" id="nopub">未曾发表</a></li>
-                <li><a href="#" id="haspub">已发表</a></li>
-              </ul>
-              <input type="hidden" name="publishStatus" value="2">
-            </dd>
-            <dd class="first-date" id="first-date" style="display: none">
-              <label>首次发表日期</label>
-              <!--日历-->
-              <input type="text" name="firstPublishDate" id="firstPublishDate" value=""
-                     onClick="WdatePicker()"/>
-            </dd>
-            <dd class="addr" id="addr2" style="display: none;">
-              <label>发表地点</label>
-              <!--级联-->
-              <select name="" class="first-select">
-                <option value="中国">中国</option>
-                <option value="海外">海外</option>
-              </select>
-              <div class="div-select">
-                <select name="" id="dd3" class="province1">
-                  <!--<option value="">省/市</option>-->
-                </select>
-                <select name="" id="dd4" class="last-select city1">
-                  <!--<option value="">市/区</option>-->
-                </select>
-                <select name="" class="district1" style="display: none;">
-                  <option value=""></option>
-                </select>
-              </div>
-              <div class="div-input" style="display: none;">
-                <input type="text" class="txt1" name="firstPublishCountry" id="firstPublishCountry"
-                       value="中国" placeholder="国家"/>
-                <input type="hidden" name="firstPublishProvince" id="firstPublishProvince"
-                       value="北京市">
-                <input type="text" name="firstPublishCity" id="firstPublishCity" value="北京市"
-                       placeholder="城市"/>
-              </div>
-            </dd>
-          </dl>
-          <dl class="explain">
-            <dd>
-              <label class="label">创作说明</label>
-              <textarea id="creationDesc" name="mainFeatures" rows="" cols=""
-                        placeholder="创作目的：为了更好的将美好的艺术形象留存在照相机镜头中，从而达到让广大的让对摄影作品有广泛认同的人，有所认知。独创性描述：该作品经过作者的独特构思，充分运用美术，画面内容形象生动的体现出太极弘图形文字Logo设计的特点。作品整体独特设计精巧，使整幅作品更容易识别和记忆，具有独创性和显著性两大特征。"></textarea>
-            </dd>
-          </dl>
-        </div>
-      </div>
-      <!--<div class="deal-info item">-->
-        <!--<div class="item-head">-->
-          <!--<h4>交易信息</h4>-->
-        <!--</div>-->
-        <!--<div class="item-body">-->
-          <!--<dl class="cont-category">-->
+                            <select class="first-select" name="">
+                                <option value="中国">中国</option>
+                                <option value="海外">海外</option>
+                            </select>
+                            <div class="div-select">
+                                <select name="" id="dd1" class="province">
+                                    <!--<option value=""></option>-->
+                                </select>
+                                <font class="prov-font1" style="display: none">请选择创作省份</font>
+                                <select name="" id="dd2" class="last-select city">
+                                    <!--<option value="">市/区</option>-->
+                                </select>
+                                <font class="prov-font2" style="display: none">请选择创作城市</font>
+                                <select name="" class="district" style="display: none;">
+                                    <option value="creationCity"></option>
+                                </select>
+                            </div>
+                            <div class="div-input" style="display: none;">
+                                <input type="text" class="txt1" name="creationCountry" id="creationCountry"
+                                       value="中国" placeholder="国家"/>
+                                <input type="hidden" name="creationProvince" id="creationProvince" value="">
+                                <input type="text" name="creationCity" id="creationCity" value="" placeholder="城市"/>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="publish">
+                        <dd class="whether">
+                            <label class="label">是否发表</label>
+                            <ul>
+                                <li class="on last"><a href="#" id="nopub">未曾发表</a></li>
+                                <li><a href="#" id="haspub">已发表</a></li>
+                            </ul>
+                            <input type="hidden" name="publishStatus" value="2">
+                        </dd>
+                        <dd class="first-date" id="first-date" style="display: none">
+                            <label>首次发表日期</label>
+                            <!--日历-->
+                            <input type="text" name="firstPublishDate" id="firstPublishDate" value=""
+                                   onClick="WdatePicker()"/>
+                        </dd>
+                        <dd class="addr" id="addr2" style="display: none;">
+                            <label>发表地点</label>
+                            <!--级联-->
+                            <select name="" class="first-select">
+                                <option value="中国">中国</option>
+                                <option value="海外">海外</option>
+                            </select>
+                            <div class="div-select">
+                                <select name="" id="dd3" class="province1">
+                                    <!--<option value="">省/市</option>-->
+                                </select>
+                                <select name="" id="dd4" class="last-select city1">
+                                    <!--<option value="">市/区</option>-->
+                                </select>
+                                <select name="" class="district1" style="display: none;">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="div-input" style="display: none;">
+                                <input type="text" class="txt1" name="firstPublishCountry" id="firstPublishCountry"
+                                       value="中国" placeholder="国家"/>
+                                <input type="hidden" name="firstPublishProvince" id="firstPublishProvince"
+                                       value="北京市">
+                                <input type="text" name="firstPublishCity" id="firstPublishCity" value="北京市"
+                                       placeholder="城市"/>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="explain">
+                        <dd>
+                            <label class="label">创作说明</label>
+                            <textarea id="creationDesc" name="mainFeatures" rows="" cols=""
+                                      placeholder="创作目的：为了更好的将美好的艺术形象留存在照相机镜头中，从而达到让广大的让对摄影作品有广泛认同的人，有所认知。独创性描述：该作品经过作者的独特构思，充分运用美术，画面内容形象生动的体现出太极弘图形文字Logo设计的特点。作品整体独特设计精巧，使整幅作品更容易识别和记忆，具有独创性和显著性两大特征。"></textarea>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!--<div class="deal-info item">-->
+            <!--<div class="item-head">-->
+            <!--<h4>交易信息</h4>-->
+            <!--</div>-->
+            <!--<div class="item-body">-->
+            <!--<dl class="cont-category">-->
             <!--<dd>-->
-              <!--<label class="label">内容分类</label>-->
-              <!--<select name="categoryId" class="category" id="content-type" required>-->
-              <!--</select>-->
+            <!--<label class="label">内容分类</label>-->
+            <!--<select name="categoryId" class="category" id="content-type" required>-->
+            <!--</select>-->
             <!--</dd>-->
-          <!--</dl>-->
+            <!--</dl>-->
 
-          <!--<dl class="auth" id="auth">-->
+            <!--<dl class="auth" id="auth">-->
             <!--<input type="hidden" name="authorizeRule" value="NonExclusiveAuthorize"/>-->
             <!--<input type="hidden" name="splitPercentage" value="0.5"/>-->
             <!--<input type="hidden" name="price" value="0"/>-->
             <!--<dd class="auth-dd">-->
-              <!--<label class="label">授权</label>-->
-              <!--<ul class="auth-ul">-->
-                <!--<li class="unexclusive auth-li on" data-id="NonExclusiveAuthorize" data-value="0.5">-->
-                  <!--<h4 class="authority">-->
-                    <!--<span>非独家商业用途授权</span>-->
-                    <!--<div class="auth-hint" style="">-->
-                      <!--<em></em>-->
-                      <!--<dl>-->
-                        <!--<dt>非独家商业用途授权</dt>-->
-                        <!--<dd>-->
-                          <!--非独家商业授权协议是指，您与美素签订版权代理授权协议的同时，可以与其他第三方平台合作进行版权的代理授权。美素获得您的非独家商业授权许可后，可以将您的作品代为授权给企业或者个人。每张作品根据购买用户支付所属套餐的价格进行结算，如购买方是按单张购买，则您可获得25元每张的分成。-->
-                        <!--</dd>-->
-                      <!--</dl>-->
-                    <!--</div>-->
-                  <!--</h4>-->
-                  <!--<ul>-->
-                    <!--<li>可获分成：50%</li>-->
-                    <!--<li>交易价格：与美素版权定价一致</li>-->
-                  <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="exclusive auth-li" data-id="ExclusiveAuthorize" data-value="0.7">-->
-                  <!--<h4 class="authority">-->
-                    <!--<span>独家授权</span>-->
-                    <!--<div class="auth-hint" style="">-->
-                      <!--<em></em>-->
-                      <!--<dl>-->
-                        <!--<dt>独家授权</dt>-->
-                        <!--<dd>-->
-                          <!--独家商业授权协议是指，您与美素签订版权代理授权协议的同时，不可以与其他第三方平台合作进行版权的代理授权。美素获得您的商业授权许可后，可以将您的作品代为授权给企业或者个人。每张作品根据购买用户支付所属套餐的价格进行结算，如购买方是按单张购买，则您可获得35元每张的分成。独家授权除可获得更高收益外，平台还可代为进行版权监测和维权，更好的保护您的创作权益。-->
-                        <!--</dd>-->
-                      <!--</dl>-->
-                    <!--</div>-->
-                  <!--</h4>-->
-                  <!--<ul>-->
-                    <!--<li>可获分成：70%</li>-->
-                    <!--<li>交易价格：与美素版权定价一致</li>-->
-                  <!--</ul>-->
-                <!--</li>-->
+            <!--<label class="label">授权</label>-->
+            <!--<ul class="auth-ul">-->
+            <!--<li class="unexclusive auth-li on" data-id="NonExclusiveAuthorize" data-value="0.5">-->
+            <!--<h4 class="authority">-->
+            <!--<span>非独家商业用途授权</span>-->
+            <!--<div class="auth-hint" style="">-->
+            <!--<em></em>-->
+            <!--<dl>-->
+            <!--<dt>非独家商业用途授权</dt>-->
+            <!--<dd>-->
+            <!--非独家商业授权协议是指，您与美素签订版权代理授权协议的同时，可以与其他第三方平台合作进行版权的代理授权。美素获得您的非独家商业授权许可后，可以将您的作品代为授权给企业或者个人。每张作品根据购买用户支付所属套餐的价格进行结算，如购买方是按单张购买，则您可获得25元每张的分成。-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</h4>-->
+            <!--<ul>-->
+            <!--<li>可获分成：50%</li>-->
+            <!--<li>交易价格：与美素版权定价一致</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="exclusive auth-li" data-id="ExclusiveAuthorize" data-value="0.7">-->
+            <!--<h4 class="authority">-->
+            <!--<span>独家授权</span>-->
+            <!--<div class="auth-hint" style="">-->
+            <!--<em></em>-->
+            <!--<dl>-->
+            <!--<dt>独家授权</dt>-->
+            <!--<dd>-->
+            <!--独家商业授权协议是指，您与美素签订版权代理授权协议的同时，不可以与其他第三方平台合作进行版权的代理授权。美素获得您的商业授权许可后，可以将您的作品代为授权给企业或者个人。每张作品根据购买用户支付所属套餐的价格进行结算，如购买方是按单张购买，则您可获得35元每张的分成。独家授权除可获得更高收益外，平台还可代为进行版权监测和维权，更好的保护您的创作权益。-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</h4>-->
+            <!--<ul>-->
+            <!--<li>可获分成：70%</li>-->
+            <!--<li>交易价格：与美素版权定价一致</li>-->
+            <!--</ul>-->
+            <!--</li>-->
 
-                <!--<li class="custom auth-li" data-id="CustomAuthorize" data-value="0.5">-->
-                  <!--<h4 class="authority">-->
-                    <!--<span>自定义授权</span>-->
-                    <!--<div class="auth-hint">-->
-                      <!--<em></em>-->
-                      <!--<dl style="height: 250px;">-->
-                        <!--<dt>自定义授权</dt>-->
-                        <!--<dd>-->
-                          <!--自定义授权是指，您与美素签订版权代理授权协议后，可以自主设定作品的交易价格。美素获得您的商业授权许可后，可以将您的作品代为授权给企业或者个人。交易价格以下载点的方式设定，区间为1-1000（整数），下载点的价格根据购买用户支付所属套餐的下载点价格进行结算，如购买方是按单张购买，1个下载点相当于50元，您可获得25元的分成；如购买方是按套餐购买，1个下载点相当于套餐内图片单张价格，您可获得单张价格50%的分成。-->
-                        <!--</dd>-->
-                      <!--</dl>-->
-                    <!--</div>-->
-                  <!--</h4>-->
-                  <!--<ul>-->
-                    <!--<li>可获分成：50%</li>-->
-                    <!--<li>交易价格：<input type="text" name="customPrice" value="" placeholder="0~1000"/>下载点</li>-->
-                  <!--</ul>-->
-                <!--</li>-->
-
-
-                <!--<li class="senior-partner auth-li" data-id="SeniorPartnerAuthorize" data-value="0" style="display: none">-->
-                  <!--<h4 class="authority">-->
-                    <!--<span>高级合伙人</span>-->
-                    <!--<div class="auth-hint" style="">-->
-                      <!--<em></em>-->
-                      <!--<dl style="height: 190px">-->
-                        <!--<dt>线下报价</dt>-->
-                        <!--<dd>-->
-                          <!--高级合伙人是包年会员订阅模式下的内容众筹计划授权模式，您与平台合作建设包年订阅素材库并从销售收入中获得分成。美素获得您的商业授权许可后，可以将您的作品代为授权给企业或者个人，平台将按照自然年度与您结算分成收入，具体的销售分成和交易价格将根据协议约定内容确定。-->
-                        <!--</dd>-->
-                      <!--</dl>-->
-                    <!--</div>-->
-                  <!--</h4>-->
-                  <!--<ul>-->
-                    <!--<li>可获分成：按合同约定内容分成</li>-->
-                    <!--<li>交易价格：按合同约定内容定价</li>-->
-                  <!--</ul>-->
-                <!--</li>-->
-
-                <!--<li class="offline auth-li hide" data-id="OfflineAuthorize" data-value="0">-->
-                  <!--<h4 class="authority">-->
-                    <!--<span>线下报价</span>-->
-                    <!--<div class="auth-hint" style="">-->
-                      <!--<em></em>-->
-                      <!--<dl style="height: 190px">-->
-                        <!--<dt>线下报价</dt>-->
-                        <!--<dd>-->
-                          <!--线下报价是指因版权方当前尚不能确定具体销售价格和授权形式，需要根据实际交易情况，届时再确定的一种授权和交易形式。当客户有购买需求时，美素会线下联系版权方进行报价，并对接客户。针对每笔线下交易，平台会收取成交价的50%作为服务费。-->
-                        <!--</dd>-->
-                      <!--</dl>-->
-                    <!--</div>-->
-                  <!--</h4>-->
-                  <!--<ul>-->
-                    <!--<li>按需报价，线下协调</li>-->
-                  <!--</ul>-->
-                <!--</li>-->
+            <!--<li class="custom auth-li" data-id="CustomAuthorize" data-value="0.5">-->
+            <!--<h4 class="authority">-->
+            <!--<span>自定义授权</span>-->
+            <!--<div class="auth-hint">-->
+            <!--<em></em>-->
+            <!--<dl style="height: 250px;">-->
+            <!--<dt>自定义授权</dt>-->
+            <!--<dd>-->
+            <!--自定义授权是指，您与美素签订版权代理授权协议后，可以自主设定作品的交易价格。美素获得您的商业授权许可后，可以将您的作品代为授权给企业或者个人。交易价格以下载点的方式设定，区间为1-1000（整数），下载点的价格根据购买用户支付所属套餐的下载点价格进行结算，如购买方是按单张购买，1个下载点相当于50元，您可获得25元的分成；如购买方是按套餐购买，1个下载点相当于套餐内图片单张价格，您可获得单张价格50%的分成。-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</h4>-->
+            <!--<ul>-->
+            <!--<li>可获分成：50%</li>-->
+            <!--<li>交易价格：<input type="text" name="customPrice" value="" placeholder="0~1000"/>下载点</li>-->
+            <!--</ul>-->
+            <!--</li>-->
 
 
-              <!--</ul>-->
+            <!--<li class="senior-partner auth-li" data-id="SeniorPartnerAuthorize" data-value="0" style="display: none">-->
+            <!--<h4 class="authority">-->
+            <!--<span>高级合伙人</span>-->
+            <!--<div class="auth-hint" style="">-->
+            <!--<em></em>-->
+            <!--<dl style="height: 190px">-->
+            <!--<dt>线下报价</dt>-->
+            <!--<dd>-->
+            <!--高级合伙人是包年会员订阅模式下的内容众筹计划授权模式，您与平台合作建设包年订阅素材库并从销售收入中获得分成。美素获得您的商业授权许可后，可以将您的作品代为授权给企业或者个人，平台将按照自然年度与您结算分成收入，具体的销售分成和交易价格将根据协议约定内容确定。-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</h4>-->
+            <!--<ul>-->
+            <!--<li>可获分成：按合同约定内容分成</li>-->
+            <!--<li>交易价格：按合同约定内容定价</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+
+            <!--<li class="offline auth-li hide" data-id="OfflineAuthorize" data-value="0">-->
+            <!--<h4 class="authority">-->
+            <!--<span>线下报价</span>-->
+            <!--<div class="auth-hint" style="">-->
+            <!--<em></em>-->
+            <!--<dl style="height: 190px">-->
+            <!--<dt>线下报价</dt>-->
+            <!--<dd>-->
+            <!--线下报价是指因版权方当前尚不能确定具体销售价格和授权形式，需要根据实际交易情况，届时再确定的一种授权和交易形式。当客户有购买需求时，美素会线下联系版权方进行报价，并对接客户。针对每笔线下交易，平台会收取成交价的50%作为服务费。-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</h4>-->
+            <!--<ul>-->
+            <!--<li>按需报价，线下协调</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+
+
+            <!--</ul>-->
             <!--</dd>-->
             <!--<a id="kfHref" style="float: right;margin-top: 30px;font-size: 12px;color: #666666"> 没有合适的？更多授权方式请咨询客服</a>-->
-          <!--</dl>-->
-        <!--</div>-->
-      <!--</div>-->
-      <div class="btns">
-        <ul>
-            <li class="next-btn"><a href="./Information_confirm.html"><input type="submit" value="下一步"/></a></li>
-        </ul>
-      </div>
-    </div>
-  </form>
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="btns">
+                <ul>
+                    <li class="next-btn"><a href="./Information_confirm.html"><input type="submit" value="下一步"/></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
 </div>
 <div class="h_foot">
     <div class="wrapper">
@@ -384,7 +390,8 @@
         </div>
         <div class="form">
             <form id="footform" action="searchi.php" method="get">
-                <input type="text" class="txt1" name="keyword" id="" value="" placeholder="搜索照片、矢量图和插画，支持双语哦" autocomplete="off">
+                <input type="text" class="txt1" name="keyword" id="" value="" placeholder="搜索照片、矢量图和插画，支持双语哦"
+                       autocomplete="off">
                 <input type="submit" class="btn" value="">
             </form>
         </div>
@@ -403,8 +410,8 @@
                 <dd><a href="">联系我们</a></dd>
             </dl>
             <dl>
-                <dd><a href="" >版权说明</a></dd>
-                <dd><a href="" >服务条款</a></dd>
+                <dd><a href="">版权说明</a></dd>
+                <dd><a href="">服务条款</a></dd>
                 <dd><a href="">常见问题</a></dd>
             </dl>
         </div>
@@ -426,97 +433,99 @@
         Copyright ©2017 北京xxxx科技有限公司版权所有 京ICP备17042338号
     </div>
 </div>
-  <div id="login_wrap" style="display:none;">
+<div id="login_wrap" style="display:none;">
     <div class="login_wrap">
-      <!--<em></em>-->
-      <div class="head">
-        <h2>登录</h2>
-        <span class="ui_line red"></span>
-      </div>
-      <form name="ECS_LOGINFORM" method="post" onsubmit="return false" >
-        <h4 class="mt15"><a href="http://www.huabanpro.com/login/?next=http://www.meisubq.com/huaban/login" class="huaban_login">点击此处用花瓣帐号登录</a></h4>
-        <div class="login_form">
-          <input type="text" name="login_username"  placeholder="用户名/手机号"/>
-          <input type="password" name="login_password"  placeholder="登录密码"/>
-          <div class="rem">
-            <input type="checkbox" value="" name="remember-me" id="remember-me">
-            <label for="remember-me"></label>
-            <span class='lt'>记住密码</span>　
-            <span class='rg'><a href="/findpwd">忘记密码？</a></span>
-          </div>
+        <!--<em></em>-->
+        <div class="head">
+            <h2>登录</h2>
+            <span class="ui_line red"></span>
         </div>
-        <div class="mt200 btn">
-          <a id="pop_login_btn"  href="javascript:;">登录</a>
-        </div>
-      </form>
-      <p align="center">还没有账号？<a href="#" class="reg_btn">马上注册</a></p>
+        <form name="ECS_LOGINFORM" method="post" onsubmit="return false">
+            <h4 class="mt15"><a href="http://www.huabanpro.com/login/?next=http://www.meisubq.com/huaban/login"
+                                class="huaban_login">点击此处用花瓣帐号登录</a></h4>
+            <div class="login_form">
+                <input type="text" name="login_username" placeholder="用户名/手机号"/>
+                <input type="password" name="login_password" placeholder="登录密码"/>
+                <div class="rem">
+                    <input type="checkbox" value="" name="remember-me" id="remember-me">
+                    <label for="remember-me"></label>
+                    <span class='lt'>记住密码</span>　
+                    <span class='rg'><a href="/findpwd">忘记密码？</a></span>
+                </div>
+            </div>
+            <div class="mt200 btn">
+                <a id="pop_login_btn" href="javascript:;">登录</a>
+            </div>
+        </form>
+        <p align="center">还没有账号？<a href="#" class="reg_btn">马上注册</a></p>
     </div>
-  </div>
+</div>
 </div>
 <div>
-  <div id="reg_wrap" style="display: none">
-    <div class="login_wrap register_wrap02">
-      <!--<em></em>-->
-      <div class="head">
-        <h2>欢迎来到美素</h2>
-        <span class="ui_line red"></span>
-      </div>
-      <form id="ECS_REGFORM" name="ECS_REGFORM" method="post">
-        <input id="agreement" name="agreement" value="1" type="checkbox" hidden="">
-        <div class="mt40 body">
-          <ul>
-            <li><input type="text" name="extend_field5" class="txt" id="extend_field5" value=""
-                       placeholder="请输入手机号" maxlength="11"/></li>
-            <li><input type="text" name="sms_code" class="txt txt01" id="sms_code" value=""
-                       placeholder="手机验证码" style="border-right: 0;width: 216px !important"
-                       maxlength="6"/>
-              <input type="button" id="getcode" name="" class="btn_n" value="获取验证码"/>
+    <div id="reg_wrap" style="display: none">
+        <div class="login_wrap register_wrap02">
+            <!--<em></em>-->
+            <div class="head">
+                <h2>欢迎来到美素</h2>
+                <span class="ui_line red"></span>
+            </div>
+            <form id="ECS_REGFORM" name="ECS_REGFORM" method="post">
+                <input id="agreement" name="agreement" value="1" type="checkbox" hidden="">
+                <div class="mt40 body">
+                    <ul>
+                        <li><input type="text" name="extend_field5" class="txt" id="extend_field5" value=""
+                                   placeholder="请输入手机号" maxlength="11"/></li>
+                        <li><input type="text" name="sms_code" class="txt txt01" id="sms_code" value=""
+                                   placeholder="手机验证码" style="border-right: 0;width: 216px !important"
+                                   maxlength="6"/>
+                            <input type="button" id="getcode" name="" class="btn_n" value="获取验证码"/>
 
-            </li>
-            <li><input type="text" name="extend_field102" class="txt" id="extend_field102" value=""
-                       placeholder="昵称（必填）" maxlength="20"/></li>
-            <li><input type="password" name="password" class="txt" id="password" value=""
-                       placeholder="密码" maxlength="20"/></li>
-            <li><input type="password" name="confirm_password" class="txt" id="confirm_password"
-                       value="" placeholder="确认密码" maxlength="20"/></li>
+                        </li>
+                        <li><input type="text" name="extend_field102" class="txt" id="extend_field102" value=""
+                                   placeholder="昵称（必填）" maxlength="20"/></li>
+                        <li><input type="password" name="password" class="txt" id="password" value=""
+                                   placeholder="密码" maxlength="20"/></li>
+                        <li><input type="password" name="confirm_password" class="txt" id="confirm_password"
+                                   value="" placeholder="确认密码" maxlength="20"/></li>
 
-          </ul>
+                    </ul>
+                </div>
+            </form>
+            <div class="label">
+                <input id="checkbox1" name="checkbox" value="" type="checkbox" checked>
+                <label for="checkbox1"></label>
+                我已阅读并同意<a style="color: #FC4349" target="_blank" href="/platform/serviceAgreement">《服务条款》</a>
+            </div>
+
+            <div class="mt40 btn">
+                <a href="javascript:;" id="reg-btn">提交</a>
+            </div>
         </div>
-      </form>
-      <div class="label">
-        <input id="checkbox1" name="checkbox" value="" type="checkbox" checked>
-        <label for="checkbox1"></label>
-        我已阅读并同意<a style="color: #FC4349" target="_blank" href="/platform/serviceAgreement">《服务条款》</a>
-      </div>
-
-      <div class="mt40 btn">
-        <a href="javascript:;" id="reg-btn">提交</a>
-      </div>
     </div>
-  </div>
 </div>
 <div>
-  <div class="pop-bind-mobile" id="pop-bind-mobile" style="display: none;">
-    <div class="pop-head">
-      <h2>绑定手机号</h2>
+    <div class="pop-bind-mobile" id="pop-bind-mobile" style="display: none;">
+        <div class="pop-head">
+            <h2>绑定手机号</h2>
+        </div>
+        <form id="bindMobileForm">
+            <div class="mt40 body">
+                <ul>
+                    <li>
+                        <input type="text" name="mobile" class="txt" value="" placeholder="请输入手机号" maxlength="11">
+                    </li>
+                    <li>
+                        <input type="text" name="sms_code_bind_mobile" class="txt txt01" value="" placeholder="手机验证码"
+                               maxlength="6">
+                        <input type="button" id="verify_code_btn" class="btn_n" value="获取验证码">
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <div class="mt40 btn">
+            <a href="javascript:;" id="sub-btn">提交</a>
+        </div>
     </div>
-    <form id="bindMobileForm">
-      <div class="mt40 body">
-        <ul>
-          <li>
-            <input type="text" name="mobile" class="txt" value="" placeholder="请输入手机号" maxlength="11">
-          </li>
-          <li>
-            <input type="text" name="sms_code_bind_mobile" class="txt txt01" value="" placeholder="手机验证码"  maxlength="6">
-            <input type="button" id="verify_code_btn" class="btn_n" value="获取验证码">
-          </li>
-        </ul>
-      </div>
-    </form>
-    <div class="mt40 btn">
-      <a href="javascript:;" id="sub-btn">提交</a>
-    </div>
-  </div>
 </div>
 <script type="text/javascript" src="http://www.meisubq.com/static/front/js/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="http://www.meisubq.com/static/common/layui/layui.js"></script>
@@ -528,31 +537,31 @@
 <script type="text/javascript" src="./js/js.js"></script>
 <script type="text/javascript" src="./js/config.js"></script>
 <script type="text/javascript">
-  layui.use('common');
+    layui.use('common');
 </script>
 
-  <!--<script type="text/javascript" src="http://www.meisubq.com/static/front/js/config.js"></script>-->
-  <script type="text/javascript" src="http://www.meisubq.com/static/front/js/lib/jquery.easydropdown.min.js"></script>
-  <script type="text/javascript" src="http://www.meisubq.com/static/front/js/jsAddress.js"></script>
-  <script type="text/javascript" src="http://www.meisubq.com/static/front/webuploader/webuploader.js"></script>
-  <script type="text/javascript" src="./js/WdatePicker.js"></script>
-  <script type="text/javascript">
+<!--<script type="text/javascript" src="http://www.meisubq.com/static/front/js/config.js"></script>-->
+<script type="text/javascript" src="http://www.meisubq.com/static/front/js/lib/jquery.easydropdown.min.js"></script>
+<script type="text/javascript" src="http://www.meisubq.com/static/front/js/jsAddress.js"></script>
+<script type="text/javascript" src="http://www.meisubq.com/static/front/webuploader/webuploader.js"></script>
+<script type="text/javascript" src="./js/WdatePicker.js"></script>
+<script type="text/javascript">
     layui.use('worksedit');
-  </script>
-  <script type="text/html" id="img-block">
+</script>
+<script type="text/html" id="img-block">
     <li class="image">
-      <div class="opus">
-        <div class="opus-img">
-          <img src="http://www.meisubq.com/static/front/imgs/backImage.png" style="display: none"/>
-          <div class="tips-panel" style="display: none">像素不符合要求</div>
+        <div class="opus">
+            <div class="opus-img">
+                <img src="http://www.meisubq.com/static/front/imgs/backImage.png" style="display: none"/>
+                <div class="tips-panel" style="display: none">像素不符合要求</div>
+            </div>
+            <div class="layui-progress" style="margin-top: 2px">
+                <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+            </div>
+            <h4 class="hide"><span class="img-title"></span><a href="#"></a></h4>
         </div>
-        <div class="layui-progress" style="margin-top: 2px">
-          <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
-        </div>
-        <h4 class="hide"><span class="img-title"></span><a href="#"></a></h4>
-      </div>
     </li>
-  </script>
+</script>
 
 </body>
 
