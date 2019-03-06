@@ -4,10 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Keywords" content="">
     <meta name="Description" content="">
-
-    <title>用户中心_美素图库</title>
-
-
+    <title>用户中心</title>
     <link rel="stylesheet" href="./css/slicy.css">
     <link rel="stylesheet" href="./css/glide.css">
     <link rel="stylesheet" href="./css/easydropdown.css">
@@ -24,6 +21,12 @@
             src="http://goutong.baidu.com/site/429/e9fe99c2267a6f7a9215a8724ce995b4/b.js?siteId=11146853"></script>
     <script src="https://hm.baidu.com/hm.js?e9fe99c2267a6f7a9215a8724ce995b4"></script>
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-126144440-2"></script>
+    <!--echarts start-->
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <!--echart end-->
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -227,15 +230,15 @@
                     </a>
                 </ul>
             </div>
-            <!--  <div class="item table">
-               <div class="hd">
-                 <h2>可用套餐</h2>
-                 <span></span>
-               </div>
-                         <div class="bd none">
-                 <h4>亲爱的用户，您暂时没有可用套餐 <a href="about.php?action=price">立即购买</a></h4>
-                 </div>
-                       </div> -->
+            <div class="item">
+                <div class="hd">
+                    <h2>数据统计</h2>
+                    <span></span>
+                </div>
+                <div class="ui_imgs mt30" style="height: 600px;">
+                    <div id="container" style="height: 100%"></div>
+                </div>
+            </div>
             <div class="item">
                 <div class="hd">
                     <h2>2019-02-10　今天</h2>
@@ -1831,6 +1834,81 @@
         })
 
     });
+</script>
+<!--echarts-->
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+
+    setTimeout(function () {
+
+        option = {
+            legend: {},
+            tooltip: {
+                trigger: 'axis',
+                showContent: false
+            },
+            dataset: {
+                source: [
+                    ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+                    ['下载', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+                    ['上传', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+                    ['收藏', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+                    ['浏览', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+                ]
+            },
+            xAxis: {type: 'category'},
+            yAxis: {gridIndex: 0},
+            grid: {top: '55%'},
+            series: [
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {
+                    type: 'pie',
+                    id: 'pie',
+                    radius: '30%',
+                    center: ['50%', '25%'],
+                    label: {
+                        formatter: '{b}: {@2012} ({d}%)'
+                    },
+                    encode: {
+                        itemName: 'product',
+                        value: '2012',
+                        tooltip: '2012'
+                    }
+                }
+            ]
+        };
+
+        myChart.on('updateAxisPointer', function (event) {
+            var xAxisInfo = event.axesInfo[0];
+            if (xAxisInfo) {
+                var dimension = xAxisInfo.value + 1;
+                myChart.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                        },
+                        encode: {
+                            value: dimension,
+                            tooltip: dimension
+                        }
+                    }
+                });
+            }
+        });
+
+        myChart.setOption(option);
+
+    });;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
 </script>
 </body>
 </html>
