@@ -436,11 +436,11 @@
 }
 .c_authen .ui_no a .ico{
 	height: 64px;
-	background: url(../image/..imgs/tianjia04.png) no-repeat center;
+	background: url(../image/tianjia04.png) no-repeat center;
 	width: 64px; background-size: cover; margin: 0 auto;
 }
 .c_authen .ui_no a:hover .ico{
-	background: url(../image/..imgs/tianjia05.png) no-repeat center;
+	background: url(../image/tianjia05.png) no-repeat center;
 	height: 64px; width: 64px; background-size: cover;
 }
 .c_authen .ui_no a p{
@@ -599,7 +599,7 @@
 }
 .c_authen02 .c_two em{
 	width: 18px; height: 18px;
-	background: url(../image/..imgs/ico33.png) no-repeat;
+	background: url(../image/ico33.png) no-repeat;
 	position: absolute; top: 8px; right: 6px;
 	 display:none;cursor: pointer; z-index: 9;
 }
@@ -641,10 +641,10 @@
 }
 .user_attention .contain .back a{
 	font-size: 14px;color:#999999;padding-left: 20px;
-	line-height: 40px;background: url(../image/..imgs/arr05.png) no-repeat top 6px left;
+	line-height: 40px;background: url(../image/arr05.png) no-repeat top 6px left;
 }
 .user_attention .contain .back a:hover{
-	background: url(../image/..imgs/arr05_1.png) no-repeat top 6px left;
+	background: url(../image/arr05_1.png) no-repeat top 6px left;
 }
 .user_attention .contain .back:hover a{
 	color:#FC4349;
@@ -837,7 +837,7 @@
 	background-color: #FFFFFF;
 }
 .c_home{
-	background: url(../image/..imgs/img131.jpg) no-repeat;
+	background: url(../image/img131.jpg) no-repeat;
 	background-size: cover;background-position:center;
 	height: 491px;
 }
@@ -926,7 +926,7 @@
 
 /*鼠标移入滚动区域*/
 .c_home02{
-	background: url(../image/..imgs/img132.jpg) no-repeat;
+	background: url(../image/img132.jpg) no-repeat;
 	background-size: cover;background-position: center;
 	height: 642px;position: relative;
 }
@@ -1016,34 +1016,34 @@
 	height: 60px;display: block;margin: 0 auto;
 }
 .c_home03 .body li .img2{
-	background: url(../image/..imgs/ico55.png) no-repeat;
+	background: url(../image/ico55.png) no-repeat;
 }
 .c_home03 .body li:hover .img2{
-	background: url(../image/..imgs/ico55_1.png) no-repeat;
+	background: url(../image/ico55_1.png) no-repeat;
 }
 .c_home03 .body li .img1{
-	background: url(../image/..imgs/ico54.png) no-repeat;
+	background: url(../image/ico54.png) no-repeat;
 }
 .c_home03 .body li:hover .img1{
-	background: url(../image/..imgs/ico54_1.png) no-repeat;
+	background: url(../image/ico54_1.png) no-repeat;
 }
 .c_home03 .body li .img3{
-	background: url(../image/..imgs/ico56.png) no-repeat;
+	background: url(../image/ico56.png) no-repeat;
 }
 .c_home03 .body li:hover .img3{
-	background: url(../image/..imgs/ico56_1.png) no-repeat;
+	background: url(../image/ico56_1.png) no-repeat;
 }
 .c_home03 .body li .img4{
-	background: url(../image/..imgs/ico57.png) no-repeat;
+	background: url(../image/ico57.png) no-repeat;
 }
 .c_home03 .body li:hover .img4{
-	background: url(../image/..imgs/ico57_1.png) no-repeat;
+	background: url(../image/ico57_1.png) no-repeat;
 }
 .c_home03 .body li .img5{
-	background: url(../image/..imgs/ico58.png) no-repeat;
+	background: url(../image/ico58.png) no-repeat;
 }
 .c_home03 .body li:hover .img5{
-	background: url(../image/..imgs/ico58_1.png) no-repeat;
+	background: url(../image/ico58_1.png) no-repeat;
 }
 .c_home03 .body li .dot{
 	width: 26px;height: 26px;border-radius: 100%;
@@ -1406,18 +1406,18 @@
 }
 .c_about06 .bd06 .body li .ico{
 	width: 28px;height: 28px;
-	background: url(../image/..imgs/ico62.png) no-repeat;
+	background: url(../image/ico62.png) no-repeat;
 	background-size: 28px 28px;position: absolute;top:17px;right: 15px;
 }
 .c_about06 .bd06 .body li .ico:hover{
-	background: url(../image/..imgs/jia_r.png) no-repeat;
+	background: url(../image/jia_r.png) no-repeat;
 }
 .c_about06 .bd06 .body li .hidden{
 	font-size: 12px;color:#999999;line-height: 22px;padding-bottom: 25px;
 	display: none;
 }
 .c_about06 .bd06 .body li.selected .ico{
-	background: url(../image/..imgs/ico63.png) no-repeat;
+	background: url(../image/ico63.png) no-repeat;
 }
 .c_about06 .bd06 .body li.selected .hidden{
 	display: block;
@@ -1567,7 +1567,7 @@
 }
 .uesr_home01 .new_mesage .by li .ico{
 	width: 27px;height: 16px;display: block;position: absolute;
-	background: url(../image/..imgs/lf1_12.png) no-repeat center;top:30px;
+	background: url(../image/lf1_12.png) no-repeat center;top:30px;
 	left:0px;
 }
 .center_wrap .uesr_home01{
@@ -1589,37 +1589,37 @@
 	margin: 0 auto;margin-top: 30px;
 }
 .cooperation .cooperation_logo .n1 .ico{
-	background: url(../image/..imgs/ico64.png) no-repeat center center;	
+	background: url(../image/ico64.png) no-repeat center center;	
 }
 .cooperation .cooperation_logo .n2 .ico{
-	background: url(../image/..imgs/ico65.png) no-repeat center center;	
+	background: url(../image/ico65.png) no-repeat center center;	
 }
 .cooperation .cooperation_logo .n3 .ico{
-	background: url(../image/..imgs/ico66.png) no-repeat center center;	
+	background: url(../image/ico66.png) no-repeat center center;	
 }
 .cooperation .cooperation_logo .n4 .ico{
-	background: url(../image/..imgs/ico67.png) no-repeat center center;	
+	background: url(../image/ico67.png) no-repeat center center;	
 }
 .cooperation .cooperation_logo .n5 .ico{
-	background: url(../image/..imgs/ico68.png) no-repeat center center;	
+	background: url(../image/ico68.png) no-repeat center center;	
 }
 .cooperation .cooperation_logo .n1:hover .ico{
-	background: url(../image/..imgs/ico64_1.png) no-repeat center center;
+	background: url(../image/ico64_1.png) no-repeat center center;
 }
 .cooperation .cooperation_logo .n2:hover .ico{
-	background: url(../image/..imgs/ico65_1.png) no-repeat center center;
+	background: url(../image/ico65_1.png) no-repeat center center;
 }
 .cooperation .cooperation_logo .n3:hover .ico{
-	background: url(../image/..imgs/ico66_1.png) no-repeat center center;
+	background: url(../image/ico66_1.png) no-repeat center center;
 }
 .cooperation .cooperation_logo .n4:hover .ico{
-	background: url(../image/..imgs/ico67_1.png) no-repeat center center;
+	background: url(../image/ico67_1.png) no-repeat center center;
 }
 .cooperation .cooperation_logo .n5:hover .ico{
-	background: url(../image/..imgs/ico68_1.png) no-repeat center center;
+	background: url(../image/ico68_1.png) no-repeat center center;
 }
 .cooperation .cooperation_logo li:hover{
-	background: url(../image/..imgs/ico69.png) no-repeat;
+	background: url(../image/ico69.png) no-repeat;
 	background-size: 199px 96px;
 }
 /*exit*/
@@ -1700,29 +1700,31 @@
 
 /*user-collection03下拉菜单*/
 .header .nav_af .le4{
-	width:148px;height: 50px;display: inline-block;/*by gy*/
+	width:auto;
+	height: 50px;
+	display: inline-block;/*by gy*/
 	position: relative;
 }
 .header .nav_af .le5{
 	background-color: #FFFFFF;/*by gy*/
 }
 .header .nav_af .le4 .mail{
-	 background:url("../image/..imgs/top5.png") no-repeat left 10px center;
+	 background:url("../image/top5.png") no-repeat left 10px center;
 	 background-size: 16px 16px;margin: 0;padding-left: 34px;margin-right: 20px;
 	 text-align: center;
 }
 .header .nav_af .le5 .mail{
-	background:url("../image/..imgs/top4_2.png") no-repeat left 10px center;
+	background:url("../image/top4_2.png") no-repeat left 10px center;
 	background-size: 16px 16px;
 }
 .header .nav_af .le4 span{
 	width:42px;height: 50px;display: inline-block;
-	background:url("../image/..imgs/arr_f.png") no-repeat  center center;
+	background:url("../image/arr_f.png") no-repeat  center center;
 	background-size: 10px 5px;cursor: pointer;
 }
 .header .nav_af .le5 span{
 	width:42px;height: 55px;display: inline-block;/*by gy*/
-	background:url("../image/..imgs/big_arr.png") no-repeat  center center;
+	background:url("../image/big_arr.png") no-repeat  center center;
 	background-size: 10px 5px;cursor: pointer;
 	 -moz-transform:scaleY(-1);
     -webkit-transform:scaleY(-1);
@@ -1732,14 +1734,19 @@
     filter:FlipV;
 }
 .header .nav_af .le4 .hdn{
-	position: absolute;top:50px;right: 0px;
-	width: 148px;background-color: #000000;z-index: 99999;
+	position: absolute;
+	top:50px;
+	width: 99%;
+	background-color: #000000;
+	z-index: 99999;
 	display: none;
 }
 .header .nav_af .le4 .hdn dd a,
 .header .nav_af .le5 .hdn dd a{
 	padding: 0;margin: 0;line-height: 40px;text-align: center;
-	font-size: 14px;width:148px;display: block;
+	font-size: 14px;
+	width:100%;
+	display: block;
 	height: 40px;
 }
 .header .nav_af .le4 .hdn dd a{
@@ -1761,14 +1768,14 @@
 }
 .header .nav_af .le4.selected{
 	background-color: #323232;
-	width: 148px;/*by gy*/
+	width: auto;/*by gy*/
 }
 .header .nav_af .le4.selected span{
-	background:url("../image/..imgs/arr_f01.png") no-repeat  center center;
+	background:url("../image/arr_f01.png") no-repeat  center center;
 	background-size: 10px 5px;
 }
 .header .nav_af .le5.selected span{
-	background:url("../image/..imgs/big_arr01.png") no-repeat  center center;
+	background:url("../image/big_arr01.png") no-repeat  center center;
 	background-size: 10px 5px;
 }
 .header .nav_af .le5.selected{

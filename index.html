@@ -108,6 +108,24 @@
                     <dd><span>|</span></dd>
                     <dd><a href="" id="register">注册</a></dd>
                 </dl>
+
+            </div>
+            <div class="nav_af" >
+                <ul>
+                    <li class="le le4 le5">
+                        <a href="./user_page.html?user_id=" class="mail">1811...</a>
+                        <span class="arr"></span>
+                        <div class="hdn">
+                            <dl>
+                                <dd><a href="./user_page.html?user_id=&act=down_list">下载记录</a></dd>
+                                <dd><a href="./user_page.html?user_id=&act=collection_list">收藏夹</a></dd>
+                                <dd><a href="./user_page.html?user_id=&act=history_list">我的足迹</a></dd>
+                                <dd><a href="./user_page.html?user_id=&act=profile">账户管理</a></dd>
+                                <dd><id="logout_button" class="last">退出</a></dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </font>
     </div>
@@ -713,7 +731,7 @@
          </div>
      </div>
      <div class="login-main">
-         <div class="login-tit">美素有礼了</div>
+         <div class="login-tit">湘潭有礼了</div>
          <div class="login-hd">
              <ul>
                  <li>
@@ -764,7 +782,7 @@
         </div>
     </div>
     <div class="login-main">
-        <div class="login-tit">美素有礼了</div>
+        <div class="login-tit">湘潭有礼了</div>
         <div class="login-hd">
             <ul>
                 <li>
@@ -958,7 +976,7 @@
                 </div>
             </div>
             <div class="mt200 btn">
-                <a href="">登录</a>
+                <a  id="login_button">登录</a>
             </div>
         </form>
         <p>还没有账号？<a class="zhuce">马上注册</a></p>
@@ -973,9 +991,8 @@
             <span class="ui_line red"></span>
         </div>
 
-        <h4 class="mt15">您可以使用花瓣网账号和密码直接登录</h4>
         <div class="login_form">
-            <input type="text" placeholder="手机号/花瓣网账号"/>
+            <input type="text" placeholder="手机号/用户名"/>
             <input type="password" placeholder="登录密码"/>
             <div class="rem">
                 <input name="checkbox" type="checkbox" value="" id="check5">
@@ -1034,7 +1051,7 @@
     <div class="login_wrap register_wrap02">
         <em></em>
         <div class="head">
-            <h2>欢迎来到美素</h2>
+            <h2>欢迎来到湘潭</h2>
             <span class="ui_line red"></span>
         </div>
         <form id="ECS_REGFORM" name="ECS_REGFORM" method="post">
@@ -1460,6 +1477,7 @@
 <script src="./javascript/drag.js" type="text/javascript"></script>
 <script src="./javascript/getVerifyCode.js" type="text/javascript"></script>
 <script src="./javascript/photo.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/my_function.js"></script>
 <script id="_trs_ta_js" src="./javascript/ta.js" async="async" defer="defer"></script>
 <script>
     //注册弹出页面
@@ -1633,54 +1651,6 @@
 <script type="text/javascript" src="./javascript/aspect.js"></script>
 <script type="text/javascript" src="./javascript/keyWord.js"></script>
 <script>
-    //领取优惠券
-    function show_get_discount_layer() {
-        layer.open({
-            type: 1,
-            title: false,
-            anim: 5,
-            area: ['900px', 'auto'],  //宽高
-            content: $('#cashcoupon_wrap'),
-            yes: function (index) {
-                layer.close(index);
-            }
-        });
-        return false;
-    }
-
-    // 领取
-    function show_receive_layer() {
-        layer.open({
-            type: 1,
-            title: false,
-            anim: 5,
-            skin: 'layui-bottom',
-            area: ['353px', 'auto'],  //宽高
-            content: $('#receive_wrap'),
-            yes: function (index) {
-                layer.close(index);
-            }
-        });
-        return false;
-    }
-
-    //注册
-    function show_temp_register_layer() {
-        layer.closeAll();
-        layer.open({
-            type: 1,
-            title: false,
-            anim: -1,
-            skin: 'layui-no-animation',
-            area: ['850px', '523px'],  //宽高
-            content: $('#temp_register_wrap'),
-            yes: function (index) {
-                layer.close(index);
-            }
-        });
-        return false;
-    }
-
     function show_temp_login_layer() {
         layer.closeAll();
         layer.open({
@@ -1769,7 +1739,7 @@
     $("#temp-login-submit").click(function (e) {
         var formData = new FormData($('#activity-login-form')[0]);
         $.ajax({
-            url: 'user.php?act=signin',
+            url: 'ps_login.php',
             type: 'post',
             data: formData,
             async: true,
@@ -1909,6 +1879,9 @@
         if (need_show_get_discount_layer == 1) {
             show_temp_login_layer();
         }
+    });
+    $(function () {
+        $(".nav_af")[0].style.display="none";
     });
 </script>
 </body>
