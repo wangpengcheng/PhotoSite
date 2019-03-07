@@ -19,7 +19,7 @@ $conn=new mysqli($sever_ip,
 if($conn->connect_errno){
         die('Connect Error:'.$conn->connect_error);
     } else {
-        echo "connect ok!!!!" ;
+        //echo "connect ok!!!!" ;
     };
      //set deaful charset utf-8
     $conn->set_charset('utf8');
