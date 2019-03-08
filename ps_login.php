@@ -12,11 +12,11 @@
 	//用户表名；
 	$user_table_name="ps_users";
 	//获取提交的用户名
-	//$user_name="18117842737";
+	//$user_name="王鹏程";
 	$user_name=$_POST["user_name"];
 	//获取密码；
 	//$user_pwd="wang123!";
-	$user_pwd=$_POST["user_pwd"];
+    $user_pwd=$_POST["user_pwd"];
 	//设置查询语句
 	$sql="SELECT * FROM ".$user_table_name." WHERE user_name = '".$user_name."'";
 	//执行查询语句
