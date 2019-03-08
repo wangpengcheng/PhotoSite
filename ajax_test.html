@@ -8,17 +8,42 @@
 <body>
 </body>
 <script type="text/javascript">
+    function requesFail(xhr){
+        var status = xhr.status;
+        if (status) {
+            console.log("error", "网络错误", "发生网络错误，错误码为：" + xhr.status);
+        } else {
+            console.log("error", "网络错误", "未知网络错误, 请确保设备处在联网状态");
+        }
+    }
      $.ajax({
-         url:"http://118.24.113.233/PhotoSite/ps_login.php",
+         //url:"http://118.24.113.233/PhotoSite/ps_login.php",
+         url:"http://118.24.113.233/PhotoSite/ps_register.php",
          type:"post",
-         timeout: 1000,
-         data:{"user_name":"王鹏程","user_pwd":"wang123!"},
+         timeout: 3000,
+         data:{"user_name":"王鹏程","user_pwd":"wang123!","pwd_confirm":"wang123!","phone":"18117842737","email":"673018396@qq.com"},
          dataType:"json",
          success:function(result){
             //$("#div1").html(result);
              console.log(result);
-             console.log(result["result_state"]);
-        }
+            // console.log(result["result"]);
+        },
+         error:function(xhr,state,errorThrown){
+             requesFail(xhr);
+         }
      });
+     // alert("hello");
+     // $.ajax({
+     //     url:"http://118.24.113.233/PhotoSite/ps_register.php",
+     //     type:"post",
+     //     timeout: 1000,
+     //     data:{"user_name":"王鹏程","user_pwd":"wang123!","password_confirm":"wang123!","phone":"18117842737","email":"673018396@qq.com"},
+     //     dataType:"json",
+     //     success:function(result){
+     //         alert(result);
+     //         console.log(result);
+     //         console.log(result["result_state"]);
+     //     }
+     // });
 </script>
 </html>

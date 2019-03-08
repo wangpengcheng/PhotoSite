@@ -110,7 +110,7 @@
                 </dl>
 
             </div>
-            <div class="nav_af" >
+            <div class="nav_af" style="display: none">
                 <ul>
                     <li class="le le4 le5">
                         <a href="./user_page.html?user_id=" class="mail">1811...</a>
@@ -121,7 +121,7 @@
                                 <dd><a href="./user_page.html?user_id=&act=collection_list">收藏夹</a></dd>
                                 <dd><a href="./user_page.html?user_id=&act=history_list">我的足迹</a></dd>
                                 <dd><a href="./user_page.html?user_id=&act=profile">账户管理</a></dd>
-                                <dd><id="logout_button" class="last">退出</a></dd>
+                                <dd><a id="logout_button" class="last">退出</a></dd>
                             </dl>
                         </div>
                     </li>
@@ -1059,7 +1059,7 @@
             <div class="mt40 body">
                 <ul>
                     <li><input type="text" name="extend_field102" class="txt" id="extend_field102" value=""
-                               placeholder="昵称（必填）" maxlength="20"/></li>
+                               placeholder="用户名（必填）" maxlength="20"/></li>
                     <li><input type="password" name="password" class="txt" id="password" value="" placeholder="密码"
                                maxlength="20"/></li>
                     <li><input type="password" name="confirm_password" class="txt" id="confirm_password" value=""
@@ -1081,7 +1081,7 @@
         </div>
 
         <div class="mt40 btn">
-            <a href="">提交</a>
+            <a id="register_button">提交</a>
         </div>
     </div>
 </div>
@@ -1879,9 +1879,6 @@
         if (need_show_get_discount_layer == 1) {
             show_temp_login_layer();
         }
-    });
-    $(function () {
-        $(".nav_af")[0].style.display="none";
     });
 </script>
 </body>

@@ -4,6 +4,20 @@
 */
 //login model
 $(function(){
+    function requesFail(xhr){
+        var status = xhr.status;
+        if (status) {
+            console.log("error", "网络错误", "发生网络错误，错误码为：" + xhr.status);
+        } else {
+            console.log("error", "网络错误", "未知网络错误, 请确保设备处在联网状态");
+        }
+    }
+    function sleep(delay) {
+        var start = (new Date()).getTime();
+        while ((new Date()).getTime() - start < delay) {
+            continue;
+        }
+    }
   var change_display=function (element) {
       if(element.style.display==="none"){
             element.style.display="inline"
@@ -56,12 +70,55 @@ $(function(){
                        icon: 1,
                        time:2000
                    });
+           },
+           error:function(xhr,state,errorThrown){
+               requesFail(xhr);
            }
        });
        //logout
        $("#logout_button").click(function () {
            change_display($(".nav_af")[0]);
            change_display($(".nav_bf")[0]);
+       });
+
+   });
+   $("#register_button").click(function () {
+       var user_name=document.getElementById("extend_field102").value;
+       var user_pwd=document.getElementById("password").value;
+       var pwd_confirm=document.getElementById("confirm_password").value;
+       var phone=document.getElementById("extend_field5").value;
+       $.ajax({
+           url:"http://118.24.113.233/PhotoSite/ps_register.php",
+           type:"post",
+           timeout: 3000,
+           data:{"user_name":user_name,"user_pwd":user_pwd,"pwd_confirm":pwd_confirm,"phone":phone},
+           dataType:"json",
+           success:function(result){
+               //$("#div1").html(result);
+               console.log(result["result"]);
+               if(result["result"]=="注册成功,请登录"||
+                   result["result"]=="该用户名已存在,请登录"){
+                   layer.closeAll();
+                   var index = layer.open({
+                       type: 1,
+                       title: false,
+                       closeBtn: 1,
+                       area: ['520px', '470px'], //宽高
+                       content: $('#login_wrap'),
+                       yes: function(index){
+                           layer.close(index);
+                       }
+                   });
+               };
+               layer.msg(result["result"],
+                   {
+                       icon: 1,
+                       time:2000
+                   });
+           },
+           error:function(xhr,state,errorThrown){
+               requesFail(xhr);
+           }
        });
    });
 });
