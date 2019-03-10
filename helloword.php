@@ -1,5 +1,5 @@
 <?php
-require '../QueryListV4/vendor/autoload.php';
+require 'vendor/autoload.php';
 use QL\QueryList;
 
 //采集某页面所有的图片
