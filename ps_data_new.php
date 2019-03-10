@@ -7,6 +7,7 @@
 	$ps_photo_table_name="ps_photos";
 	$main_station_url="http://www.meisupic.com/";
 	$topic=[];
+	//$photo=[];
 use QL\QueryList;
 
 function get_topic($main_url){
@@ -68,40 +69,91 @@ function get_img_url($topic_link){
 	return $result;
 }
 
-function get_img($img_link){
-	
-}
+function get_img($img_link,$topic_id){
+	//photo_name、photo_message、photo_address、photo_big_address、tpoic_id、photo_width|height
+	$result=[];
+$rules = array (
+  'img_link' => 
+  array (
+    0 => '.img>img',
+    1 => 'src',
+  ),
+  'big_img_link' => 
+  array (
+    0 => '#big_img>div>img',
+    1 => 'src',
+  ),
+ 
+);
+$data = QueryList::get($img_link)->rules($rules)->range('.picture_head>.wrapper')->queryData();
+$data2 = QueryList::get($img_link)->find('.bd>p')->htmls();
+//print_r($data);
+$photo_name_array=explode('名称：', $data2[0]);
+$photo_name=$photo_name_array[1];
+$photo_id_array=explode('ID：', $data2[1]);
+$photo_media_id=$photo_id_array[1];
+$photo_size_array=explode('px', $data2[3]);
+$photo_size=explode('尺寸：',$photo_size_array[0]);
+$photo_size1=explode('×',$photo_size[1]);
+$photo_width=$photo_size1[0];
+$photo_height=$photo_size1[1];
+$result['photo_name']=$photo_name;
+$result['photo_address']=$data[0]['img_link'];
+$result['big_img_address']=$data[0]['big_img_link'];
+$result['photo_media_id']=$photo_media_id;
+$result['topic_id']=$topic_id;
+$result['photo_width']=$photo_width;
+$result['photo_height']=$photo_height;
+$result['ueser_id']=1;
+return $result;
 
-$topic_url=get_topic($main_station_url);
-$temp_array=[];
-for($i=0;$i<count($topic_url);$i++){
-	$img_result=get_img_url($topic_url[$i]);
-	$topic[$i]['display_photo_url']=$img_result['big_img_url'];
-	foreach ($img_result['img_rul'] as $temp_link_list) {
-		print_r($temp_link_list.'<br>');
-	}
-	print_r('<hr>');
 }
+function updateimage($photo){
+	global $ps_photo_table_name,$conn;
+	$sql_insert = "INSERT INTO ".$ps_photo_table_name." (photo_media_id,photo_name,photo_address,photo_big_address,photo_width,photo_height,photo_topic_id,ueser_id,create_time) VALUES('".$photo['photo_media_id']."','".$photo['photo_name']."','".$photo['photo_address']."','".$photo['big_img_address']."','".$photo['photo_width']."','".$photo['photo_height']."','".$photo['topic_id']."','".$photo['ueser_id']."','".date('Y-m-d h:i:s', time())."')";
+		// //$result=$conn->query($get_tpoic_id);
+	     if ($conn->query($sql_insert) === TRUE) {
+	      print_r("image insert ".$photo['photo_media_id']." success\n");
+	      	$topic_id=mysqli_insert_id($conn);
+	     // print_r($topic_id);
+	     } else {
+	      echo "Error: " . $sql_insert . "<br>" . $conn->error;
+	      print_r("Error: ".$photo['photo_media_id'].$conn->error."\n");
+	     }
+	 return 1;
+};
 //print_r($topic);
-//获取图片链接
+//$photo1=get_img("http://www.meisupic.com/goods.php?media_id=88344662",9);
+//print_r($photo1);
 
+function updatetopic($topic){
+	global $topic_table_name,$conn;
+		$sql_insert = "INSERT INTO ".$topic_table_name." (topic_name,topic_message,display_photo_url,display_photo_little_url,create_time) VALUES('".$topic['topic_name']."','".$topic['topic_message']."','".$topic['display_photo_url']."','".$topic['display_photo_little_url']."','".date('Y-m-d h:i:s', time())."')";
+		//$result=$conn->query($get_tpoic_id);
+	     if ($conn->query($sql_insert) === TRUE) {
+	      print_r("topic insert ".$topic['topic_name']."  success \n") ;
+	      	$topic_id=mysqli_insert_id($conn);
+	     // print_r($topic_id);
+	     } else {
+	      echo "Error: " . $sql_insert . "<br>" . $conn->error;
+	      print_r("Error: " .$topic['topic_name']."  " . $conn->error."\n");
+	     }
+	 return $topic_id;
+};
 
-	// foreach($data as $item) {
-	// 		//$sql_insert = "INSERT INTO ".$topic_table_name." (topic_name,topic_message,display_photo_url,create_time) VALUES('".$item['title']."','".$item['num']."','"."http://www.meisupic.com/".$item['img_link']."','".date('Y-m-d h:i:s', time())."')";
-	//      //$res_insert = $conn->query($sql_insert);
-	//      $get_tpoic_id="SELECT topic_id FROM ".$topic_table_name."where topic_name = '".$topic_name."'";
-	//      $result=$conn->query($get_tpoic_id);
-	//      if(mysqli_num_rows($result)!==0){
-	//      	$row = $result->fetch_array(MYSQLI_ASSOC);
-	//      	$topic_id=$row[0];
-	//      }else
-	//      {
-	//      	echo "do not have this topic";
-	//      }
-
-	//      if ($conn->query($sql_insert) === TRUE) {
-	//       echo "insert success";
-	//      } else {
-	//       echo "Error: " . $sql . "<br>" . $conn->error;
-	//      }
-	//  }
+	
+	//print_r($topic[$i]);
+$topic_url=get_topic($main_station_url);
+ for($i=0;$i<count($topic_url);$i++){
+ 	//获取更新的图片链接
+	$img_result=get_img_url($topic_url[$i]);
+	//补全topic信息
+	$topic[$i]['display_photo_url']=$img_result['big_img_url'];
+	$topic_id=updatetopic($topic[$i]);
+	 foreach ($img_result['img_rul'] as $temp_link_list) {
+	 	//print_r($temp_link_list.'<br>');
+	 	$photo=get_img($temp_link_list,$topic_id);
+	 	//print_r($photo);
+	 	$is_ok=updateimage($photo);
+	 };
+	}
