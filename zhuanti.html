@@ -1,10 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="Generator" content="ECSHOP v3.6.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="Keywords" content="       ，圣诞，圣诞节，圣诞节元素，节日元素，节日矢量，Christmas，Merry Christmas，圣诞老人，圣诞礼物，">
+    <meta name="Keywords" content=" ，圣诞，圣诞节，圣诞节元素，节日元素，节日矢量，Christmas，Merry Christmas，圣诞老人，圣诞礼物，">
     <meta name="Description" content="">
     <title>校园摄影网站</title>
     <link rel="stylesheet" href="./css/slicy.css">
@@ -3609,6 +3608,7 @@
 </div>
 <input type="hidden" id="hidden_reg_mobile_drag" value="">
 <script type="text/javascript" src="./js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="./js/jquery.cookie.js"></script>
 <script type="text/javascript" src="./js/jquery.json.js"></script>
 <script type="text/javascript" src="./js/jquery.glide.js"></script>
 <script type="text/javascript" src="./js/layer.js"></script>
@@ -3624,231 +3624,12 @@
 <script src="./javascript/drag.js" type="text/javascript"></script>
 <script src="./javascript/getVerifyCode.js" type="text/javascript"></script>
 <script src="./javascript/photo.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/my_function.js"></script>
 <script id="_trs_ta_js" src="./javascript/ta.js" async="async" defer="defer"></script>
-<script>
-    function showBandPhoneLayer() {
-        layer.open({
-            type: 1,
-            title: '绑定手机号',
-            anim: -1,
-            area: ['600px', '350px'],  //宽高
-            content: $('#BandPhoneModal'),
-            yes: function (index) {
-                layer.close(index);
-            }
-        });
-    }
-
-    $(function () {
-        $(".get-code").on("click", getVerifyCode({
-            callBack: function () {//按钮点击后的回调函数，-----必须-----
-                var formData = new FormData($('#band-phone')[0]);
-                ;
-                $.ajax({
-                    url: 'http://meisupic.com/band_phone.php?act=get_code',
-                    type: 'post',
-                    data: formData,
-                    async: true,
-                    cache: false,
-                    timeout: 30000,
-                    contentType: false,
-                    processData: false,
-                    success: function (returndata) {
-                        var data = jQuery.parseJSON(returndata);
-                        switch (parseInt(data["code"])) {
-                            case -3:
-                                dialog('手机号已注册，无法绑定', 1);
-                                break;
-                            case -1:
-                                dialog('请填写手机号', 1);
-                                break;
-                            case 0:
-                                var message = data["content"];
-                                dialog(message, 1);
-                                break;
-                            case 1:
-                                dialog('短信验证码已发送', 1);
-                                break;
-                            default:
-                                dialog('系统错误', 1);
-                        }
-                    },
-                    error: function () {
-                        dialog("系统级别错误");
-                    }
-                })
-            },
-            time: 60,//定时时间，以秒为单位，默认60秒
-            getCurrentTime: function (time) {//获取倒计时当前时间
-                //console.log(time);
-                //console.log(this);//这里的这个this执行按钮
-                //console.log("=================================");
-            },
-            isPhone: true,//是否为发送手机验证码，如果是则会验证手机号格式，-----必须-----
-            getPhone: function () {//获取手机号，此处一定要return
-                return $("#j_phone").val();
-            },
-            //phoneReg: /^1[34578]\d{9}$/,//手机号验证正则
-            phoneCallBack: function () {//当手机号有误时的回调，默认会中止操作
-                dialog("您输入的手机号有误", 1);
-            },
-            timeIsUpText: "重新发送",//倒计时时间到了后按钮所显示文字
-            timeRunnigText: "s重新发送",//倒计时时间正在走的时候按钮所显示文字。默认为"xxs后重新获取"
-            unabledClass: "unlabed"//按钮不能用的样式，即点击按钮后的样式
-        }));
-        $('#has-know-service').on("click", function (e) {
-            location.reload();
-        })
-        $('.band-phone-commit').on('click', function (e) {
-            // show_message('短信验证码已发送');
-            var formData = new FormData($('#band-phone')[0]);
-            ;
-            $.ajax({
-                url: 'http://meisupic.com/band_phone.php?act=make_band',
-                type: 'post',
-                data: formData,
-                async: true,
-                cache: false,
-                timeout: 30000,
-                contentType: false,
-                processData: false,
-                success: function (returndata) {
-                    var data = jQuery.parseJSON(returndata);
-                    switch (parseInt(data["code"])) {
-                        case -4:
-                            dialog('验证码输入错误或验证码已失效', 1);
-                            break;
-                        case -3:
-                            dialog('手机号已注册，无法绑定', 2);
-                            break;
-                        case 1:
-                            layer.closeAll();
-                            dialog('绑定成功', 1);
-                            window.location.reload();
-                            break;
-                        default:
-                            layer.closeAll();
-                            dialog('系统错误', 1);
-                    }
-                },
-                error: function () {
-                    layer.closeAll();
-                    dialog('系统错误', 1);
-                }
-            })
-        });
-    });
-</script>
-<input type="hidden" id="hidden_reg_mobile_drag" value="">
-<!-- <script id="_trs_ta_js" src="./javascript/ta.js" async="async" defer="defer"></script> -->
-<script type="text/javascript">
-    window.onscroll = function () {
-        getSearchIds();
-        showItems();
-    }
-    var show_array = []; // 显示的所有pids
-    var send_status = 1; // 发送状态 默认允许发
-    function getSearchIds() {
-        var items = $(".imgList").find(".imgItem");
-        var len = items.length;
-        var start = 0;
-        for (var i = start; i < len; i++) {
-            var elem = items[i];
-            if ($(elem).offset().top <= $(window).height() + $(window).scrollTop() && $(elem).offset().top + $(elem).outerHeight() > $(window).scrollTop()) {
-
-                var img = $(elem).find("img");
-                var pid = $(img).parent().attr("data-id");
-                var is_has = show_array.indexOf(pid);
-                if (is_has < 0) {
-                    show_array.push(pid);
-                }
-                start = i;
-                send_status = 0;
-            }
-            else {
-                if ($(elem).offset().top > $(window).height() + $(window).scrollTop()) {
-                    send_status = 1;
-                    break;
-                }
-            }
-        }
-        // 解决只有一排数据不发送的问题
-        if (len <= 5 && len > 0) {
-            send_status = 1;
-        }
-    }
-
-    function showItems() {
-        var items = $(".imgList").find(".imgItem");
-        var len = items.length;
-        var start = 0;
-        for (var i = start; i < len; i++) {
-            var elem = items[i];
-            if ($(elem).offset().top < $(window).height() + $(window).scrollTop() && $(elem).offset().top + $(elem).outerHeight() > $(window).scrollTop()) {
-
-                var img = $(elem).find("img");
-                if (!$(img).attr("src")) {
-                    $(img).attr("src", $(img).attr("data-original")).fadeIn();
-                    start = i;
-                }
-            }
-            else {
-                if ($(elem).offset().top > $(window).height() + $(window).scrollTop()) {
-                    break;
-                }
-            }
-        }
-    }
-
-    function setPiclistSize() {
-        $(".imgList").Huiphoto({
-            wraperWidth: "auto",
-            item: ".imgItem",
-            margin: 50,
-            extra: 0
-        });
-    }
-
-    $(function () {
-        setPiclistSize();
-        showItems();
-        $(window).resize(function () {
-            setPiclistSize();
-        });
-        $('.collect-topic').on('click', function (e) {
-            var topic_id = $(this).attr('data-topic-id');
-            $.ajax({
-                url: 'http://meisupic.com/collect_topic.php?id=' + topic_id,
-                type: 'get',
-                success: function (returndata) {
-                    var data = jQuery.parseJSON(returndata);
-                    switch (parseInt(data["code"])) {
-                        case -4:
-                            dialog('您已收藏该专辑', 1);
-                            break;
-                        case -3:
-                            dialog('系统错误，缺少id', 1);
-                            break;
-                        case -2:
-                            dialog('请先登录', 1);
-                            break;
-                        case 1:
-                            layer.closeAll();
-                            dialog(data["message"], 1);
-                            location.reload();
-                            break;
-                        default:
-                            layer.closeAll();
-                            dialog('系统错误', 1);
-                    }
-                },
-                error: function () {
-                    layer.closeAll();
-                    dialog('系统错误', 1);
-                }
-            })
-        });
-    });
-</script>
+<script src="./javascript/jquery.ui.widget.js"></script>
+<script src="./javascript/jquery.iframe-transport.js"></script>
+<script src="./javascript/jquery.fileupload.js"></script>
+<script type="text/javascript" src="./javascript/aspect.js"></script>
+<script type="text/javascript" src="./javascript/keyWord.js"></script>
 </body>
 </html>

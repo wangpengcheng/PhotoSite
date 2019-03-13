@@ -4,6 +4,21 @@
 */
 //login model
 $(function(){
+    function write_cookies(user_id,user_name,user_pwd) {
+        $.cookie("user_id",user_id,{expires:7,path:"/"});
+        $.cookie("user_name",user_name,{expires:7,path:"/"});
+        $.cookie("user_pwd",user_pwd,{expires:7,path:"/"});
+        console.log("<<<<<<"+"登录成功");
+    }
+    function user_login(user_id,user_name) {
+        $(".nav_af>ul>.le>a")[0].innerText=user_name;
+        $(".nav_af>ul>.le>a")[0].href="./user_page.html?user_id="+user_id;
+        //change hraf
+        var temp_a=$(".hdn>dl>dd>a");
+        for(var i=0;i<temp_a.length;++i){
+            temp_a[i].href=temp_a[i].href.replace("user_id=","user_id="+user_id);
+        }
+    }
     function requesFail(xhr){
         var status = xhr.status;
         if (status) {
@@ -18,22 +33,23 @@ $(function(){
             continue;
         }
     }
-  var change_display=function (element) {
-      if(element.style.display==="none"){
-            element.style.display="inline"
-      }else {
-          element.style.display="none";
-      };
+      var change_display=function (element) {
+          if(element.style.display==="none"){
+                element.style.display="inline"
+          }else {
+              element.style.display="none";
+          };
   };
    $("#login_button").click(function(){
-       var user_name=document.getElementById("login_username").value;
-       var user_passwd=document.getElementById("login_password").value;
+       var input_user_name=document.getElementById("login_username").value;
+       var input_user_passwd=document.getElementById("login_password").value;
+       console.log("nihao "+input_user_name+input_user_passwd);
        var result_string="";
        $.ajax({
            url:"http://118.24.113.233/PhotoSite/ps_login.php",
            type:"post",
            timeout: 1000,
-           data:{"user_name":user_name,"user_pwd":user_passwd },
+           data:{"user_name":input_user_name,"user_pwd":input_user_passwd },
            dataType:"json",
            success:function(result){
                switch (parseInt(result["result_state"])){
@@ -43,17 +59,18 @@ $(function(){
                        //change hiden
                        var nav_af=$(".nav_af")[0];
                        var nav_bf=$(".nav_bf")[0];
-                       change_display(nav_af);
-                       change_display(nav_bf);
+                       nav_af.style.display="inline";
+                       nav_bf.style.display="none";
                         //change HTML
                        var user_id=result["user_id"];
                        var user_name=result["user_name"];
-                       $(".nav_af>ul>.le>a")[0].innerText=user_name;
-                       $(".nav_af>ul>.le>a")[0].href="./user_page.html?user_id="+user_id;
-                        //change hraf
-                       var temp_a=$(".hdn>dl>dd>a");
-                       for(var i=0;i<temp_a.length;++i){
-                           temp_a[i].href.replace("user_id=","user_id="+user_id);
+                       user_login(user_id,user_name);
+                       //change cookie
+                       var isChecked=$("#login_remember").attr("checked");
+                       if(isChecked){
+                           write_cookies(user_id,user_name,input_user_passwd);
+                       }else {
+                           write_cookies("","","");
                        }
                        break;
                    case 1:
@@ -75,13 +92,23 @@ $(function(){
                requesFail(xhr);
            }
        });
-       //logout
-       $("#logout_button").click(function () {
-           change_display($(".nav_af")[0]);
-           change_display($(".nav_bf")[0]);
-       });
-
    });
+    //logout
+    $("#logout_button").click(function () {
+        $(".nav_af")[0].style.display="none";
+        $(".nav_bf")[0].style.display="inline";
+        try {
+            write_cookies("","","");
+        }catch (err){
+            var script=document.createElement("script");
+            script.type="text/javascript";
+            script.src="./js/jquery.cookie.js";
+            document.getElementsByTagName("head")[0].appendChild(script);
+            script.onload=function (ev) {
+                write_cookies("","","");
+            }
+        }
+    });
    $("#register_button").click(function () {
        var user_name=document.getElementById("extend_field102").value;
        var user_pwd=document.getElementById("password").value;
@@ -121,4 +148,17 @@ $(function(){
            }
        });
    });
+    var user_id=$.cookie("user_id");
+    var user_name=$.cookie("user_name");
+    //var user_pwd=$.cookie("user_name");
+    console.log("<<<<<"+user_name+"<<<<"+user_id);
+    if(user_id!=null&&user_id!=""
+        &&user_name!=null&&user_name!=""){
+        //change hiden
+        var nav_af=$(".nav_af")[0];
+        var nav_bf=$(".nav_bf")[0];
+        nav_af.style.display="inline";
+        nav_bf.style.display="none";
+        user_login(user_id,user_name);
+    }
 });
