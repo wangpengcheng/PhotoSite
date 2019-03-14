@@ -51,3 +51,13 @@ console.log(editor.txt.text());
 console.log(editor.txt.getJSON());
 //设置样式
 $("#my_change").css("display", "inherit");
+$("#look_comments").click(function () {
+    var container=$(".container")[0];
+    if(container.style.display=="none"){
+        container.style.display==""
+        $("#look_comments").text="隐藏评论";
+    }else{
+        container.style.display=="none"
+        $("#look_comments").text="查看评论";
+    }
+});

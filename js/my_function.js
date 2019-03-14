@@ -8,7 +8,6 @@ $(function(){
         $.cookie("user_id",user_id,{expires:7,path:"/"});
         $.cookie("user_name",user_name,{expires:7,path:"/"});
         $.cookie("user_pwd",user_pwd,{expires:7,path:"/"});
-        console.log("<<<<<<"+"登录成功");
     }
     function user_login(user_id,user_name) {
         $(".nav_af>ul>.le>a")[0].innerText=user_name;
@@ -97,17 +96,17 @@ $(function(){
     $("#logout_button").click(function () {
         $(".nav_af")[0].style.display="none";
         $(".nav_bf")[0].style.display="inline";
-        try {
+       // try {
             write_cookies("","","");
-        }catch (err){
-            var script=document.createElement("script");
-            script.type="text/javascript";
-            script.src="./js/jquery.cookie.js";
-            document.getElementsByTagName("head")[0].appendChild(script);
-            script.onload=function (ev) {
-                write_cookies("","","");
-            }
-        }
+        // //}catch (err){
+        //     var script=document.createElement("script");
+        //     script.type="text/javascript";
+        //     script.src="./js/jquery.cookie.js";
+        //     document.getElementsByTagName("head")[0].appendChild(script);
+        //     script.onload=function (ev) {
+        //         write_cookies("","","");
+        //     }
+        // }
     });
    $("#register_button").click(function () {
        var user_name=document.getElementById("extend_field102").value;

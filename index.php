@@ -1,6 +1,24 @@
 <?php
     include 'ps_header.php'
 ?>
+<?php
+     //get photo 
+    include 'ps_connect.php';
+   function get_topic_list(){
+        global $conn;
+        $topic_list_array=[];
+        $topic_list_sql="SELECT * FROM ps_topics LIMIT 12 ";
+        $topic_list_result=$conn->query($topic_list_sql);
+        $topic_list_count= mysqli_num_rows($topic_list_result);
+        //print_r($topic_list_result);
+                if($topic_list_count!==0){
+                    //将结果转化为数组
+                    $topic_list_array = $topic_list_result->fetch_all(MYSQLI_ASSOC);
+                    return $topic_list_array;
+                }
+    };
+    $topic_list_array=get_topic_list();
+?>
 <!--高步-->
 <div class="h_slide">
     <!--幻灯片-->
@@ -160,114 +178,21 @@
             </div>
             <div class="h_row3_main">
                 <ul>
-                    <li class="l1">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/1-上.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>自然风光</h3>
-                                <p><i class="h_ico_album"></i>共89张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l2">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/2-上.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>医疗健康</h3>
-                                <p><i class="h_ico_album"></i>共247张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l3">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/3-上.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>万马奔腾</h3>
-                                <p><i class="h_ico_album"></i>共141张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l4">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/4-上.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>可爱萌宠</h3>
-                                <p><i class="h_ico_album"></i>共98张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l5">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/1-中.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>商务生活</h3>
-                                <p><i class="h_ico_album"></i>共96张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l6">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/2-中.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>时尚女孩</h3>
-                                <p><i class="h_ico_album"></i>共123张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l7">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/3-中.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>汁甜肉脆</h3>
-                                <p><i class="h_ico_album"></i>共139张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l8">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/4-中.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>金猪贺岁</h3>
-                                <p><i class="h_ico_album"></i>共190张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l9">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/1-下.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>美好食光</h3>
-                                <p><i class="h_ico_album"></i>共94张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l10">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/2-下.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>圣诞快乐</h3>
-                                <p><i class="h_ico_album"></i>共178张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l11">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/3-下.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>美容美妆</h3>
-                                <p><i class="h_ico_album"></i>共96张</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="l12">
-                        <a href="" target="_blank">
-                            <img src="http://meisupic.com/themes/meisu2017/imgs/4-下.jpg"/>
-                            <div class="h_row3_mask">
-                                <h3>节气插画</h3>
-                                <p><i class="h_ico_album"></i>共96张</p>
-                            </div>
-                        </a>
-                    </li>
+                <?php
+                        for($i=0;$i<count($topic_list_array);++$i) {
+                            $temp=$topic_list_array[$i];
+                            $li=$i+1;
+                            echo '<li class="l'.$li.'">';
+                            echo '  <a href="'."topic.php?topic_id=".$temp['topic_id'].'" target="_blank">';
+                            echo '     <img src="'.$temp['display_photo_little_url'].'"/>';
+                            echo '     <div class="h_row3_mask">';
+                            echo '          <h3>'.$temp['topic_name'].'</h3>';
+                            echo '          <p><i class="h_ico_album"></i>'.$temp['topic_message'].'</p>';
+                            echo '     </div>';
+                            echo '    </a>';    
+                            echo '</li>';
+                        }
+                ?>
                 </ul>
             </div>
         </div>

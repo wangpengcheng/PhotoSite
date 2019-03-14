@@ -1,8 +1,8 @@
 <?php
 /*
- * main function is to  connect mysql databaseä
+ * main function is to  connect mysql databaseÃ¤
  *2018-4-9 15:29
- *çwangpencgheng
+ *Ã§wangpencgheng
  *link url :https://github.com/wangpengcheng/PhotoSite
 */
 //connect localhost

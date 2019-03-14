@@ -11,7 +11,7 @@
         return $result;
     }
    
-    function is_index(){
+    function is_index(){//名字起错了，就这个样子吧
          $temp=curPageURL()["path"];
         $result=explode('/', $temp);
         //echo $result["path"];//'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -19,11 +19,35 @@
         //print_r(($result[$last-1]=="test.php"));
         return $result[$last-1];
     };
-    function get_photo_title(){
-        echo '照片';
+    function get_query($temp2){
+        $result=[];
+        if(array_key_exists("query", $temp2)){
+            $query=$temp2["query"];
+            $query_array=explode('&', $query);
+            foreach ($query_array as $temp_query) {
+                # code...
+                $temp_query_array=explode('=', $temp_query);
+                $result[$temp_query_array[0]]=$temp_query_array[1];
+            }
+            $temp_array=[];
+            $temp_array['photo_id']="12";
+            return $result;
+        }else{
+            return "no query";
+        };
+    }
+    $page_url=curPageURL();
+    $page_query=get_query($page_url);
+    function get_photo_id($page_query){
+        if(array_key_exists('photo_id', $page_query)){
+            return $page_query['photo_id'];
+        }else{
+            return "empty";
+        }
     };
-?>
+    //print_r($page_query);
 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +55,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="Keywords" content="网站关键词描述"/>
     <meta name="Description" content="网站描述"/>
+    <meta name="referrer" content="no-referrer" /> <!--可以让img标签预加载网络图片-->
     <title><?php
         if(is_index()=="index.php"){
             echo '校园风景';
@@ -41,9 +66,9 @@
         }else if(is_index()=="user.php"){
             echo '用户信息';
         }else if(is_index()=="photo.php"){
-            get_photo_title();
+            //get_photo_title();
+            echo '照片';
         }
-        is_index();
     ?></title>
     <?php
         if(is_index()=="hand_photo.php"){
@@ -79,7 +104,7 @@
              echo  '<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">';
              echo  '<link href="./css/zyd.comment.css" rel="stylesheet" type="text/css">';
              echo  '<link href="./css/wangEditor-fullscreen-plugin.css" rel="stylesheet" type="text/css">';
-        }else {
+        }else if(is_index()!="topic.php"){
              echo '<link rel="stylesheet" href="./css/new_style.css"/>';
         }
     ?>
@@ -173,7 +198,6 @@
                     <dd><span>|</span></dd>
                     <dd><a href="" id="register">注册</a></dd>
                 </dl>
-
             </div>
             <div class="nav_af" style="display: none">
                 <ul>

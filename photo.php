@@ -1,16 +1,46 @@
 <?php
-    include 'ps_header.php'
+    include 'ps_header.php';
 ?>
 
+<?php
+	 //get photo 
+    include 'ps_connect.php';
+	$photo_id=get_photo_id($page_query);
+	$photo_array=[];
+	$author_array=[];
+	if($photo_id!="empty"){
+		$photo_sql="SELECT * FROM ps_photos "." WHERE photo_id = '".$photo_id."'";
+		$photo_result=$conn->query($photo_sql);
+		$photo_row_count= mysqli_num_rows($photo_result);
+		if($photo_row_count!==0){
+			//将结果转化为数组
+        	$photo_array = $photo_result->fetch_array(MYSQLI_ASSOC);
+        	//print_r($photo_array);
+        	if($photo_array['user_id']!==""){
+				$author_sql="SELECT * FROM ps_users "." WHERE user_id = '".$photo_array['user_id']."'";
+				$author_result=$conn->query($author_sql);
+				$author_row_count= mysqli_num_rows($author_result);
+				if($author_row_count!==0){
+					//将结果转化为数组
+		        	$author_array = $author_result->fetch_array(MYSQLI_ASSOC);
+		        	//print_r($photo_array);
+		    	}
+			}
+    	}
+	}
+	$conn->close();
+	//print_r($photo_array);
+	//print_r($author_array);
+?>
 <div class="picture_info">
     <div class="picture_head picture_head01">
         <div class="wrapper">
             <div class="img">
-                <img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1592314/88344662/api_thumb_450.jpg"
+                <img src=<?php echo "\"".$photo_array['photo_address']."\"";?>
                      height="384px">
                 <div id="my_change" class="btn">
                     <ul>
-                        <li class="n1" sn="88344662" title="圣诞装饰红色星和古董婴儿鞋"><a href="javascript:void(0)">收藏</a></li>
+                        <li class="n1" sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a href="javascript:void(0)">收藏</a></li>
                         <li class="n2"><a href="javascript:void(0)" id="img_p">放大</a></li>
                     </ul>
                 </div>
@@ -22,7 +52,7 @@
             </div>
             <div id="big_img" class="d_none">
                 <div class="big_img">
-                    <img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1592314/88344662/api_thumb_450.jpg">
+                    <img src=<?php echo "\"".$photo_array['photo_big_address']."\"";?> >
                 </div>
             </div>
             <div class="txt">
@@ -39,14 +69,14 @@
                   </div>
                 </div>-->
                 <div class="bd">
-                    <p>名称：圣诞装饰红色星和古董婴儿鞋</p>
+                    <p>名称：<?php echo $photo_array['photo_name'];?> </p>
 
-                    <p>ID：88344662</p>
+                    <p>ID：<?php echo $photo_array['photo_id'];?></p>
                     <p>作者：
-                        <a href="homedp.php?username=LiliGraphie" class="goods_username">LiliGraphie</a>
+                        <a href= <?php echo "\""."user_page.php?user_id=".$photo_array['user_id']."\"";?>  class="goods_username"><?php echo $author_array['user_name'];?></a>
                     </p>
-                    <p>尺寸：4115×3850px／ dpi</p>
-                    <p>格式：照片</p>
+                    <p>尺寸：<?php echo $photo_array['photo_width']."x".$photo_array['photo_height'];?>px/dpi</p>
+                    <p>格式：<?php echo $photo_array['photo_format'];?></p>
                     <p>授权：商业用途</p>
                 </div>
                 <div class="ft">
@@ -62,9 +92,9 @@
                 </div>
                 <div class="btns">
                     <ul>
-                        <li sn="88344662" title="圣诞装饰红色星和古董婴儿鞋"><a href="javascript:void(0)" id="goodsinfo_add">
+                        <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a href=<?php echo "\"".$photo_array['photo_big_address']."\"";?> id="goodsinfo_add" target="_blank">
                             下载原图</a></li>
-                        <li sn="88344662" title="圣诞装饰红色星和古董婴儿鞋"><a href="javascript:void(0)" class="red" id="forward">查看评论</a>
+                        <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a class="red" id="look_comments">查看评论</a>
                         </li>
                     </ul>
                 </div>
@@ -251,70 +281,8 @@
         </div>
     </div>
 </div>
-<!--评论js-->
-<script src="./js/wangEditor.min.js" type="text/javascript"></script>
-<!--<script src="./js/jquery-1.7.2.min.js" type="text/javascript"></script>-->
-<!--<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>-->
-<script src="https://cdn.bootcss.com/bootstrap/2.3.0/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="./js/xss.js" type="text/javascript"></script>
-<script src="./js/wangEditor-fullscreen-plugin.js" type="text/javascript"></script>
-<script src="./js/zyd.comment.js" type="text/javascript"></script>
-<script type="text/javascript">
-    var E = window.wangEditor
-    var editor = new E('#editor')
-    // 自定义菜单配置
-    editor.customConfig.menus = [
-        'code', // 插入代码
-        //      'head', // 标题
-        'bold', // 粗体
-        'italic', // 斜体
-        'underline', // 下划线
-        //      'strikeThrough', // 删除线
-        //      'foreColor', // 文字颜色
-        //      'backColor', // 背景颜色
-        'image', // 插入图片
-        'link', // 插入链接
-        'list', // 列表
-        //      'justify', // 对齐方式
-        'quote', // 引用
-        'emoticon', // 表情
-        //      'table', // 表格
-        //      'video', // 插入视频
-        //      'undo', // 撤销
-        //      'redo' // 重复
-    ];
-    // debug模式下，有 JS 错误会以throw Error方式提示出来
-    editor.customConfig.debug = true;
 
-    // 关闭粘贴样式的过滤
-    editor.customConfig.pasteFilterStyle = false;
-    // 自定义处理粘贴的文本内容
-    editor.customConfig.pasteTextHandle = function (content) {
-        // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
-        return content + '<p>在粘贴内容后面追加一行</p>'
-    };
-    // 插入网络图片的回调
-    editor.customConfig.linkImgCallback = function (url) {
-        console.log(url) // url 即插入图片的地址
-    };
-    editor.customConfig.zIndex = 100;
-    editor.create();
-    E.fullscreen.init('#editor');
-    //    editor.txt.clear(); //清空编辑器内容
-    //    editor.txt.html('<p>用 JS 设置的内容</p><strong>hello</strong><script>alert(/xss/);<\/script>');
-    //    editor.txt.append('<p>追加的内容</p>');
-    // 读取 html
-    console.log(editor.txt.html());
-    // 读取 进行 xss 攻击过滤后的html
-    console.log(filterXSS(editor.txt.html()));
-    // 读取 text
-    console.log(editor.txt.text());
-    // 获取 JSON 格式的内容
-    console.log(editor.txt.getJSON());
-    //设置样式
-    $("#my_change").css("display", "inherit");
-</script>
 
 <?php
-	include 'footer.php' 
+	include 'footer.php'
 ?>

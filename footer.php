@@ -132,7 +132,7 @@
                     <span class='rg'><a href="">忘记密码？</a></span>
                 </div>
             </div>
-            <div class="mt200 btn">
+            <div class="mt200 btn" style="display:block">
                 <a  id="login_button">登录</a>
             </div>
         </form>
@@ -543,6 +543,8 @@
         <h4>新增用户自动保存</h4>
     </div>
 </div>
+<input type="hidden" id="hidden_reg_mobile_drag" value="">
+</body>
 <?php
 if(is_index()=="hand_photo.php"){ 
 echo '<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>';
@@ -579,7 +581,6 @@ echo '            <h4 class="hide"><span class="img-title"></span><a href="#"></
 echo '        </div>';
 echo '    </li>';
 echo '</script>';
-echo '<input type="hidden" id="hidden_reg_mobile_drag" value="">';
 //echo '<script type="text/javascript" src="./javascript/jquery-1.7.2.js"></script>';
 echo '<script type="text/javascript" src="./jst/jquery.json.js"></script>';
 echo '<script type="text/javascript" src="./js/jquery.glide.js"></script>';
@@ -630,33 +631,32 @@ echo '<script type="text/javascript" src="./js/my_function.js"></script>';
     echo '<script type="text/javascript" src="./js/comment.js"></script>';
     echo '<script type="text/javascript" src="./js/my_function.js"></script>';
 }else{
-echo '<input type="hidden" id="hidden_reg_mobile_drag" value="">';
-echo '<script type="text/javascript" src="./js/jquery-1.7.2.js"></script>';
-echo '<script type="text/javascript" src="./js/jquery.json.js"></script>';
-echo '<script type="text/javascript" src="./js/jquery.glide.js"></script>';
-echo '<script type="text/javascript" src="./js/jquery.cookie.js"></script>';
-echo '<script type="text/javascript" src="./js/layer.js"></script>';
-echo '<script type="text/javascript" src="./js/jquery.easydropdown.min.js"></script>';
-echo '<script type="text/javascript" src="./js/jquery.poshytip.js"></script>';
-echo '<script type="text/javascript" src="./js/jquery.row-grid-display.js"></script>';
-echo '<script type="text/javascript" src="./js/template.js"></script>';
-echo '<script type="text/javascript" src="./js/XCheck.js"></script>';
-echo '<script type="text/javascript" src="./js/script.js"></script>';
-echo '<script type="text/javascript" src="./js/dialog.js"></script>';
-echo '<script type="text/javascript" src="./js/gy.js"></script>';
-echo '<script src="./js/drag.js" type="text/javascript"></script>';
-echo '<script src="./js/getVerifyCode.js" type="text/javascript"></script>';
-echo '<script src="./js/photo.js" type="text/javascript"></script>';
-echo '<script type="text/javascript" src="./js/my_function.js"></script>';
-echo '<script id="_trs_ta_js" src="./javascript/ta.js" async="async" defer="defer"></script>';
-echo '<script src="./js/jquery.ui.widget.js"></script>';
-echo '<script src="./js/jquery.iframe-transport.js"></script>';
-echo '<script src="./js/jquery.fileupload.js"></script>';
-echo '<script type="text/javascript" src="./js/aspect.js"></script>';
-echo '<script type="text/javascript" src="./js/keyWord.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery-1.7.2.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery.json.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery.glide.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery.cookie.js"></script>';
+    echo '<script type="text/javascript" src="./js/layer.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery.easydropdown.min.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery.poshytip.js"></script>';
+    echo '<script type="text/javascript" src="./js/jquery.row-grid-display.js"></script>';
+    echo '<script type="text/javascript" src="./js/template.js"></script>';
+    echo '<script type="text/javascript" src="./js/XCheck.js"></script>';
+    echo '<script type="text/javascript" src="./js/script.js"></script>';
+    echo '<script type="text/javascript" src="./js/dialog.js"></script>';
+    echo '<script type="text/javascript" src="./js/gy.js"></script>';
+    echo '<script src="./js/drag.js" type="text/javascript"></script>';
+    echo '<script src="./js/getVerifyCode.js" type="text/javascript"></script>';
+    echo '<script src="./js/photo.js" type="text/javascript"></script>';
+    echo '<script type="text/javascript" src="./js/my_function.js"></script>';
+    echo '<script id="_trs_ta_js" src="./javascript/ta.js" async="async" defer="defer"></script>';
+    echo '<script src="./js/jquery.ui.widget.js"></script>';
+    echo '<script src="./js/jquery.iframe-transport.js"></script>';
+    echo '<script src="./js/jquery.fileupload.js"></script>';
+    echo '<script type="text/javascript" src="./js/aspect.js"></script>';
+    echo '<script type="text/javascript" src="./js/keyWord.js"></script>';
 };
-?>
-
-   
-</body>
+if(is_index()=="topic.php"){
+    echo '<script type="text/javascript" src="./js/topic_load.js"></script>';
+}
+?>s
 </html>
