@@ -6,11 +6,16 @@
 	 //get photo 
     include 'ps_connect.php';
 	$photo_id=get_photo_id($page_query);
+	$user_id=get_user_id($page_query);
 	$photo_array=[];
 	$author_array=[];
 	if($photo_id!="empty"){
+		$time=date('Y-m-d H:i:s', time());
 		$photo_sql="SELECT * FROM ps_photos "." WHERE photo_id = '".$photo_id."'";
+		$record_sql="INSERT INTO ps_user_browserecord (user_id,photo_id,record_time) VALUES ('".$user_id."','".$photo_id."','".$time."')";
+		//INSERT INTO `ps_user_browserecord` (`record_id`, `user_id`, `photo_id`, `record_time`) VALUES (NULL, '19', '1234', '2019-03-17 15:00:24');
 		$photo_result=$conn->query($photo_sql);
+		$res_insert = $conn->query($record_sql);
 		$photo_row_count= mysqli_num_rows($photo_result);
 		if($photo_row_count!==0){
 			//将结果转化为数组
@@ -286,3 +291,37 @@
 <?php
 	include 'footer.php'
 ?>
+<script type="text/javascript">
+	//添加下载按钮时间，添加下载记录
+	function GetRequest() {
+    var url = this.location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for(var i = 0; i < strs.length; i ++) {
+            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+	}
+	var url=GetRequest();
+	var photo_id=url['photo_id'];
+	var user_id=$.cookie("user_id");
+    var user_name=$.cookie("user_name");
+	$(function(){
+		$($(".btns>ul>li>a")[0]).click(function(){
+    		$.ajax({
+    			url:"./ps_up_dwon_history.php",
+    			type:"post",
+    			timeout:3000,
+    			data:{"user_id":user_id,"photo_id":photo_id,"load_type":"0"},
+    			dataType:"json",
+    			success:function(result){
+    				console.log(result);
+    			}
+    		});
+		});
+		$()
+	});
+</script>

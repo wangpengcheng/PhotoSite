@@ -183,7 +183,7 @@
                             $temp=$topic_list_array[$i];
                             $li=$i+1;
                             echo '<li class="l'.$li.'">';
-                            echo '  <a href="'."topic.php?topic_id=".$temp['topic_id'].'" target="_blank">';
+                            echo '  <a href="'."topic.php?topic_id=".$temp['topic_id']."&user_id=".'" target="_blank">';
                             echo '     <img src="'.$temp['display_photo_little_url'].'"/>';
                             echo '     <div class="h_row3_mask">';
                             echo '          <h3>'.$temp['topic_name'].'</h3>';

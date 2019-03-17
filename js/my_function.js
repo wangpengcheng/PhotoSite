@@ -11,12 +11,19 @@ $(function(){
     }
     function user_login(user_id,user_name) {
         $(".nav_af>ul>.le>a")[0].innerText=user_name;
-        $(".nav_af>ul>.le>a")[0].href="./user_page.html?user_id="+user_id;
+        $(".nav_af>ul>.le>a")[0].href="./user.php?user_id="+user_id;
         //change hraf
         var temp_a=$(".hdn>dl>dd>a");
         for(var i=0;i<temp_a.length;++i){
             temp_a[i].href=temp_a[i].href.replace("user_id=","user_id="+user_id);
+           // console.log(temp_a[i].href);
         }
+        var topic_list=$(".h_row3_main>ul>li>a");
+        for(var i=0;i<topic_list.length;++i){
+            topic_list[i].href=topic_list[i].href.replace("user_id=","user_id="+user_id);
+           // console.log(topic_list[i].href);
+        };
+
     }
     function requesFail(xhr){
         var status = xhr.status;

@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Keywords" content="">
     <meta name="Description" content="">
+    <meta name="referrer" content="no-referrer" /> <!--可以让img标签预加载网络图片-->
     <title>用户中心</title>
     <link rel="stylesheet" href="./css/slicy.css">
     <link rel="stylesheet" href="./css/glide.css">
@@ -12,14 +13,14 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/lf_style.css">
     <link rel="stylesheet" href="./css/dxm_style.css">
-    <link rel="stylesheet" href="http://meisupic.com/themes/meisu2017/css/css.css">
+    <link rel="stylesheet" href="./css/css.css">
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/drag.css">
     <meta name="viewport" content="width=1366">
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script charset="utf-8"
             src="http://goutong.baidu.com/site/429/e9fe99c2267a6f7a9215a8724ce995b4/b.js?siteId=11146853"></script>
-    <script src="https://hm.baidu.com/hm.js?e9fe99c2267a6f7a9215a8724ce995b4"></script>
+    <!--<script src="https://hm.baidu.com/hm.js?e9fe99c2267a6f7a9215a8724ce995b4"></script>-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-126144440-2"></script>
     <!--echarts start-->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
@@ -110,7 +111,7 @@
         </div>
         <!--头部左侧-->
         <div class="copyr">
-            <a href="./index.html">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="index1.html">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="./topic.html">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="./hand_photo.html">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">专题</a>-->
@@ -224,7 +225,7 @@
                         <li><big>0</big>已下载</li>
                     </a>
                     <a href="user.php?act=package">
-                        <li><big>0</big>可下载总数</li>
+                        <li><big>0</big>已上传总数</li>
                     </a>
                 </ul>
             </div>
@@ -239,7 +240,8 @@
             </div>
             <div class="item">
                 <div class="hd">
-                    <h2>2019-02-10　今天</h2>
+                    <!--<h2>2019-02-10　今天</h2>-->
+                    <h2>最近7天</h2>
                     <span></span>
                 </div>
                 <div class="ui_imgs mt30">
@@ -278,7 +280,8 @@
             </div>
             <div class="item mt60">
                 <div class="hd">
-                    <h2>2019-02-20　昨天</h2>
+                    <!--<h2>2019-02-20　昨天</h2>-->
+                    <h2>最近30天</h2>
                     <span></span>
                 </div>
                 <div class="mt30 ui_imgs">
@@ -317,6 +320,83 @@
         </div>
         <!--我的下载-->
         <div class="body user_manage user_manage1">
+            <!--          <div class="hd">
+              <ul>
+                <li class="c1">单张下载记录(0)<span></span></li>
+                <li>批量下载记录(0)<span></span></li>
+              </ul>
+             </div> -->
+            <div class="user_record mt40 bd">
+                <table width="100%" class="ui_table" border="0" cellspacing="0">
+                    <tbody>
+                    <tr class="frist">
+                        <td width="" height="55" align="center">图片信息<span>|</span></td>
+                        <td width="12%" height="55" align="center">所属账户<span>|</span></td>
+                        <td width="15%" height="55" align="center">时间<span>|</span></td>
+                        <td width="10%" height="55" align="center">图片下载<span>|</span></td>
+                        <td width="10%" height="55" align="center">授权</td>
+                    </tr>
+                    <tr>
+                        <td height="170" align="center">
+                            <div class="img left">
+                                <a href="goods.php?media_id=MSBQ13715300036172" target="_blank">
+                                    <img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs//MSBQ13715300036172/MSBQ13715300036172.jpg"
+                                         style="height: 100px;max-width: 100px">
+                                </a>
+                            </div>
+                            <div class="txt left max-350">
+                                <p>图片ID：MSBQ13715300036172</p>
+                                <p>圆形蛋糕3</p>
+                                <p>尺寸：XL</p>
+                            </div>
+                        </td>
+                        <td height="170" align="center">主账户</td>
+                        <td height="170" align="center">2019-02-21</td>
+
+                        <td height="170" align="center">
+                            <a href="javascript:void(0)"><i data-sn="MSBQ13715300036172" data-rec-id="142813"
+                                                            class="botton_down"></i></a>
+
+
+                        </td>
+
+                        <td height="170" align="center">
+                            <p class="xiazai" rec_id="142813"><i class="botton_shouquan"></i></p>
+                        </td>
+                    </tr>
+                    <!--单行-->
+                    <tr>
+                        <td height="170" align="center">
+                            <div class="img left">
+                                <a href="goods.php?media_id=MSBQ13715300070585" target="_blank">
+                                    <img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs//MSBQ13715300070585/MSBQ13715300070585.jpg"
+                                         style="height: 100px;max-width: 100px">
+                                </a>
+                            </div>
+                            <div class="txt left max-350">
+                                <p>图片ID：MSBQ13715300070585</p>
+                                <p>圣诞节装饰小猫</p>
+                                <p>尺寸：XL</p>
+                            </div>
+                        </td>
+                        <td height="170" align="center">主账户</td>
+                        <td height="170" align="center">2019-02-21</td>
+
+                        <td height="170" align="center">
+                            <a href="javascript:void(0)"><i data-sn="MSBQ13715300070585" data-rec-id="142807"
+                                                            class="botton_down"></i></a>
+                        </td>
+
+                        <td height="170" align="center">
+                            <p class="xiazai" rec_id="142807"><i class="botton_shouquan"></i></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--我的上传-->
+        <div class="body user_manage user_upload">
             <!--          <div class="hd">
               <ul>
                 <li class="c1">单张下载记录(0)<span></span></li>
@@ -1363,15 +1443,15 @@
 </div>
 <input type="hidden" id="hidden_reg_mobile_drag" value="">
 
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/jquery-1.7.2.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/jquery.json.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/jquery.glide.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/layer.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/jquery.easydropdown.min.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/WdatePicker.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/jquery.poshytip.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/jquery.row-grid.js"></script>
-<script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/template.js"></script>
+<script type="text/javascript" src="./js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="./js/jquery.json.js"></script>
+<script type="text/javascript" src="./js/jquery.glide.js"></script>
+<script type="text/javascript" src="./js/layer.js"></script>
+<script type="text/javascript" src="./js/jquery.easydropdown.min.js"></script>
+<script type="text/javascript" src="./js/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/jquery.poshytip.js"></script>
+<script type="text/javascript" src="./js/jquery.row-grid.js"></script>
+<script type="text/javascript" src="./js/template.js"></script>
 <script type="text/javascript" src="http://meisupic.com/themes/meisu2017/js/XCheck.js"></script>
 
 
@@ -1382,170 +1462,6 @@
 <script type="text/javascript" src="./js/getVerifyCode.js"></script>
 <script type="text/javascript" src="./js/photo.js"></script>
 <script id="_trs_ta_js" src="//ta.trs.cn/c/js/ta.js?mpid=1245" async="async" defer="defer"></script>
-<script>
-    function showBandPhoneLayer() {
-        layer.open({
-            type: 1,
-            title: '完善信息',
-            anim: 5,
-            skin: 'layui-layer0',
-            area: ['965px', 'auto'],  //宽高
-            content: $('#BandPhoneModal'),
-            btn: '完成',
-            yes: function (index) {
-                var formData = new FormData($('#band-phone')[0]);
-                var industry_name = $("#industry_name").find("option:selected").val();
-                formData.append("industry_name", industry_name);
-                $.ajax({
-                    url: 'band_phone.php?act=make_band',
-                    type: 'post',
-                    data: formData,
-                    async: true,
-                    cache: false,
-                    timeout: 30000,
-                    contentType: false,
-                    processData: false,
-                    success: function (returndata) {
-                        var data = jQuery.parseJSON(returndata);
-                        switch (parseInt(data["code"])) {
-                            case -4:
-                                dialog('验证码输入错误或验证码已失效', 1);
-                                break;
-                            case -3:
-                                dialog('手机号已注册，无法绑定', 2);
-                                break;
-                            case -1:
-                                dialog('缺少必要信息', 2);
-                                break;
-                            case 1:
-                                layer.closeAll();
-                                dialog('完善成功', 1);
-                                window.location.reload();
-                                break;
-                            default:
-                                layer.closeAll();
-                                dialog('系统错误', 1);
-                        }
-                    },
-                    error: function () {
-                        layer.closeAll();
-                        dialog('系统错误', 1);
-                    }
-                })
-            }
-        });
-    }
-
-    function showMoreInfoLayer(phone) {
-        $("#user-has-band-phone-num").val(phone);
-        layer.open({
-            type: 1,
-            title: '完善信息',
-            anim: 5,
-            skin: 'layui-layer0',
-            area: ['965px', 'auto'],  //宽高
-            content: $('#MoreInfoModal'),
-            btn: '完成',
-            yes: function (index) {
-                var formData = new FormData($('#more-info')[0]);
-                var industry_name = $("#more_info_industry_name").find("option:selected").val();
-                formData.append("industry_name", industry_name);
-                $.ajax({
-                    url: 'band_phone.php?act=more_info',
-                    type: 'post',
-                    data: formData,
-                    async: true,
-                    cache: false,
-                    timeout: 30000,
-                    contentType: false,
-                    processData: false,
-                    success: function (returndata) {
-                        var data = jQuery.parseJSON(returndata);
-                        switch (parseInt(data["code"])) {
-                            case -1:
-                                dialog('缺少必要信息', 2);
-                                break;
-                            case 1:
-                                layer.closeAll();
-                                dialog('完善成功', 1);
-                                window.location.reload();
-                                break;
-                            default:
-                                layer.closeAll();
-                                dialog('系统错误', 1);
-                        }
-                    },
-                    error: function () {
-                        layer.closeAll();
-                        dialog('系统错误', 1);
-                    }
-                })
-            }
-        });
-    }
-
-    $(function () {
-        $(".get-code").on("click", getVerifyCode({
-            callBack: function () {//按钮点击后的回调函数，-----必须-----
-                var formData = new FormData($('#band-phone')[0]);
-                ;
-                $.ajax({
-                    url: 'band_phone.php?act=get_code',
-                    type: 'post',
-                    data: formData,
-                    async: true,
-                    cache: false,
-                    timeout: 30000,
-                    contentType: false,
-                    processData: false,
-                    success: function (returndata) {
-                        var data = jQuery.parseJSON(returndata);
-                        switch (parseInt(data["code"])) {
-                            case -3:
-                                dialog('手机号已注册，无法绑定', 1);
-                                break;
-                            case -1:
-                                dialog('请填写手机号', 1);
-                                break;
-                            case 0:
-                                var message = data["content"];
-                                dialog(message, 1);
-                                break;
-                            case 1:
-                                dialog('短信验证码已发送', 1);
-                                break;
-                            default:
-                                dialog('系统错误', 1);
-                        }
-                    },
-                    error: function () {
-                        dialog("系统级别错误");
-                    }
-                })
-            },
-            time: 60,//定时时间，以秒为单位，默认60秒
-            getCurrentTime: function (time) {//获取倒计时当前时间
-                //console.log(time);
-                //console.log(this);//这里的这个this执行按钮
-                //console.log("=================================");
-            },
-            isPhone: false,//是否为发送手机验证码，如果是则会验证手机号格式，-----必须-----
-            getPhone: function () {//获取手机号，此处一定要return
-                return $("#j_phone").val();
-            },
-            //phoneReg: /^1[34578]\d{9}$/,//手机号验证正则
-            phoneCallBack: function () {//当手机号有误时的回调，默认会中止操作
-                dialog("您输入的手机号有误", 1);
-            },
-            timeIsUpText: "重新发送",//倒计时时间到了后按钮所显示文字
-            timeRunnigText: "s重新发送",//倒计时时间正在走的时候按钮所显示文字。默认为"xxs后重新获取"
-            unabledClass: "unlabed"//按钮不能用的样式，即点击按钮后的样式
-        }));
-        $('#has-know-service').on("click", function (e) {
-            location.reload();
-        })
-    });
-</script>
 <!--我的收藏 start-->
 <style>
     .modal-content {
@@ -1792,6 +1708,8 @@
             $(".user_order").hide();
             //我的下载隐藏
             $(".user_manage1").hide();
+            //上传记录隐藏
+            $(".user_upload").hide();
             //我的收藏隐藏
             $(".user_collection").hide();
             //我的足迹隐藏
@@ -1829,6 +1747,13 @@
             $(".c1").removeClass("c1");
             $(".user_manage2").show();
             $("#my_manage_button").addClass("c1");
+        })
+        $("#up_load_button").click(function () {
+            hide_all();
+            $(".user_home").hide();
+            $(".c1").removeClass("c1");
+            $(".user_upload").show();
+            $("#up_load_button").addClass("c1");
         })
 
     });

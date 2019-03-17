@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('PRC');
     function curPageURL() {    
         $pageURL = 'http';    
         $pageURL .= "://";    
@@ -31,9 +32,15 @@
             }
             $temp_array=[];
             $temp_array['photo_id']="12";
+            $temp_array['topic_id']="3";
+            $temp_array['user_id']="19";
             return $result;
         }else{
-            return "no query";
+             $temp_array=[];
+            $temp_array['photo_id']="12";
+            $temp_array['topic_id']="3";
+            $temp_array['user_id']="19";
+            return $temp_array;
         };
     }
     $page_url=curPageURL();
@@ -45,6 +52,20 @@
             return "empty";
         }
     };
+    function get_topic_id($page_query){
+        if(array_key_exists('topic_id', $page_query)){
+            return $page_query['topic_id'];
+        }else{
+            return "empty";
+        }
+    }
+     function get_user_id($page_query){
+        if(array_key_exists('user_id', $page_query)){
+            return $page_query['user_id'];
+        }else{
+            return "empty";
+        }
+    }
     //print_r($page_query);
 
 ?>
@@ -60,7 +81,7 @@
         if(is_index()=="index.php"){
             echo '校园风景';
         }else if (is_index()=="topic.php") {
-            echo '专题';
+            echo '精彩专题';
         }else if (is_index()=="hand_photo.php"){
             echo '编辑信息';
         }else if(is_index()=="user.php"){
@@ -168,7 +189,7 @@
     <link href="http://meisupic.com/themes/meisu2017/js/skin/WdatePicker.css" rel="stylesheet" type="text/css">
     <!--  <script src="http://sgoutong.baidu.com/embed/1547804898/asset/embed/pc_nb.js" charset="UTF-8"></script> -->
     <link rel="stylesheet" type="text/css" href="//sgoutong.baidu.com/embed/1547804898/asset/embed/css/pc/main.css">
-    <script type="text/javascript" src="//p.qiao.baidu.com/cps2/site/poll?cb=jsonp_bridge_1552203048744_9791668731255698&l=1&v=9117938710011146853&s=11146853&e=24453643&dev=0&auth=%7B%22anonym%22%3A0%2C%22key%22%3A%225534984912114627294swqy9670438334%22%2C%22sn%22%3A%22729409890%22%2C%22id%22%3A%229117938710011146853%22%2C%22from%22%3A4%2C%22token%22%3A%22bridge%22%7D&_time=1552203048744" id="id_jsonp_bridge_1552203008485_7427988791504829" charset="utf-8"></script>
+   <!--  <script type="text/javascript" src="//p.qiao.baidu.com/cps2/site/poll?cb=jsonp_bridge_1552203048744_9791668731255698&l=1&v=9117938710011146853&s=11146853&e=24453643&dev=0&auth=%7B%22anonym%22%3A0%2C%22key%22%3A%225534984912114627294swqy9670438334%22%2C%22sn%22%3A%22729409890%22%2C%22id%22%3A%229117938710011146853%22%2C%22from%22%3A4%2C%22token%22%3A%22bridge%22%7D&_time=1552203048744" id="id_jsonp_bridge_1552203008485_7427988791504829" charset="utf-8"></script> -->
 
 </head>
 <body id="all_toper" class="bg_fff" style="height: 100%">
@@ -182,9 +203,9 @@
         </div>
         <!--头部左侧-->
         <div class="copyr">
-            <a href="./index.html">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./topic.html">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./hand_photo.html">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./index.php">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./topic.php">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./hand_photo.php">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">上传图片</a>-->
             <a href="./researcher_relsult.html"><font color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a>
             <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;

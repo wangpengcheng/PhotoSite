@@ -1,6 +1,12 @@
 <?php
 	include 'ps_header.php'; 
 ?>
+<?php
+	$topic_id=get_topic_id($page_query);
+	function get_topic_array($topic_id){
+		
+	}
+?>
  <style type="text/css">
         .imgListInit {
             height: 0;
