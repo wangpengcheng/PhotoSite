@@ -61,7 +61,7 @@
                 </div>
                 <input type="submit" class="btn" name="" id="" value=""/>
             </form>
-            <div id="srch_img">
+            <div id="srch_img2" class="srch_img">
             </div>
         </div>
         <!--搜索热点关键字-->

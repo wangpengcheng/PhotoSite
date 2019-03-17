@@ -658,5 +658,5 @@ echo '<script type="text/javascript" src="./js/my_function.js"></script>';
 if(is_index()=="topic.php"){
     echo '<script type="text/javascript" src="./js/topic_load.js"></script>';
 }
-?>s
+?>
 </html>

@@ -616,7 +616,25 @@ $(function(){
 		  }
 		});
 	   return false;
-	})
+	});
+    $('.srch_img2').click(function(){
+    	console.log("点击搜索");
+        layer.open({
+            type: 1,
+            title: '以图搜图',
+            closeBtn: 1,
+            shade:0.8,
+            area: ['850px', '340px'], //宽高
+            content: $('#srchimg_wrap'),
+            yes: function(index){
+                layer.close(index);
+            },
+            success: function(layero, index){
+
+            }
+        });
+        return false;
+    })
 	
 	//文件转移到
 	$('#zy').click(function(){

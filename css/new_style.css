@@ -307,12 +307,20 @@ body{
 	position: absolute;  bottom: 195px; right: 50%; margin: 0 auto;
 	 width: 500px; margin-right: -140px;   font-size: 14px; text-align: right; 
 }
-.h_slide .form #srch_img{
+.h_slide .form #srch_img {
 	position: absolute; top: 50%; margin-top: -8px; right: 250px;
 	width: 20px; height: 16px;  cursor: pointer;
 	background: url(../image/h-ico8.png) no-repeat center;
 }
-.h_slide .form #srch_img:hover{
+.h_slide .form #srch_img :hover{
+	background: url(../image/h-ico8-1.png) no-repeat center;
+}
+.h_slide .form #srch_img2 {
+	position: absolute; top: 50%; margin-top: -8px; right: 250px;
+	width: 20px; height: 16px;  cursor: pointer;
+	background: url(../image/h-ico8.png) no-repeat center;
+}
+.h_slide .form #srch_img2 :hover{
 	background: url(../image/h-ico8-1.png) no-repeat center;
 }
 .h_slide .form .txt,
