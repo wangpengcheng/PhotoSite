@@ -1,43 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta name="Generator" content="ECSHOP v3.6.0"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="Keywords" content=""/>
-    <meta name="Description" content=""/>
-    <meta name="referrer" content="no-referrer" /> <!--可以让img标签预加载网络图片-->
-    <title>校园摄影网站</title>
-    <link rel="stylesheet" href="./css/slicy.css">
-    <link rel="stylesheet" href="./css/glide.css">
-    <link rel="stylesheet" href="./css/easydropdown.css">
-    <link rel="stylesheet" href="./css/jquery-ui.css"/>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/lf_style.css"/>
-    <link rel="stylesheet" href="./css/dxm_style.css"/>
-    <link rel="stylesheet" href="./css/css.css">
-    <link rel="stylesheet" href="./css/responsive.css">
-    <link rel="stylesheet" href="./css/drag.css">
-    <meta name="viewport" content="width=1366"/>
-    <script async src="./js/e8b0ebdc065d83b84c71bde85f9a2ac7.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-126144440-2');
-    </script>
-    <!--<link rel="shortcut icon" href="./favicon.ico"/>-->
-    <link rel="icon" href="./favicon.ico"/>
-    <!--<link rel="icon" href="./animated_favicon.gif" type="image/gif"/>-->
-    <script type="text/javascript" src="./js/common.js"></script>
-    <script type="text/javascript" src="./js/transport.js"></script>
-    <script type="text/javascript" src="./js/utils.js"></script>
-    <style type="text/css">
+<?php
+    include 'ps_header.php';
+?>
+<?php
+    include 'ps_connect.php';
+    $photos=[];//图片查询结果
+    //获得关键词
+	$key_word=get_key_word($page_query);
+	
+	//更新照片id
+	if($key_word!="empty"){
+		//设置查询语句
+		//SELECT * FROM ps_targets WHERE target_name like '%美女%' GROUP BY photo_id;
+		$keyword_sql_query="SELECT  photo_id FROM ps_targets WHERE target_name like "."'%".$key_word."%' GROUP BY photo_id;";
+		print_r($keyword_sql_query."\n");
+		//执行查询语句
+		$key_word_result=$conn->query($keyword_sql_query);
+		if(mysqli_num_rows($key_word_result)!==0){
+			$key_words_result=$key_word_result->fetch_all(MYSQLI_ASSOC);
+			//sprint_r($key_words_result);
+			foreach ($key_words_result as $temp) {
+				# code...
+				# //获取图片地址，宽度和高度
+				$photo_query_sql=  "SELECT photo_address,photo_width,photo_height FROM ps_photos "." WHERE photo_id = '".$temp['photo_id']."'";
+				//print_r($photo_query_sql."\n");
+				$photo_result=$conn->query($photo_query_sql);
+				if(mysqli_num_rows($photo_result)){
+					//获取图片信息
+					$photo_array = $photo_result->fetch_all(MYSQLI_ASSOC);
+				}else{
+					echo "no image";
+				}
+			}
+		}else{
+			echo "no this words";
+		}
+	}
+    //关闭连接
+	$conn->close();
+	//print_r($photo_array);
+	//print_r($author_array);
+?>
+<!--style start-->
+<style type="text/css">
         .imgListInit {
             height: 0;
             overflow: hidden;
@@ -127,60 +131,13 @@
 
 
     </style>
-</head>
-<body>
-<div class="loader" style="z-index: 198910151;display: none">
-</div>
-<div class="header header_black header_w">
-    <div class="wrapper" style="width: auto;margin: 0 70px;">
-        <div class="logo">
-            <a href=""><img class="logo-normal" src="./htmlimg/logo1.png"/></a>
-        </div>
-        <!--头部左侧-->
-        <div class="copyr">
-            <a href="index1.html">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./topic.html">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./hand_photo.html">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <!--<a href="./zhuanti.html">上传图片</a>-->
-            <a href="./researcher_relsult.html"><font color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a>
-            <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <font id="ECS_MEMBERZONE">
-            <div id="append_parent"></div>
-            <div class="nav_bf">
-                <dl>
-                    <!-- <dt><a href="">价格</a></dt> -->
-                    <dd><a href="" id="login">登录</a></dd>
-                    <dd><span>|</span></dd>
-                    <dd><a href="" id="register">注册</a></dd>
-                </dl>
-            </div>
-            <div class="nav_af" style="display: none">
-                <ul>
-                    <li class="le le4">
-                        <a href="./user_page.html?user_id=" class="mail">1811...</a>
-                        <span class="arr"></span>
-                        <div class="hdn">
-                            <dl>
-                                <dd><a href="./user_page.html?user_id=&act=down_list">下载记录</a></dd>
-                                <dd><a href="./user_page.html?user_id=&act=collection_list">收藏夹</a></dd>
-                                <dd><a href="./user_page.html?user_id=&act=history_list">我的足迹</a></dd>
-                                <dd><a href="./user_page.html?user_id=&act=profile">账户管理</a></dd>
-                                <dd><a id="logout_button" class="last">退出</a></dd>
-                            </dl>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </font>
-    </div>
-</div>
+<!--style end-->
 <div class="toper toper_w">
     <div class="wrapper">
-        <h2>"校园风景"</h2><span style='font-size: 14px;line-height: 103px;padding-left: 7px;'>共 1766 个搜索结果</span>
+        <h2><?php echo $key_word;?></h2><span style='font-size: 14px;line-height: 103px;padding-left: 7px;'>共 1766 个搜索结果</span>
         <div class="form">
             <form action="searchi.php" method="get" id="myform">
-                <input class="s_clearall" type="hidden" value='校园风景' name="s_keyword" id="s_keyword" autocomplete="off">
+                <input class="s_clearall" type="hidden" value=<?php echo "'".$key_word."'";?> name="s_keyword" id="s_keyword" autocomplete="off">
                 <input class="s_clearall" type="hidden" value='1' name="offset" id="s_offset" autocomplete="off">
                 <input class="s_clearall" type="hidden" value='4' name="sort" id="s_sort" autocomplete="off">
                 <input class="s_clearall" type="hidden" value='' name="phototype" id="s_phototype" autocomplete="off">
@@ -216,7 +173,7 @@
                     </select>
                 </div>
                 <div class="input">
-                    <input type="text" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value="校园风景"
+                    <input type="text" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value=<?php echo "\"".$key_word."\"";?>
                            autocomplete="off"/>
                     <input class="btn" value="" onclick="submitForm()" type="submit"/>
                 </div>
@@ -521,10 +478,12 @@
     </div>
 </div>
 
+<!--边界线-->
 <div class="label_wrap">
     <dl>
     </dl>
 </div>
+<!--查询结果-->
 <div class="search_content">
     <div class="wrapper1">
         <div id="searchCon2" class="imgs ui_imgs">
@@ -1942,333 +1901,9 @@
         </ul>
     </div>
 </div>
-<div class="h_foot">
-    <div class="wrapper">
-        <div class="txt">
-            还没找到想要的正版图片？来探索湘潭世界吧！
-        </div>
-        <div class="form">
-            <form id="footform" action="searchi.php" method="get">
-                <input type="text" class="txt1" name="keyword" id="" value="" placeholder="搜索照片、矢量图和插画，支持双语哦"
-                       autocomplete="off"/>
-                <input type="submit" class="btn" value=""/>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="wrapper">
-        <div class="logo">
-            <a href=""><img src="./htmlimg/f_logo.png"/></a>
-            <h4><a href=""></a></h4>
-        </div>
-        <div class="nav">
-            <dl>
-                <dd><a href="">关于我们</a></dd>
-                <!--<dd><a href="">价格体系</a></dd>-->
-                <dd><a href="">联系我们</a></dd>
-            </dl>
-            <dl>
-                <dd><a href="">版权说明</a></dd>
-                <!--<dd><a href="">服务条款</a></dd>-->
-                <dd><a href="">常见问题</a></dd>
-            </dl>
-        </div>
-        <div class="qrimg">
-            <div class="img">
-                <img src="./htmlimg/er.jpg"/>
-            </div>
-            <div class="txt">
-                <div class="qq">
-                    <a href="" target="_blank">联系方式</a>
-                </div>
-                <h4>电话：0086-731-58293938<br/>
-                    Email: lxsb@xtu.edu.cn</h4>
-            </div>
-        </div>
-    </div>
-    <div class="copyright">
-        <span></span>
-        版权所有 © 湘潭大学. 地址：中国湖南湘潭
-    </div>
-</div>
-
-
-<div id="login_wrap" class="d_none">
-    <div class="login_wrap">
-        <em></em>
-        <div class="head">
-            <h2>登录</h2>
-            <span class="ui_line red"></span>
-        </div>
-        <form id="ECS_LOGINFORM" name="ECS_LOGINFORM" method="post">
-
-            <div class="login_form">
-                <input type="text" name="login_username" id="login_username" placeholder="用户名/手机号"/>
-                <input type="password" name="login_password" id="login_password" placeholder="登录密码"/>
-                <div class="rem">
-                    <input name="checkbox" type="checkbox" value="" id="login_remember" name="login_remember">
-                    <label for="login_remember"></label>
-                    <span class='lt'>记住密码</span>　
-                    <span class='rg'><a href="">忘记密码？</a></span>
-                </div>
-            </div>
-            <div class="mt200 btn">
-                <a href="">登录</a>
-            </div>
-        </form>
-        <p>还没有账号？<a href="" class="zhuce">马上注册</a></p>
-    </div>
-</div>
-
-
-<div id="login_wrap_bf" class="d_none">
-    <div class="login_wrap">
-        <em></em>
-        <div class="head">
-            <h2>请登录后再进行收藏或购买</h2>
-            <span class="ui_line red"></span>
-        </div>
-
-        <h4 class="mt15">您可以使用花瓣网账号和密码直接登录</h4>
-        <div class="login_form">
-            <input type="text" placeholder="手机号/花瓣网账号"/>
-            <input type="password" placeholder="登录密码"/>
-            <div class="rem">
-                <input name="checkbox" type="checkbox" value="" id="check5">
-                <label for="check5"></label>
-
-
-                <span class='lt'>记住密码</span>　
-                <span class='rg'><a href="">忘记密码？</a></span>　　　
-            </div>
-        </div>
-        <div class="mt200 btn">
-            <a href="">登录</a>
-        </div>
-
-        <p>还没有账号？<a href="" class="zhuce">马上注册</a></p>
-    </div>
-</div>
-
-
-<div id="register_wrap" class="d_none">
-    <div class="login_wrap register_wrap">
-        <em></em>
-        <div class="head">
-            <h2>注册</h2>
-            <span class="ui_line red"></span>
-        </div>
-        <div class="mt40 body">
-            <ul>
-                <li><input type="text" name="reg_mobile_drag" class="txt" id="reg_mobile_drag" value=""
-                           placeholder="手机号" autocomplete="off"/></li>
-                <li class="d_none">
-                    <input type="button" name="" class="btn btn1" id="" value=""/>
-                    <input type="text" name="" class="txt txt1" value="" placeholder="按住滑块，拖动到最右边"/>
-                </li>
-                <li class="d_none">
-                    <input type="button" name="" class="btn btn2" id="" value=""/>
-                    <input type="text" name="" class="txt txt2" value="验证通过"/>
-                </li>
-                <li>
-                    <div id="drag"></div>
-                </li>
-            </ul>
-        </div>
-        <div class="mt40 btn d_none" id="div_regs">
-            <a href="" id="regs">立即注册</a>
-        </div>
-        <p>已有账号？<a href="" class="denglu">马上登录</a></p>
-    </div>
-</div>
-
-
-<div id="reg_wrap" class="d_none">
-    <div class="login_wrap register_wrap02">
-        <em></em>
-        <div class="head">
-            <h2>欢迎来到湘潭学雅风</h2>
-            <span class="ui_line red"></span>
-        </div>
-        <form id="ECS_REGFORM" name="ECS_REGFORM" method="post">
-            <input id="agreement" name="agreement" value="1" type="checkbox" hidden="">
-            <div class="mt40 body">
-                <ul>
-                    <li><input type="text" name="extend_field102" class="txt" id="extend_field102" value=""
-                               placeholder="昵称（必填）" maxlength="20"/></li>
-                    <li><input type="password" name="password" class="txt" id="password" value="" placeholder="密码"
-                               maxlength="20"/></li>
-                    <li><input type="password" name="confirm_password" class="txt" id="confirm_password" value=""
-                               placeholder="确认密码" maxlength="20"/></li>
-                    <li><input type="text" name="extend_field5" class="txt" id="extend_field5" value=""
-                               placeholder="请输入手机号" maxlength="11"/></li>
-                    <li><input type="text" name="sms_code" class="txt txt01" id="sms_code" value="" placeholder="手机验证码"
-                               style="border-right: 0;width: 216px !important" maxlength="6"/>
-                        <input type="button" id="getcode" name="" class="btn_n" id="" value="获取验证码"/>
-
-                    </li>
-                </ul>
-            </div>
-        </form>
-        <div class="label">
-            <input id="checkbox1" name="checkbox" value="" type="checkbox" checked>
-            <label for="checkbox1"></label>
-            我已阅读并同意《注册协议》
-        </div>
-
-        <div class="mt40 btn">
-            <a href="">提交</a>
-        </div>
-    </div>
-</div>
-
-<div id="srchimg_wrap" style="display: none;">
-    <div class="srchimg_wrap">
-        <form id="ECS_SEARCHBYIMG" name="ECS_SEARCHBYIMG" action="searchi.php" method="post"
-              enctype="multipart/form-data">
-            <div class="head">
-                <ul>
-                    <li class="selected">
-                        <input name="searchtype" checked="checked" value="1" id="searchtype_1" type="radio"
-                               autocomplete="off"><label for="searchtype_1"><i></i></label>按链接地址　
-                    </li>
-                    <li>
-                        <input name="searchtype" value="2" id="searchtype_2" type="radio" autocomplete="off"><label
-                            for="searchtype_2"><i></i></label>上传图片　
-                    </li>
-                </ul>
-            </div>
-            <div class="body">
-                <input type="text" name="image_url" id="" class="txt" value="" placeholder="黏贴图片URL"/>
-                <input type="submit" name="" id="" class="btn" value="搜索" onclick="dialog('搜索结果加载中...',2);"/>
-            </div>
-
-            <div class="body" style="display: none;">
-                <div class="upload">
-                    <div class="ico">
-
-                    </div>
-                    <h4>选择搜索图片</h4>
-                    <input type="file" name="searchimg" class="file" id="searchimg" value=""
-                           onchange="this.form.submit();dialog('搜索结果加载中...',2);"/>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="sidebar">
-    <ul>
-        <!--     <a href="">
-                  <li class='n0'></li>
-                  <div class="qr">
-                      <img src="./htmlimg/img136.jpg"/>
-                      <p>扫码加客服微信<br>	发现更多惊喜</p>
-                  </div>
-                </a>
-            <a href="">
-              <li class='n1'></li>
-            </a>
-            <a href="">
-              <li class='n2'></li>
-            </a>
-            <a href="" target="_blank">
-              <li class='n3' title="""></li>
-            </a> -->
-        <a>
-            <li class='n4'></li>
-        </a>
-    </ul>
-</div>
-
-<div id="forward_wap" class="d_none">
-    <div class="forward_wap">
-        <h4 class="del_txt">我们的图片购买功能还没正式开放哦，为表示歉意，奉上7折优惠码一枚。请您8月份再来体验！</h4>
-        <div class="body">
-            <ul>
-                <li><input type="text" name="forward_name" class="txt" id="forward_name" value=""
-                           placeholder="姓名或公司名称"/></li>
-                <li><input type="text" name="forward_tel" class="txt txt01" id="forward_tel" value=""
-                           placeholder="手机号"/>
-                <li><input type="text" name="forward_mail" class="txt" id="forward_mail" value="" placeholder="邮箱"/>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<div id="BandPhoneModal" class="d_none">
-    <div class="bdsj_wap">
-        <p class="tip">为了您的账户安全，下载图片之前需要绑定手机号，<font style="color:#fc4349">请绑定手机号</font></p>
-        <form id="band-phone">
-            <ul>
-                <li>
-                    <input id="j_phone" class="text" type="text" name="phone" value="" placeholder="请输入手机号"/>
-                </li>
-                <li>
-                    <input class="text text_code" type="text" name="sms_code" value="" placeholder="手机验证码"/>
-                    <button class="btn_code get-code" type="button">获取验证码</button>
-                </li>
-            </ul>
-        </form>
-    </div>
-    <div class="bdsj_foot">
-        <a href="" class="ui_btn band-phone-commit">立即绑定</a>
-    </div>
-</div>
-
-
-<div class="sidebar">
-    <ul>
-        <!--<a href="">-->
-        <!--<li class='n0'></li>-->
-        <!--<div class="qr">-->
-        <!--<img src="./htmlimg/img136.jpg"/>-->
-        <!--<p>扫码加客服微信<br>	发现更多精彩</p>-->
-        <!--</div>-->
-        <!--</a>-->
-        <!--<a href="">-->
-        <!--<li class='n1'></li>-->
-        <!--</a>-->
-        <!--<a href="">-->
-        <!--<li class='n2'></li>-->
-        <!--</a>-->
-        <!--<a href="" target="_blank">-->
-        <!--<li class='n3' title="""></li>-->
-        <!--</a>-->
-        <a href="">
-            <li class='n4'></li>
-        </a>
-    </ul>
-</div>
-
-
-<input type="hidden" id="hidden_reg_mobile_drag" value="">
-<script type="text/javascript" src="./js/jquery-1.7.2.js"></script>
-<script type="text/javascript" src="./js/jquery.json.js"></script>
-<script type="text/javascript" src="./js/jquery.glide.js"></script>
-<script type="text/javascript" src="./js/layer.js"></script>
-<script type="text/javascript" src="./js/jquery.easydropdown.min.js"></script>
-<script type="text/javascript" src="./js/WdatePicker.js"></script>
-<script type="text/javascript" src="./js/jquery.poshytip.js"></script>
-<script type="text/javascript" src="./js/jquery.row-grid-display.js"></script>
-<script type="text/javascript" src="./js/template.js"></script>
-<script type="text/javascript" src="./js/XCheck.js"></script>
-
-
-<script type="text/javascript" src="./js/script.js"></script>
-<script type="text/javascript" src="./js/dialog.js"></script>
-<script type="text/javascript" src="./js/gy.js"></script>
-<script src="./js/drag.js" type="text/javascript"></script>
-<script src="./js/getVerifyCode.js" type="text/javascript"></script>
-<script src="./js/photo.js" type="text/javascript"></script>
-<script id="_trs_ta_js" src="./js/ta.js" async="async" defer="defer"></script>
-
-
-<input type="hidden" id="hidden_reg_mobile_drag" value="">
-<!-- <script id="_trs_ta_js" src="./js/ta.js" async="async" defer="defer"></script> -->
+<?php
+	include 'footer.php'
+?>
 <script type="text/javascript">
     window.onscroll = function () {
         getSearchIds();
@@ -2363,5 +1998,3 @@
         });
     });
 </script>
-</body>
-</html>

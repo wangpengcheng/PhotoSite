@@ -152,7 +152,7 @@
             return "empty";
         }
     };
-    print_r($page_query);
+    //print_r($page_query);
     function get_topic_id($page_query){
     	if(array_key_exists('topic_id', $page_query)){
     		return $page_query['topic_id'];
@@ -167,12 +167,28 @@
             return "empty";
         }
     }
+    function get_history($user_id){
+        global $conn;//设置全局变量
+        $result=[];
+        $get_histroy_sql="SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='".$user_id."' and ps_user_browserecord.photo_id=ps_photos.photo_id"."GROUP BY DATE_FORMAT(create_time, \"%Y-%m-%d\" )";
+        print_r($get_histroy_sql);
+        //SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='1' and ps_user_browserecord.photo_id=ps_photos.photo_id
+        $user_history_result=$conn->query($get_histroy_sql);
+        $histroy_row_count=mysqli_num_rows($user_history_result);
+        if($histroy_row_count!==0){
+            $result=$user_history_result->fetch_all(MYSQLI_ASSOC);
+        }
+        return $result;
+    }
+    $user_id=get_user_id($page_query);
+    $user_history_result=get_history($user_id);
+    print_r($user_history_result);
     // $topic_id=get_topic_id($page_query);
     // $user_id=get_user_id($page_query);
     // //print_r($topic_id);
     // print_r($user_id);
      //include 'ps_connect.php';
-	print_r(date('Y-m-d H:i:s', time()));
+	//print_r(date('Y-m-d H:i:s', time()));
 	//print_r($photo_array);
 	//print_r($author_array);
 ?>

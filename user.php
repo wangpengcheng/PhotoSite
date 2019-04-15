@@ -1,5 +1,19 @@
 <?php
-	include "ps_header.php"
+	include "ps_header.php";
+?>
+<?php
+    include 'ps_connect.php';
+    function get_history($user_id){
+        global $conn;//设置全局变量
+        $get_histroy_sql="SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='".$user_id."' and ps_user_browserecord.photo_id=ps_photos.photo_id"; 
+        //SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='1' and ps_user_browserecord.photo_id=ps_photos.photo_id
+        $user_history_result=$conn->query($get_histroy_sql);
+        $histroy_row_count=mysqli_num_rows($user_history_result);
+        $result=$user_history_result->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+    $user_id=get_user_id($page_query);
+    $user_history_result=get_history($user_id);
 ?>
  <!--echarts start-->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>

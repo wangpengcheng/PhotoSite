@@ -2,7 +2,7 @@
     include 'ps_header.php'
 ?>
 <?php
-     //get photo 
+     
     include 'ps_connect.php';
    function get_topic_list(){
         global $conn;
@@ -61,7 +61,7 @@
                 </div>
                 <input type="submit" class="btn" name="" id="" value=""/>
             </form>
-            <div id="srch_img2" class="srch_img">
+            <div id="srch_img" class="srch_img">
             </div>
         </div>
         <!--搜索热点关键字-->

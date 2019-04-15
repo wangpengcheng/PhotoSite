@@ -1,5 +1,6 @@
 <?php
 date_default_timezone_set('PRC');
+header("Content-type: text/html; charset=utf-8");
     function curPageURL() {    
         $pageURL = 'http';    
         $pageURL .= "://";    
@@ -67,6 +68,13 @@ date_default_timezone_set('PRC');
         }
     }
     //print_r($page_query);
+    function get_key_word($page_query){
+        if(array_key_exists('keyword', $page_query)){
+            return urldecode($page_query['keyword']);
+        }else{
+            return "empty";
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -204,8 +212,8 @@ date_default_timezone_set('PRC');
         <!--头部左侧-->
         <div class="copyr">
             <a href="./index.php">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./topic.php">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./hand_photo.php">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./topic.php?topic_id=10">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./hand_photo.php&user_id=">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">上传图片</a>-->
             <a href="./researcher_relsult.html"><font color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a>
             <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
@@ -227,10 +235,10 @@ date_default_timezone_set('PRC');
                         <span class="arr"></span>
                         <div class="hdn">
                             <dl>
-                                <dd><a href="./user_page.html?user_id=&act=down_list">下载记录</a></dd>
-                                <dd><a href="./user_page.html?user_id=&act=collection_list">收藏夹</a></dd>
-                                <dd><a href="./user_page.html?user_id=&act=history_list">我的足迹</a></dd>
-                                <dd><a href="./user_page.html?user_id=&act=profile">账户管理</a></dd>
+                                <dd><a href="./user.php?user_id=&act=down_list">下载记录</a></dd>
+                                <dd><a href="./user.php?user_id=&act=collection_list">收藏夹</a></dd>
+                                <dd><a href="./user.php?user_id=&act=history_list">我的足迹</a></dd>
+                                <dd><a href="./user.php?user_id=&act=profile">账户管理</a></dd>
                                 <dd><a id="logout_button" class="last">退出</a></dd>
                             </dl>
                         </div>
@@ -240,46 +248,47 @@ date_default_timezone_set('PRC');
         </font>
     </div>
 </div>
-<div class="toper" style="<?php if(is_index()=="index.php"){echo 'display: none';} ?> ">
-    <div class="wrapper">
-        <h2 style="margin-top: 0px;">探索我们的世界！</h2>
-        <div class="form">
-            <form action="searchi.php" method="get" id="myform">
-                <input class="s_clearall" type="hidden" value="" name="offset" id="s_offset">
-                <input class="s_clearall" type="hidden" value="" name="sort" id="s_sort">
-                <input class="s_clearall" type="hidden" value="" name="phototype" id="s_phototype">
-                <input class="s_clearall" type="hidden" value="" name="orientation" id="s_orientation">
+<?php if(is_index()!=="index.php"&&is_index()!==""&&is_index()!=="researcher_relsult.php"){ 
+echo '<div class="toper" style="">';
+echo '    <div class="wrapper">';
+echo '        <h2 style="margin-top: 0px;">探索我们的世界！</h2>';
+echo '        <div class="form">';
+echo '            <form action="searchi.php" method="get" id="myform">';
+echo '                <input class="s_clearall" type="hidden" value="" name="offset" id="s_offset">';
+echo '                <input class="s_clearall" type="hidden" value="" name="sort" id="s_sort">';
+echo '                <input class="s_clearall" type="hidden" value="" name="phototype" id="s_phototype">';
+echo '                <input class="s_clearall" type="hidden" value="" name="orientation" id="s_orientation">';
 
-                <input class="s_clearall" type="hidden" value="" name="people_only" id="s_people_only">
-                <input class="s_clearall" type="hidden" value="" name="race" id="s_race">
-                <input class="s_clearall" type="hidden" value="" name="age" id="s_age">
-                <input class="s_clearall" type="hidden" value="" name="gender" id="s_gender">
-                <input class="s_clearall" type="hidden" value="" name="quantity" id="s_quantity">
-
-                <input class="s_clearall" type="hidden" value="" name="color" id="s_color">
-
-                <input class="s_clearall" type="hidden" value="" name="categories" id="s_categories">
-                <input class="s_clearall" type="hidden" value="" name="username" id="s_username">
-                <input class="s_clearall" type="hidden" value="" name="exclude_keyword" id="s_exclude_keyword">
-                <div class="type">
-                    <!--<h4>全部图片</h4>-->
-                    <div class="bt">
-                        <i class="n1"></i>
-                        <i class="n2"></i>
-                    </div>
-                    <div class="dropdown"><span class="old"><select class="" onchange="changeSearch('phototypesearch',this.options[this.options.selectedIndex].value)" id="EasyDropDownF7E7D1">
-                        <option value="" class="label">全部图片</option>
-                        <option value="" class="label">全部图片</option>
-                        <option value="photo">照片</option>
-                        <option value="vector">矢量图</option>
-                    </select></span><span class="selected">全部图片</span><span class="carat"></span><div><ul><li>全部图片</li><li>照片</li><li>矢量图</li></ul></div></div>
-                </div>
-                <div class="input">
-                    <input type="text" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value="" autocomplete="off">
-                    <input onclick="submitForm()" class="btn" value="" type="submit">
-                </div>
-                <div id="srch_img" class="srch_img"></div>
-            </form>
-        </div>
-    </div>
-</div>
+echo '                <input class="s_clearall" type="hidden" value="" name="people_only" id="s_people_only">';
+echo '                <input class="s_clearall" type="hidden" value="" name="race" id="s_race">';
+echo '                <input class="s_clearall" type="hidden" value="" name="age" id="s_age">';
+echo '                <input class="s_clearall" type="hidden" value="" name="gender" id="s_gender">';
+echo '                <input class="s_clearall" type="hidden" value="" name="quantity" id="s_quantity">';
+echo '                <input class="s_clearall" type="hidden" value="" name="color" id="s_color">';
+echo '                <input class="s_clearall" type="hidden" value="" name="categories" id="s_categories">';
+echo '                <input class="s_clearall" type="hidden" value="" name="username" id="s_username">';
+echo '                <input class="s_clearall" type="hidden" value="" name="exclude_keyword" id="s_exclude_keyword">';
+echo '                <div class="type">';
+echo '                    <!--<h4>全部图片</h4>-->';
+echo '                    <div class="bt">';
+echo '                        <i class="n1"></i>';
+echo '                        <i class="n2"></i>';
+echo '                    </div>';
+echo '                    <div class="dropdown"><span class="old"><select class="" onchange="changeSearch(\'phototypesearch\',this.options[this.options.selectedIndex].value)" id="EasyDropDownF7E7D1">';
+echo '                        <option value="" class="label">全部图片</option>';
+echo '                        <option value="" class="label">全部图片</option>';
+echo '                        <option value="photo">照片</option>';
+echo '                        <option value="vector">矢量图</option>';
+echo '                    </select></span><span class="selected">全部图片</span><span class="carat"></span><div><ul><li>全部图片</li><li>照片</li><li>矢量图</li></ul></div></div>';
+echo '                </div>';
+echo '                <div class="input">';
+echo '                    <input type="text" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value="" autocomplete="off">';
+echo '                    <input onclick="submitForm()" class="btn" value="" type="submit">';
+echo '                </div>';
+echo '                <div id="srch_img" class="srch_img"></div>';
+echo '            </form>';
+echo '        </div>';
+echo '    </div>';
+echo ' </div>';
+}
+?>
