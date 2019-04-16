@@ -249,11 +249,11 @@ header("Content-type: text/html; charset=utf-8");
     </div>
 </div>
 <?php if(is_index()!=="index.php"&&is_index()!==""&&is_index()!=="researcher_relsult.php"){ 
-echo '<div class="toper" style="">';
+echo '<div class="toper">';
 echo '    <div class="wrapper">';
 echo '        <h2 style="margin-top: 0px;">探索我们的世界！</h2>';
 echo '        <div class="form">';
-echo '            <form action="searchi.php" method="get" id="myform">';
+echo '            <form action="./researcher_relsult.php" method="get" id="myform">';
 echo '                <input class="s_clearall" type="hidden" value="" name="offset" id="s_offset">';
 echo '                <input class="s_clearall" type="hidden" value="" name="sort" id="s_sort">';
 echo '                <input class="s_clearall" type="hidden" value="" name="phototype" id="s_phototype">';
@@ -282,7 +282,7 @@ echo '                        <option value="vector">矢量图</option>';
 echo '                    </select></span><span class="selected">全部图片</span><span class="carat"></span><div><ul><li>全部图片</li><li>照片</li><li>矢量图</li></ul></div></div>';
 echo '                </div>';
 echo '                <div class="input">';
-echo '                    <input type="text" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value="" autocomplete="off">';
+echo '                    <input type="text" id="big_sereach_input" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value="" autocomplete="off">';
 echo '                    <input onclick="submitForm()" class="btn" value="" type="submit">';
 echo '                </div>';
 echo '                <div id="srch_img" class="srch_img"></div>';

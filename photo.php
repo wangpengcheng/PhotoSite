@@ -5,13 +5,37 @@
 <?php
 	 //get photo 
     include 'ps_connect.php';
-	$key=get_key_word($page_query);
-	
+	$photo_id=get_photo_id($page_query);
+	$user_id=get_user_id($page_query);
+	$photo_array=[];
+	$author_array=[];
 	//更新照片id
-	if($key!="empty"){
-		
+	if($photo_id!="empty"){
+		$time=date('Y-m-d H:i:s', time());
+		$photo_sql="SELECT * FROM ps_photos "." WHERE photo_id = '".$photo_id."'";
+		$record_sql="INSERT INTO ps_user_browserecord (user_id,photo_id,record_time) VALUES ('".$user_id."','".$photo_id."','".$time."')";
+		//INSERT INTO `ps_user_browserecord` (`record_id`, `user_id`, `photo_id`, `record_time`) VALUES (NULL, '19', '1234', '2019-03-17 15:00:24');
+		$photo_result=$conn->query($photo_sql);
+		$res_insert = $conn->query($record_sql);
+		$photo_row_count= mysqli_num_rows($photo_result);
+		if($photo_row_count!==0){
+			//将结果转化为数组
+        	$photo_array = $photo_result->fetch_array(MYSQLI_ASSOC);
+        	//print_r($photo_array);
+        	if($photo_array['user_id']!==""){
+				$author_sql="SELECT * FROM ps_users "." WHERE user_id = '".$photo_array['user_id']."'";
+				$author_result=$conn->query($author_sql);
+				$author_row_count= mysqli_num_rows($author_result);
+				if($author_row_count!==0){
+					//将结果转化为数组
+		        	$author_array = $author_result->fetch_array(MYSQLI_ASSOC);
+		        	//print_r($photo_array);
+		    	}
+			}
+    	}else{
+            echo "image no found;";
+        }
 	}
-    //关闭连接
 	$conn->close();
 	//print_r($photo_array);
 	//print_r($author_array);

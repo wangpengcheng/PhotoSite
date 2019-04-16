@@ -42,7 +42,7 @@
         <!--搜索框-->
         <div class="form">
             <!--查询表单-->
-            <form action="http://www.meisupic.com/searchi.php" method="get" id="myformIndex">
+            <form action="./researcher_relsult.php" method="get" id="myformIndex">
                 <!--搜索输入框-->
                 <input type="text" class="txt" name="keyword" id="keywordindex" value=""
                        placeholder="搜索照片、矢量图和插画， 多个词语注意用空格分隔，支持双语哦" autocomplete="off"/>
@@ -360,3 +360,5 @@
 <?php
     include 'footer.php'
 ?>
+<script type="text/javascript">
+</script>
