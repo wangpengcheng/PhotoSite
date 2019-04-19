@@ -64,7 +64,7 @@ header("Content-type: text/html; charset=utf-8");
         if(array_key_exists('user_id', $page_query)){
             return $page_query['user_id'];
         }else{
-            return "empty";
+            return 1;
         }
     }
     //print_r($page_query);
