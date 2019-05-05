@@ -18,6 +18,54 @@
                 }
     };
     $topic_list_array=get_topic_list();
+    /*
+    * array unique_rand( int $min, int $max, int $num )
+    * 生成一定数量的不重复随机数，指定的范围内整数的数量必须
+    * 比要生成的随机数数量大
+    * $min 和 $max: 指定随机数的范围
+    * $num: 指定生成数量
+    */
+    function unique_rand($min, $max, $num) {
+      $count = 0;
+      $return = array();
+      while ($count < $num) {
+        $return[] = mt_rand($min, $max);
+        $return = array_flip(array_flip($return));
+        $count = count($return);
+      }
+      //打乱数组，重新赋予数组新的下标
+      shuffle($return);
+      return $return;
+    }
+ 
+    function get_random_pictures()
+    {
+        global $conn;
+        //返回结果
+        $pictures_array=[];
+        //产生3个随机数
+        //获取3个随机数
+        $temp_random= unique_rand(1, 1406, 3);
+        for($i=0;$i<3;++$i)
+        {
+            $temp_array=[];
+            //sql  SELECT photo_address FROM `ps_photos` WHERE photo_id='1'
+            $temp_query_sql="SELECT photo_address FROM ps_photos "." WHERE photo_id = '".$temp_random[$i]."'";
+            $temp_result=$conn->query($temp_query_sql);
+            if(mysqli_num_rows($temp_result)!==0)
+            {
+                //获取搜索结果
+                $temp_results=$temp_result->fetch_array(MYSQLI_ASSOC);
+                $temp_array['photo_address']=$temp_results['photo_address'];
+                $temp_array['photo_id']=$temp_random[$i];
+
+            }
+            array_push($pictures_array,$temp_array);
+        }
+        return $pictures_array;
+
+    }
+  $rand_pictures=get_random_pictures();
 ?>
 <!--高步-->
 <div class="h_slide">
@@ -46,13 +94,13 @@
                 <!--搜索输入框-->
                 <input type="text" class="txt" name="keyword" id="keywordindex" value=""
                        placeholder="搜索照片、矢量图和插画， 多个词语注意用空格分隔，支持双语哦" autocomplete="off"/>
-                <div class="type">
+                <div class="type" style="display:none">
                     <!--<h4>全部图片</h4>-->
                     <div class="bt">
                         <i class="n1"><img src="./htmlimg/ar.png"/></i>
                         <i class="n2"><img src="./htmlimg/af.png"/></i>
                     </div>
-                    <select class="dropdown" name="phototype">
+                    <select class="dropdown" name="phototype" style="display: none;">
                         <option value="" class="label">全部图片</option>
                         <option value="" class="label">全部图片</option>
                         <option value="photo">照片</option>
@@ -61,21 +109,21 @@
                 </div>
                 <input type="submit" class="btn" name="" id="" value=""/>
             </form>
-            <div id="srch_img" class="srch_img">
+            <div id="srch_img" class="srch_img" style="display:none">
             </div>
         </div>
         <!--搜索热点关键字-->
-        <div class="keys" style="top: 60%">
+        <div class="keys" style="top: 60%" style="display: none;">
             <ul>
                 关键热词：
-                <li><a target="_blank" href="">校园风景</a></li>
-                <li><a target="_blank" href="">2019</a></li>
-                <li><a target="_blank" href="">校园logo</a></li>
-                <li><a target="_blank" href="">逸夫楼</a></li>
-                <li><a target="_blank" href="">插画</a></li>
-                <li><a target="_blank" href="">画册</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=校园风景">校园风景</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=2019">2019</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=校园logo">校园logo</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=逸夫楼">逸夫楼</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=插画">插画</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=画册">画册</a></li>
                 <!--  <li><a target="_blank" href="">背景</a></li> -->
-                <li><a target="_blank" href="">水墨</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=水墨">水墨</a></li>
             </ul>
         </div>
         <div class="h_slide_msg">
@@ -158,10 +206,14 @@
             </div>
             <div class="h_row2_main">
                 <ul>
-                    <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548729910.485866.jpg"/></a></li>
+                   <!--  <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548729910.485866.jpg"/></a></li>
                     <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548729954.960632.jpg"/></a></li>
-                    <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548730000.720496.jpg"/></a></li>
-
+                    <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548730000.720496.jpg"/></a></li> -->
+                    <?php
+                        foreach ($rand_pictures as $temp) {
+                            echo '<li class="li"><a href="./photo.php?photo_id='.$temp['photo_id'].'" target="_blank"><img src="'.$temp['photo_address'].'"/></a></li>';
+                        }
+                    ?>
                     <!--<li class="l1"><a href=""><img src="./htmlimg/h-img5.jpg"/></a></li>-->
                     <!--<li class="l2"><a href=""><img src="./htmlimg/h-img6.jpg"/></a></li>-->
                     <!--<li class="l3"><a href=""><img src="./htmlimg/h-img7.jpg"/></a></li>-->
@@ -169,12 +221,12 @@
             </div>
         </div>
     </div>
-    <div class="h_row3">
+    <div class="h_row3" id="h_row3">
         <div class="wrapper">
             <div class="h_row_tit">
                 <p class="cn">精选专辑</p>
                 <p class="en">Selected Album</p>
-                <a class="more-topic-btn" href="" target="_blank">更多专辑</a>
+                <a class="more-topic-btn" href="" target="_blank" style="display: none;">更多专辑</a>
             </div>
             <div class="h_row3_main">
                 <ul>

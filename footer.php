@@ -1,4 +1,4 @@
-<div class="h_foot">
+<div class="h_foot" style="display: none;">
     <div class="wrapper">
         <div class="txt">
             还没找到想要的图片？来探索我们的世界吧！
@@ -20,14 +20,14 @@
         </div>
         <div class="nav">
             <dl>
-                <dd><a href="">关于我们</a></dd>
+                <dd><a href="http://www.xtu.edu.cn/">关于我们</a></dd>
                 <!--<dd><a href="">价格体系</a></dd>-->
-                <dd><a href="">联系我们</a></dd>
+                <dd><a href="http://www.xtu.edu.cn/xysh/">联系我们</a></dd>
             </dl>
             <dl>
                 <dd><a href="">版权说明</a></dd>
                 <!--<dd><a href="">服务条款</a></dd>-->
-                <dd><a href="">常见问题</a></dd>
+                <dd><a href="http://www.xtu.edu.cn/xxgk/">常见问题</a></dd>
             </dl>
         </div>
         <div class="qrimg">
@@ -36,7 +36,7 @@
             </div>
             <div class="txt">
                 <div class="qq">
-                    <a href="" target="_blank">联系方式</a>
+                    <a href="http://fuwu.xtu.edu.cn/web/index.jsp" target="_blank">联系方式</a>
                 </div>
                 <h4>电话：0086-731-58293938<br/>
                     Email: lxsb@xtu.edu.cn</h4>
@@ -46,37 +46,6 @@
     <div class="copyright">
         <span></span>
         版权所有 © 湘潭大学. 地址：中国湖南湘潭
-    </div>
-</div>
-<div id="picture_dialog" class="d_none">
-    <div class="picture_dialog">
-        <div class="item item01">
-            <h4>标准授权包含的应用领域有：</h4>
-            <p>数字用途：网站、微博、微信、电邮等</p>
-            <p>线下印刷：宣传页、海报、报纸杂志、包装等。</p>
-        </div>
-        <div class="item item02">
-            <h4>扩展授权额外包含以下授权领域：</h4>
-            <p>户外广告（楼宇、车身、灯箱、围挡、橱窗、户外广告牌）</p>
-            <p>转售设计模板（软件/程序）APP皮肤/主题</p>
-            <p>转售品（纺织品、手机壳、贺卡、明信片等)</p>
-        </div>
-        <div class="foot">
-            <p>扩展授权的价格：每张500元，如需购买，请联系在线客服，或者致电 400-999-8242</p>
-            <a href="" target="_blank">联系在线客服</a>
-        </div>
-    </div>
-</div>
-<div id="confirm_purchase" class="d_none">
-    <div class="reminders_wap">
-        <h4>您已经购买过此图片，重复购买会重复扣费，请去下载记录下载此图片。
-        </h4>
-    </div>
-</div>
-<div id="big_img" class="d_none">
-    <div class="big_img">
-        <em></em>
-        <img src="./htmlimg/img63.jpg"/>
     </div>
 </div>
 <div id="srchimg_wrap" style="display: none;">

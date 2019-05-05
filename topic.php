@@ -184,12 +184,12 @@
     </style>
 <div class="album_details">
     <div class="bgimg"
-         style="height:648px ; background-size:cover ; background-position:center ;background-image:url('http://meisupic.oss-cn-beijing.aliyuncs.com/topic/1542771606.584706.jpg') ;  "></div>
+         style="height:648px ; background-size:cover ; background-position:center ;background-image:url('') ;"></div>
     <div class="txt">
-        <h2>圣诞节
-            <small>206幅作品</small>
+        <h2>
+            <small></small>
         </h2>
-        <div class="btns">
+        <div class="btns" style="display:none">
             <em></em>
             <a href="">全部专辑</a>
             <a href="" data-topic-id="89" class="collect-topic">收藏专辑</a>

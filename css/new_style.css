@@ -4738,7 +4738,8 @@ a.jubao{color: #bababa}
 
 /*2018.5.24 新增 首页样式*/
 .h_row1{
-	padding-top: 50px;
+	padding-top: 0px;
+	display: none;
 }
 .h_row1 ul{
 	height: auto; overflow: hidden; margin-right: -14px;
@@ -4781,7 +4782,7 @@ a.jubao{color: #bababa}
 }
 
 .h_row2{
-	 margin-top: 64px; 
+	 margin-top: 0px; 
 }
 
 .h_row_tit{

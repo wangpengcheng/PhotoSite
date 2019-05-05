@@ -64,7 +64,8 @@ header("Content-type: text/html; charset=utf-8");
         if(array_key_exists('user_id', $page_query)){
             return $page_query['user_id'];
         }else{
-            return 1;
+            $page_query['user_id']=19;
+            return $page_query['user_id'];
         }
     }
     //print_r($page_query);
@@ -212,8 +213,8 @@ header("Content-type: text/html; charset=utf-8");
         <!--头部左侧-->
         <div class="copyr">
             <a href="./index.php">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./topic.php?topic_id=10">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="./hand_photo.php&user_id=">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./index.php#h_row3">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./hand_photo.php?user_id=">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">上传图片</a>-->
             <a href="./researcher_relsult.html"><font color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a>
             <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
@@ -270,22 +271,22 @@ echo '                <input class="s_clearall" type="hidden" value="" name="use
 echo '                <input class="s_clearall" type="hidden" value="" name="exclude_keyword" id="s_exclude_keyword">';
 echo '                <div class="type">';
 echo '                    <!--<h4>全部图片</h4>-->';
-echo '                    <div class="bt">';
+echo '                    <div class="bt" style="display:none">';
 echo '                        <i class="n1"></i>';
 echo '                        <i class="n2"></i>';
 echo '                    </div>';
 echo '                    <div class="dropdown"><span class="old"><select class="" onchange="changeSearch(\'phototypesearch\',this.options[this.options.selectedIndex].value)" id="EasyDropDownF7E7D1">';
-echo '                        <option value="" class="label">全部图片</option>';
+echo '                        <option value="" class="label">搜索图片</option>';
 echo '                        <option value="" class="label">全部图片</option>';
 echo '                        <option value="photo">照片</option>';
 echo '                        <option value="vector">矢量图</option>';
-echo '                    </select></span><span class="selected">全部图片</span><span class="carat"></span><div><ul><li>全部图片</li><li>照片</li><li>矢量图</li></ul></div></div>';
+echo '                    </select></span><span class="selected">搜索图片</span><span class="carat"></span><div><ul><li>全部图片</li><li>照片</li><li>矢量图</li></ul></div></div>';
 echo '                </div>';
 echo '                <div class="input">';
 echo '                    <input type="text" id="big_sereach_input" class="txt" placeholder="输入关键词" name="keyword" id="keyword" value="" autocomplete="off">';
 echo '                    <input onclick="submitForm()" class="btn" value="" type="submit">';
 echo '                </div>';
-echo '                <div id="srch_img" class="srch_img"></div>';
+echo '                <div id="srch_img" class="srch_img" style="display:none"></div>';
 echo '            </form>';
 echo '        </div>';
 echo '    </div>';

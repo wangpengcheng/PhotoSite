@@ -18,7 +18,7 @@
         <div class="body">
             <div class="images-info item">
                 <div class="item-head">
-                    <h4>上传图片<span style="color: #949393">（同一系列相同信息的可批量上传，单次最多20张）</span></h4>
+                    <h4>上传图片</h4>
                 </div>
                 <div class="c2-uploadarea">
                     <div class="plus">
@@ -190,7 +190,7 @@
             </div>
             <div class="btns">
                 <ul>
-                    <li class="next-btn"><a href="./Information_confirm.html"><input type="submit" value="下一步"/></a>
+                    <li class="next-btn"><a href="./html/Information_confirm.html"><input type="submit" value="确定提交"/></a>
                     </li>
                 </ul>
             </div>

@@ -304,9 +304,17 @@
 	display: block;
 }
 .album_details .txt{
-	width: 270px; height: 248px;  border: 10px solid #fff;
-	position: absolute; left: 5%; top:50%; margin-top: -169px;
-	padding: 0 25px; color: #fff; padding-top: 70px;
+	width: 270px; 
+	height: 150px;  
+	border: 10px
+	solid #fff;
+	position: absolute;
+	left: 5%; 
+	top:50%; 
+	margin-top: -169px;
+	padding: 0 25px; 
+	color: #fff; 
+	padding-top: 70px;
 }
 .album_details .txt h2{
 	font-size: 42px; border-bottom: 1px solid #fff;

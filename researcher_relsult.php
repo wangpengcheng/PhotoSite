@@ -161,14 +161,14 @@
                 <input class="s_clearall" type="hidden" value='' name="image_url" id="image_url" autocomplete="off">
                 <div class="type">
                     <!--<h4>全部图片</h4>-->
-                    <div class="bt">
+                    <div class="bt" style="display: none;">
                         <i class="n1"></i>
                         <i class="n2"></i>
                     </div>
                     <select class="dropdown"
                             onchange="changeSearch('phototypesearch',this.options[this.options.selectedIndex].value)">
-                        <option value="" class="label">全部图片</option>
-                        <option value="" class="label">全部图片</option>
+                        <option value="" class="label">搜索图片</option>
+                        <option value="" class="label">搜索图片</option>
                         <option value="photo">照片</option>
                         <option value="vector">矢量图</option>
                     </select>
@@ -178,7 +178,7 @@
                            autocomplete="off"/>
                     <input class="btn" value="" onclick="submitForm()" type="submit"/>
                 </div>
-                <div id="srch_img" class="srch_img"></div>
+                <div id="srch_img" class="srch_img" style="display: none;"></div>
             </form>
             <!-- <div id="srch_img" class="srch_img"> </div> -->
         </div>
@@ -187,7 +187,7 @@
 
 
 <div class="srch_head">
-    <div class="srch_head_l  srch_head_l1">
+    <div class="srch_head_l  srch_head_l1" style="display: none;">
         <ul>
 
             <li class="selected">
@@ -205,7 +205,7 @@
 
         </div>
     </div>
-    <div class="srch_head_l srch_head_l2">
+    <div class="srch_head_l srch_head_l2" style="display: none;">
         <ul>
             <li>
                 <select class="dropdown" id="phototype">
@@ -469,7 +469,7 @@
 
         </ul>
     </div>
-    <div class="srch_head_r">
+    <div class="srch_head_r" >
         <label>共1页</label>
         <ul>
             <li class="prev"><a href=""></a></li>
