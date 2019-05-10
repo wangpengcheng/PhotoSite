@@ -14,12 +14,118 @@
     }
     $user_id=get_user_id($page_query);
     $user_history_result=get_history($user_id);
+
+    //最近浏览图片
+    $last_looked_photos=[];
+    //sql示例： SELECT photo_id,record_time FROM ps_user_browserecord WHERE user_id=0 ORDER BY record_time DESC LIMIT 10 
+    //抽取10个
+    $looked_sql="SELECT photo_id FROM ps_user_browserecord WHERE user_id='".$user_id."' GROUP BY photo_id ORDER BY record_time DESC LIMIT 10 ;";
+    $looked_result=$conn->query($looked_sql);
+    if(mysqli_num_rows($looked_result)>0){
+        $last_looked_photos=$looked_result->fetch_all(MYSQLI_ASSOC);
+        for ($i=0; $i <count($last_looked_photos) ; $i++) { 
+            $new_sql="SELECT photo_address FROM ps_photos WHERE photo_id='".$last_looked_photos[$i]['photo_id']."'";
+            $temp_result=$conn->query($new_sql);
+            if(mysqli_num_rows($temp_result)>0){
+                $temp_result_plus=$temp_result->fetch_all(MYSQLI_ASSOC);
+                $last_looked_photos[$i]['photo_address']=$temp_result_plus[0]['photo_address'];
+            }
+        }
+    }
+    
+    //数据显示数组，3行6例。
+    $data_show=[];
+    //获取上传下载和浏览;
+    $upload_record_count=[];
+    $brower_record=[];
+    //获取上传记录 SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;
+    $upload_record_sql="SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;";
+
+    //获取上传记录统计
+    //select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id=19 AND load_type=0 GROUP BY months
+    //获取上传统计
+    $upload_record_count_sql="select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id='".$user_id."' AND load_type=1 GROUP BY months";
+    $upload_record_count_result=$conn->query($upload_record_count_sql);//查询结果
+    if(mysqli_num_rows($upload_record_count_result)>0){
+        $upload_record_count_result_2=$upload_record_count_result->fetch_all(MYSQLI_ASSOC);
+        //print_r($upload_record_count_result_2);
+    }
+    //获取下载统计数据
+    $download_record_count_sql="select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id='".$user_id."' AND load_type=0 GROUP BY months";
+    $download_record_count_result=$conn->query($download_record_count_sql);//查询结果
+    if(mysqli_num_rows($download_record_count_result)>0){
+        $download_record_count_result_2=$download_record_count_result->fetch_all(MYSQLI_ASSOC);
+        //print_r($download_record_count_result_2);
+    }
+
+    //获取浏览统计数据
+    //select CONCAT(DATE_FORMAT(record_time,'%m')) months ,COUNT(record_id) as count_id from ps_user_browserecord WHERE user_id=19 GROUP BY months
+    $brower_record_count_sql="select CONCAT(DATE_FORMAT(record_time,'%m')) months ,COUNT(record_id) as count_record from ps_user_browserecord WHERE user_id='".$user_id."'GROUP BY months";
+    $brower_record_count_result=$conn->query($brower_record_count_sql);//查询结果
+    if(mysqli_num_rows($brower_record_count_result)>0){
+        $brower_record_count_result_2=$brower_record_count_result->fetch_all(MYSQLI_ASSOC);
+        //print_r($brower_record_count_result_2);
+    }
+
+    $col_1_array=[];
+    $col_2_array=[];
+    $col_3_array=[];
+    //处理函数；将数据整合成合理的格式,主要上传下载记录，浏览记录
+    for ($i=0; $i <6 ; $i++) { 
+        foreach ($upload_record_count_result_2 as $temp_1) {
+            if($temp_1['months']==$i){
+                $col_1_array[$i]=$temp_1['count_id'];
+            }
+        }
+        if(empty($col_1_array[$i])){
+            $col_1_array[$i]=0;
+        }
+        foreach ($download_record_count_result_2 as $temp_2) {
+            if($temp_2['months']==$i){
+                $col_2_array[$i]=$temp_2['count_id'];
+            }
+        }
+        if(empty($col_2_array[$i])){
+            $col_2_array[$i]=0;
+        }
+        foreach ($brower_record_count_result_2 as $temp_3) {
+            if($temp_3['months']==$i){
+                $col_3_array[$i]=$temp_3['count_record'];
+            }
+        }
+        if(empty($col_3_array[$i])){
+            $col_3_array[$i]=0;
+        }
+
+    }
+
+    array_push($data_show,$col_1_array);//上传
+    array_push($data_show,$col_2_array);//下载
+    array_push($data_show,$col_3_array);//浏览
+
+    //显示数据表格
+    $updown_record=[];
+    $updown_record_sql="SELECT photo_id ,load_time,load_type FROM ps_load_history WHERE user_id='".$user_id."'";
+    $updown_record_result=$conn->query($updown_record_sql);
+    if(mysqli_num_rows($updown_record_result)>0){
+        $updown_record_result_2=$updown_record_result->fetch_all(MYSQLI_ASSOC);
+        //查询图片表，获得图片 name,address,
+            for ($i=0; $i <count($updown_record_result_2) ; $i++) {
+                $photo_message_sql="SELECT photo_address,photo_name FROM ps_photos WHERE photo_id='".$updown_record_result_2[$i]['photo_id']."'";
+                $photo_temp_result=$conn->query($photo_message_sql); 
+                if(mysqli_num_rows($photo_temp_result)>0){
+                    $photo_temp_result_plus=$photo_temp_result->fetch_all(MYSQLI_ASSOC);
+                    $updown_record_result_2[$i]['photo_address']=$photo_temp_result_plus[0]['photo_address'];
+                    $updown_record_result_2[$i]['photo_name']=$photo_temp_result_plus[0]['photo_name'];
+                }
+            }
+    }
 ?>
  <!--echarts start-->
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script type="text/javascript" src="./js/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="./js/ecStat.min.js"></script>
+    <script type="text/javascript" src="./js/dataTool.min.js"></script>
+    <script type="text/javascript" src="./js/simplex.js"></script>
     <script type="text/javascript" src="./js/user.js"></script>
     <style id="poshytip-css-tip-twitter" type="text/css">
         div.tip-twitter {
@@ -74,11 +180,11 @@
     <div class="wrapper">
         <div class="head">
             <ul class="naver">
-                <li id="my_main" class="c1"><a href="./user_page.html">我的首页</a></li>
-                <li id="down_load_button"><a>下载记录</a></li>
-                <li id="up_load_button"><a>上传记录</a></li>
-                <li id="collection_manage_button"><a>我的收藏</a></li>
-                <li id="my_histroy_button"><a>我的足迹</a></li>
+                <li id="my_main" class="c1"><a >我的首页</a></li>
+                <li id="down_load_button"><a>相关记录</a></li>
+                <li id="up_load_button" style="display: none;"><a>上传记录</a></li>
+                <li id="collection_manage_button" style="display: none;"><a>我的收藏</a></li>
+                <li id="my_histroy_button" style="display: none;"><a>我的足迹</a></li>
                 <li id="my_manage_button" class="last"><a>账户管理</a></li>
             </ul>
             <div class="avatar">
@@ -116,42 +222,27 @@
             <div class="item">
                 <div class="hd">
                     <!--<h2>2019-02-10　今天</h2>-->
-                    <h2>最近7天</h2>
+                    <!--显示最近浏览的最多10条记录-->
+                    <h2>最近浏览</h2>
                     <span></span>
                 </div>
                 <div class="ui_imgs mt30">
                     <ul class="container">
-                        <li class="item last-row" style="margin-right: 10px;">
-                            <div class="cover ui_cover">
-                                <dl sn="88344662" title="圣诞装饰红色星和古董婴儿鞋">
-                                    <dd class="sp1" title="添加至购物车" style="display: none;"></dd>
-                                    <dd class="sp1_1" title="已经添加"></dd>
-                                    <dd class="sp2" title="添加至收藏夹"></dd>
-                                    <dd class="sp2_1" title="取消收藏"></dd>
-                                    <dd class="sp3" title="查看相似图片 "></dd>
-                                </dl>
-                            </div>
-                            <a href="goods.php?media_id=88344662" target="_blank"><img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1592314/88344662/api_thumb_450.jpg"></a>
-                        </li>
+                        <?php 
+                        foreach ($last_looked_photos as $temp_look) {
+                            echo '<li class="item last-row" style="margin-right: 10px;">';
+                            echo    '<a href="'."./photo.php?photo_id=".$temp_look['photo_id']."user_id=".$user_id.'" target="_blank">';
+                            echo        '<img src="'.$temp_look['photo_address'].'">';
+                            echo     '</a>';
+                            echo '</li>';
+                        }
 
-                        <li class="item" style="margin-right: 0px;">
-
-                            <div class="cover ui_cover">
-                                <dl sn="20177673" title="美丽年轻的金发女孩，穿着黑色衣服的肖像">
-                                    <dd class="sp1" title="添加至购物车" style="display: none;"></dd>
-                                    <dd class="sp1_1" title="已经添加"></dd>
-                                    <dd class="sp2" title="添加至收藏夹"></dd>
-                                    <dd class="sp2_1" title="取消收藏"></dd>
-                                    <dd class="sp3" title="查看相似图片 "></dd>
-                                </dl>
-                            </div>
-                            <a href="goods.php?media_id=20177673" target="_blank"><img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs/1005833/20177673/api_thumb_450.jpg"></a>
-                        </li>
+                        ?>
 
                     </ul>
                 </div>
             </div>
-            <div class="item mt60">
+            <div class="item mt60" style="display: none;">
                 <div class="hd">
                     <!--<h2>2019-02-20　昨天</h2>-->
                     <h2>最近30天</h2>
@@ -204,62 +295,35 @@
                     <tbody>
                     <tr class="frist">
                         <td width="" height="55" align="center">图片信息<span>|</span></td>
-                        <td width="12%" height="55" align="center">所属账户<span>|</span></td>
                         <td width="15%" height="55" align="center">时间<span>|</span></td>
-                        <td width="10%" height="55" align="center">图片下载<span>|</span></td>
-                        <td width="10%" height="55" align="center">授权</td>
+                        <td width="15%" height="55" align="center">类型<span>|</span></td>
                     </tr>
-                    <tr>
-                        <td height="170" align="center">
-                            <div class="img left">
-                                <a href="goods.php?media_id=MSBQ13715300036172" target="_blank">
-                                    <img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs//MSBQ13715300036172/MSBQ13715300036172.jpg" style="height: 100px;max-width: 100px">
-                                </a>
-                            </div>
-                            <div class="txt left max-350">
-                                <p>图片ID：MSBQ13715300036172</p>
-                                <p>圆形蛋糕3</p>
-                                <p>尺寸：XL</p>
-                            </div>
-                        </td>
-                        <td height="170" align="center">主账户</td>
-                        <td height="170" align="center">2019-02-21</td>
+                    <?php
+                    foreach ($updown_record_result_2 as $temp_key) {
+                        echo '<tr>';
+                        echo '<td height="170" align="center">';
+                        echo     '<div class="img left">';
+                        echo         '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'user_id='.$user_id.'" target="_blank">';
+                        echo             '<img src="'.$temp_key['photo_address'].'" style="height: 100px;max-width: 100px">';
+                        echo        '</a>';
+                        echo    '</div>';
+                        echo    '<div class="txt left max-350">';
+                        echo        '<p>图片ID：'.$temp_key['photo_id'].'</p>';
+                        echo        '<p>'.$temp_key['photo_name'].'</p>';
+                        echo    '</div>';
+                        echo '</td>';
+                        echo '<td height="170" align="center">'.$temp_key['load_time'].'</td>';
 
-                        <td height="170" align="center">
-                            <a href="javascript:void(0)"><i data-sn="MSBQ13715300036172" data-rec-id="142813" class="botton_down"></i></a>
-
-
-                        </td>
-
-                        <td height="170" align="center">
-                            <p class="xiazai" rec_id="142813"><i class="botton_shouquan"></i></p>
-                        </td>
-                    </tr>
-                    <!--单行-->
-                    <tr>
-                        <td height="170" align="center">
-                            <div class="img left">
-                                <a href="goods.php?media_id=MSBQ13715300070585" target="_blank">
-                                    <img src="http://meisupic.oss-cn-beijing.aliyuncs.com/thumbs//MSBQ13715300070585/MSBQ13715300070585.jpg" style="height: 100px;max-width: 100px">
-                                </a>
-                            </div>
-                            <div class="txt left max-350">
-                                <p>图片ID：MSBQ13715300070585</p>
-                                <p>圣诞节装饰小猫</p>
-                                <p>尺寸：XL</p>
-                            </div>
-                        </td>
-                        <td height="170" align="center">主账户</td>
-                        <td height="170" align="center">2019-02-21</td>
-
-                        <td height="170" align="center">
-                            <a href="javascript:void(0)"><i data-sn="MSBQ13715300070585" data-rec-id="142807" class="botton_down"></i></a>
-                        </td>
-
-                        <td height="170" align="center">
-                            <p class="xiazai" rec_id="142807"><i class="botton_shouquan"></i></p>
-                        </td>
-                    </tr>
+                        echo '<td height="170" align="center">';
+                        if($temp_key['load_type']==0){
+                            echo "下载";
+                        }else{
+                            echo "上传";
+                        }
+                        echo '</td>';
+                        echo '</tr>';
+                     } 
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -501,7 +565,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="item mt60">
+            <div class="item mt60" style="display: none;">
                 <div class="hd">
                     <h2>30天内</h2>
                     <span></span>
@@ -915,7 +979,12 @@
             $(".user_upload").show();
             $("#up_load_button").addClass("c1");
         })
-
+        $("#my_main").click(function () {
+            hide_all();
+            $(".c1").removeClass("c1");
+            $(".user_home").show();
+            $("#my_main").addClass("c1");
+        })
     });
 </script>
 <!--echarts-->
@@ -935,11 +1004,25 @@
             },
             dataset: {
                 source: [
-                    ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
-                    ['下载', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
-                    ['上传', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
-                    ['收藏', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
-                    ['浏览', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+                    ['product','1月','2月', '3月', '4月', '5月', '6月'],
+                    ['上传'
+                    <?php foreach ($data_show[0] as $temp) {
+                        echo ",".$temp;
+                    } 
+                    ?>
+                     ],
+                    ['下载'
+                    <?php foreach ($data_show[1] as $temp) {
+                        echo ",".$temp;
+                    } 
+                    ?>
+                    ],
+                    ['浏览' 
+                    <?php foreach ($data_show[2] as $temp) {
+                        echo ",".$temp;
+                    } 
+                    ?>
+                    ]
                 ]
             },
             xAxis: {type: 'category'},
@@ -949,19 +1032,18 @@
                 {type: 'line', smooth: true, seriesLayoutBy: 'row'},
                 {type: 'line', smooth: true, seriesLayoutBy: 'row'},
                 {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
                 {
                     type: 'pie',
                     id: 'pie',
                     radius: '30%',
                     center: ['50%', '25%'],
                     label: {
-                        formatter: '{b}: {@2012} ({d}%)'
+                        formatter: '{b}: {@1月} ({d}%)'
                     },
                     encode: {
                         itemName: 'product',
-                        value: '2012',
-                        tooltip: '2012'
+                        value: '1月',
+                        tooltip: '1月'
                     }
                 }
             ]

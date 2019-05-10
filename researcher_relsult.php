@@ -135,7 +135,7 @@
 <!--style end-->
 <div class="toper toper_w">
     <div class="wrapper">
-        <h2><?php echo $key_word;?></h2><span style='font-size: 14px;line-height: 103px;padding-left: 7px;'>共 <?php count($reseach_photo_array);?>个搜索结果</span>
+        <h2><?php echo $key_word;?></h2><span style='font-size: 14px;line-height: 103px;padding-left: 7px;'>共 <?php echo count($reseach_photo_array);?>个搜索结果</span>
         <div class="form">
             <form action="./researcher_relsult.php" method="get" id="myform">
                 <input class="s_clearall" type="hidden" value=<?php echo "'".$key_word."'";?> name="s_keyword" id="s_keyword" autocomplete="off">

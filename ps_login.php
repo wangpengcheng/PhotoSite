@@ -17,7 +17,7 @@
 	//获取密码；
 	//$user_pwd="wang123!";
     $user_pwd=$_POST["user_pwd"];
-	//设置查询语句
+	//设置查询语句示例：
 	$sql="SELECT * FROM ".$user_table_name." WHERE user_name = '".$user_name."'";
 	//执行查询语句
 	$result=$conn->query($sql);

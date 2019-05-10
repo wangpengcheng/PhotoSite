@@ -5,49 +5,64 @@
  * @author zhyd(yadong.zhang0415#gmail.com)
  * @link https://github.com/zhangyd-c
  */
+
+function requesFail(xhr){
+        var status = xhr.status;
+        if (status) {
+            console.log("error", "网络错误", "发生网络错误，错误码为：" + xhr.status);
+        } else {
+            console.log("error", "网络错误", "未知网络错误, 请确保设备处在联网状态");
+        }
+    }
+//获取url参数
+function GetRequest() {
+    var url = this.location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for(var i = 0; i < strs.length; i ++) {
+            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+}
+var url=GetRequest();
+var photo_id=url['photo_id'];
+var user_id=url['user_id'];
+if((!user_id)||user_id==""){
+	user_id=3;//游客
+}
+
 $.extend({
 	comment: {
 		submit: function(target) {
-			var $this = $(target);
-			$this.button('loading');
-
-			$('#detail-modal').modal('show');
-			$(".close").click(function() {
-				setTimeout(function() {
-					$this.html("<i class='fa fa-close'></i>取消操作...");
-					setTimeout(function() {
-						$this.button('reset');
-					}, 1000);
-				}, 500);
-			});
-			// 模态框抖动
-			//		$('#detail-modal .modal-content').addClass("shake");
-			$("#detail-form-btn").click(function() {
-				$.ajax({
-					type: "get",
-					url: "./server/comment.json",
-					async: true,
-					success: function(json) {
-						if(json.statusCode == 200) {
-							console.log(json.message);
-						} else {
-							console.error(json.message);
-						}
-						$('#detail-modal').modal('hide');
-
-						setTimeout(function() {
-							$this.html("<i class='fa fa-check'></i>" + json.message);
-							setTimeout(function() {
-								$this.button('reset');
-								window.location.reload();
-							}, 1000);
-						}, 1000);
-					},
-					error: function(data) {
-						console.error(data);
-					}
-				});
-			});
+					var $this = $(target);
+					$this.button('loading');
+					//获取关键评论HTML字段
+					var photo_comment=$(".w-e-text")[0].innerHTML;
+					console.log("hello word");
+					// 模态框抖动
+					//		$('#detail-modal .modal-content').addClass("shake");
+					$.ajax({
+				        url:"./receive_comments.php",
+				        type:"post",
+				        timeout: 3000,
+				        data:{"user_id":user_id,"photo_id":photo_id,"photo_comment":photo_comment},
+				        dataType:"json",
+				        success: function(result){
+						               //$("#div1").html(result);
+						               console.log(result);
+						         
+						            setTimeout(function() {
+											$this.button('reset');
+											window.location.reload();
+										}, 1000);
+				           			},
+				        error: function(xhr,state,errorThrown){
+				               requesFail(xhr);
+				           }
+				       	});
 		},
 		reply: function(pid, c) {
 			console.log(pid);

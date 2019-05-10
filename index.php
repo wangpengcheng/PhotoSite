@@ -66,6 +66,34 @@
 
     }
   $rand_pictures=get_random_pictures();
+  //上传图片数量最多的前5个用户；获取名称,用户id和作品数量; 
+  function get_users(){
+    global $conn;
+    $result=[];
+    //样例sql: SELECT user_id,COUNT(1) from ps_photos GROUP BY user_id
+    $get_user_sql="SELECT user_id, COUNT(photo_id) AS photo_count from ps_photos GROUP BY user_id";
+    $user_query_result=$conn->query($get_user_sql);
+    if(mysqli_num_rows($user_query_result)!==0){
+        $result=$user_query_result->fetch_all(MYSQLI_ASSOC);
+    };
+    //遍历查找用户基本信息
+    //名称、head_image、
+    for ($i=0; $i < count($result); $i++ ) { 
+         # code...
+        $temp_user_id=$result[$i]['user_id'];
+        //sql样例： SELECT user_name,user_head_image FROM `ps_users` WHERE user_id=1
+        $get_user_sql_2="SELECT user_name,user_head_image FROM `ps_users` WHERE user_id='".$temp_user_id."';";
+        $user_query_result_2=$conn->query($get_user_sql_2);
+        if(mysqli_num_rows($user_query_result_2)!==0){
+            $result2=$user_query_result_2->fetch_array(MYSQLI_ASSOC);
+            $result[$i]['user_name']=$result2['user_name'];
+            $result[$i]['user_head_image']=$result2['user_head_image'];
+        }
+
+    }
+    return $result;
+  }
+$user_array=get_users();
 ?>
 <!--高步-->
 <div class="h_slide">
@@ -132,7 +160,7 @@
     </div>
 </div>
 <!--下部浮动栏1-->
-<div class="h_row1">
+<div class="h_row1" style="display: none;">
     <div class="wrapper">
         <ul>
             <li>
@@ -258,97 +286,19 @@
         </div>
         <div class="h_row5_main">
             <ul>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1534062878.048771.png"/>
-                            <span class="msg"><big>49584</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">kamchatka</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529477739.976632.png"/>
-                            <span class="msg"><big>3972</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">heckmannoleg</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529477760.045744.png"/>
-                            <span class="msg"><big>10205</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">EpicStockMedia</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529477855.560860.png"/>
-                            <span class="msg"><big>5034</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">Smallredgirl</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529477968.717942.png"/>
-                            <span class="msg"><big>4169</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">ventdusud</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529477994.661877.png"/>
-                            <span class="msg"><big>10520</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">AntonMatyukha</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529478923.081148.png"/>
-                            <span class="msg"><big>7407</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">chungking</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1540278643.507413.png"/>
-                            <span class="msg"><big>493</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">Emily</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1529479074.765925.png"/>
-                            <span class="msg"><big>6352</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">dobrynina_art</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <div class="h_row5_img">
-                            <img src="./htmlimg/1540278894.336426.png"/>
-                            <span class="msg"><big>8002</big>/作品</span>
-                        </div>
-                        <p class="h_row5_txt">4045</p>
-                    </a>
-                </li>
-
+                <?php
+                foreach ($user_array as $temp_user) {
+                    echo '<li>';
+                    //echo '<a href="'.'./user.php?user_id='.$temp_user['user_id'].'"  target="_blank">';
+                    echo '<div class="h_row5_img">';
+                    echo       '<img src="'.$temp_user['user_head_image'].'"/>';
+                    echo  '<span class="msg"><big>'.$temp_user['photo_count'].'</big>/作品</span>';
+                    echo  '</div>';
+                    echo  '<p class="h_row5_txt">'.$temp_user['user_name'].'</p>';
+                    //echo '</a>';
+                    echo  '</li>';
+                }
+                ?>
             </ul>
         </div>
     </div>

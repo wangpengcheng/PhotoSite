@@ -180,9 +180,9 @@
         }
         return $result;
     }
-    $user_id=get_user_id($page_query);
-    $user_history_result=get_history($user_id);
-    print_r($user_history_result);
+    //$user_id=get_user_id($page_query);
+    //$user_history_result=get_history($user_id);
+    //print_r($user_history_result);
     // $topic_id=get_topic_id($page_query);
     // $user_id=get_user_id($page_query);
     // //print_r($topic_id);
@@ -191,4 +191,6 @@
 	//print_r(date('Y-m-d H:i:s', time()));
 	//print_r($photo_array);
 	//print_r($author_array);
+    
+    echo json_encode ("hello word");
 ?>

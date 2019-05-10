@@ -156,7 +156,7 @@ function updatetarget($photo_id,$media_id){
 }
 function updateimage($photo){
 	global $ps_photo_table_name,$conn;
-	$sql_insert = "INSERT INTO ".$ps_photo_table_name." (photo_media_id,photo_name,photo_address,photo_big_address,photo_width,photo_height,photo_topic_id,ueser_id,create_time) VALUES('".$photo['photo_media_id']."','".$photo['photo_name']."','".$photo['photo_address']."','".$photo['big_img_address']."','".$photo['photo_width']."','".$photo['photo_height']."','".$photo['topic_id']."','".$photo['ueser_id']."','".date('Y-m-d h:i:s', time())."')";
+	$sql_insert = "INSERT INTO ".$ps_photo_table_name." (photo_media_id,photo_name,photo_address,photo_big_address,photo_width,photo_height,photo_topic_id,user_id,create_time) VALUES('".$photo['photo_media_id']."','".$photo['photo_name']."','".$photo['photo_address']."','".$photo['big_img_address']."','".$photo['photo_width']."','".$photo['photo_height']."','".$photo['topic_id']."','".$photo['ueser_id']."','".date('Y-m-d h:i:s', time())."')";
 		// //$result=$conn->query($get_tpoic_id);
 	     if ($conn->query($sql_insert) === TRUE) {
 	      	print_r("image insert ".$photo['photo_media_id']." success\n");

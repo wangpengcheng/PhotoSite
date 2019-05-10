@@ -36,7 +36,33 @@
             echo "image no found;";
         }
 	}
-	$conn->close();
+
+    /*更新评论数据*/
+    //预定义结果
+    $photo_comments=[];
+    //评论统计
+    $comments_count=0;
+    //user_id,comment_date,comment_content
+    //查询例句： SELECT user_id,comment_content,comment_date FROM `ps_comments` WHERE photo_id='0'
+	$get_comments_sql="SELECT user_id,comment_content,comment_date FROM ps_comments WHERE photo_id='".$photo_id."'";
+    $comments_result=$conn->query($get_comments_sql);
+    $comments_count=mysqli_num_rows($comments_result);
+    if($comments_count!==0){
+        $photo_comments=$comments_result->fetch_all(MYSQLI_ASSOC);
+        for ($i=0; $i < count($photo_comments); $i++ ) { 
+            $temp_user_id=$photo_comments[$i]['user_id'];
+            //sql样例： SELECT user_name,user_head_image FROM `ps_users` WHERE user_id=1
+            $get_user_sql_2="SELECT user_name,user_head_image FROM `ps_users` WHERE user_id='".$temp_user_id."';";
+            $user_query_result_2=$conn->query($get_user_sql_2);
+            if(mysqli_num_rows($user_query_result_2)!==0){
+                $result2=$user_query_result_2->fetch_array(MYSQLI_ASSOC);
+                $photo_comments[$i]['user_name']=$result2['user_name'];
+                $photo_comments[$i]['user_head_image']=$result2['user_head_image'];
+            }
+
+        }
+    }
+    $conn->close();
 	//print_r($photo_array);
 	//print_r($author_array);
 ?>
@@ -48,7 +74,7 @@
                      height="384px">
                 <div id="my_change" class="btn">
                     <ul>
-                        <li class="n1" sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a href="javascript:void(0)">收藏</a></li>
+                        <li class="n1" sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?> style="display:none"><a href="javascript:void(0)">收藏</a></li>
                         <li class="n2"><a href="javascript:void(0)" id="img_p">放大</a></li>
                     </ul>
                 </div>
@@ -101,48 +127,15 @@
                 <div class="btns">
                     <ul>
                         <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a href=<?php echo "\"".$photo_array['photo_big_address']."\"";?> id="goodsinfo_add" target="_blank">
-                            下载原图</a></li>
-                        <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a class="red" id="look_comments">查看评论</a>
+                            查看原图</a></li>
+                        <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a class="red" id="look_comments">隐藏评论</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
-    <!--comments-->
-    <!--弹框-->
-    <div class="modal fade bs-example-modal-sm" id="detail-modal" tabindex="-1" role="dialog"
-         aria-labelledby="detail-modal-label">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="detail-modal-label">评论信息框</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="detail-form">
-                        <div class="form-group input-logo">
-                            <input type="text" class="form-control" placeholder="必填" value="匿名">
-                            <span class="fa fa-user pull-left" aria-hidden="true">昵称</span>
-                        </div>
-                        <div class="form-group input-logo">
-                            <input type="text" class="form-control" placeholder="选填">
-                            <span class="fa fa-envelope pull-left" aria-hidden="true">邮箱</span>
-                        </div>
-                        <div class="form-group input-logo">
-                            <input type="text" class="form-control" placeholder="选填">
-                            <span class="fa fa-globe pull-left" aria-hidden="true">网址</span>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default btn-sm" id="detail-form-btn">提交评论</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!--评论区域-->
     <div class="container">
         <div class="col-xs-12">
             <div id="comment-place">
@@ -164,126 +157,29 @@
 
             <!-- 评论 -->
             <div class="commentList">
-                <h3><i class="fa fa-comments-o fa-fw"></i><em>20</em>条评论~~~</h3>
+                <h3><i class="fa fa-comments-o fa-fw"></i><em><?php echo $comments_count; ?></em>条评论~~~</h3>
                 <ul class="comment">
-                    <li>
-                        <div class="comment-body" id="comment-1">
-                            <div class="cheader">
-                                <a target="_blank" href="https://github.com/zhangyd-c">
-                                    <img class="userImage" src="img/user/11.jpg">
-                                    <strong>张三</strong>
-                                </a>
-                                <div class="timer">
-                                    <i class="fa fa-clock-o fa-fw"></i>2018-01-01 14:14:14
-                                    <i class="fa fa-map-marker fa-fw"></i>北京市朝阳区
-                                </div>
-                            </div>
-                            <div class="content">
-                                <a href="#comment-5" class="comment-quote">@钱五</a>
-                                在圣诞节中，北京真是个充满生机的城市…<img
-                                    src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png"
-                                    alt="[污]" data-w-e="1">
-                            </div>
-                            <div class="sign">
-                                <i class="icons os-win2"></i>win8 <i class="sepa"></i>
-                                <i class="icons browser-chrome"></i>chrome 15.0.0.12 <i class="sepa"></i>
-                                <a href="#comment-1" class="comment-reply" onclick="$.comment.reply(1, this)"><i
-                                        class="fa fa-reply fa-fw"></i>回复</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="comment-body" id="comment-2">
-                            <div class="cheader">
-                                <a target="_blank" href="https://github.com/zhangyd-c">
-                                    <img class="userImage" src="img/user/3.jpg">
-                                    <strong>李四</strong>
-                                </a>
-                                <div class="timer">
-                                    <i class="fa fa-clock-o fa-fw"></i>2018-01-01 14:14:14
-                                    <i class="fa fa-map-marker fa-fw"></i>北京市朝阳区
-                                </div>
-                            </div>
-                            <div class="content">在圣诞节晚会，最后就我一个人去了。<img
-                                    src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png"
-                                    alt="[污]" data-w-e="1"></div>
-                            <div class="sign">
-                                <i class="icons os-linux"></i>Linux <i class="sepa"></i>
-                                <i class="icons browser-tt"></i>TT 15.0.0.12 <i class="sepa"></i>
-                                <a href="#comment-1" class="comment-reply" onclick="$.comment.reply(1, this)"><i
-                                        class="fa fa-reply fa-fw"></i>回复</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="comment-body" id="comment-3">
-                            <div class="cheader">
-                                <a target="_blank" href="https://github.com/zhangyd-c">
-                                    <img class="userImage" src="img/user/5.jpg">
-                                    <strong>王二麻子</strong>
-                                </a>
-                                <div class="timer">
-                                    <i class="fa fa-clock-o fa-fw"></i>2018-01-01 14:14:14
-                                    <i class="fa fa-map-marker fa-fw"></i>北京市朝阳区
-                                </div>
-                            </div>
-                            <div class="content">世界上有许多你意想不到的事，比如，这个圣诞节。<img
-                                    src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png"
-                                    alt="[污]" data-w-e="1"></div>
-                            <div class="sign">
-                                <i class="icons os-mac"></i>Mac <i class="sepa"></i>
-                                <i class="icons browser-safari"></i>safari 15.0.0.12 <i class="sepa"></i>
-                                <a href="#comment-1" class="comment-reply" onclick="$.comment.reply(1, this)"><i
-                                        class="fa fa-reply fa-fw"></i>回复</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="comment-body" id="comment-4">
-                            <div class="cheader">
-                                <a target="_blank" href="https://github.com/zhangyd-c">
-                                    <img class="userImage" src="img/user/6.jpg">
-                                    <strong>赵一</strong>
-                                </a>
-                                <div class="timer">
-                                    <i class="fa fa-clock-o fa-fw"></i>2018-01-01 14:14:14
-                                    <i class="fa fa-map-marker fa-fw"></i>北京市朝阳区
-                                </div>
-                            </div>
-                            <div class="content">床前明月光，疑是地上霜。举头望明月，低头思故乡。<img
-                                    src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png"
-                                    alt="[污]" data-w-e="1"></div>
-                            <div class="sign">
-                                <i class="icons os-ipad"></i>Ipad <i class="sepa"></i>
-                                <i class="icons browser-safari"></i>safari 15.0.0.12 <i class="sepa"></i>
-                                <a href="#comment-1" class="comment-reply" onclick="$.comment.reply(1, this)"><i
-                                        class="fa fa-reply fa-fw"></i>回复</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="comment-body" id="comment-5">
-                            <div class="cheader">
-                                <a target="_blank" href="https://github.com/zhangyd-c">
-                                    <img class="userImage" src="img/user/7.jpg">
-                                    <strong>钱五</strong>
-                                </a>
-                                <div class="timer">
-                                    <i class="fa fa-clock-o fa-fw"></i>2018-01-01 14:14:14
-                                    <i class="fa fa-map-marker fa-fw"></i>北京市朝阳区
-                                </div>
-                            </div>
-                            <div class="content">你以为你是铅笔盒啊，装那么多笔。<img
-                                    src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png"
-                                    alt="[污]" data-w-e="1"></div>
-                            <div class="sign">
-                                <i class="icons os-android"></i>Android <i class="sepa"></i>
-                                <i class="icons browser-safari"></i>safari 15.0.0.12 <i class="sepa"></i>
-                                <a href="#comment-1" class="comment-reply" onclick="$.comment.reply(1, this)"><i
-                                        class="fa fa-reply fa-fw"></i>回复</a>
-                            </div>
-                        </div>
-                    </li>
+                    <?php
+                    if(count($photo_comments)>0){
+                     foreach ($photo_comments as $temp_comments) {
+                            # code...
+                            echo '<li>';
+                            echo    '<div class="comment-body" id="comment-1">';
+                            echo         '<div class="cheader">';
+                            echo            '<img class="userImage" src="'.$temp_comments['user_head_image'].'">';
+                            echo             '<strong>'.$temp_comments['user_name'].'</strong>';
+                            echo            '<div class="timer">';
+                            echo                '<i class="fa fa-clock-o fa-fw"></i>'.$temp_comments['comment_date'];
+                            echo            '</div>';
+                            echo        '</div>';
+                            echo        '<div class="content">';
+                            echo   $temp_comments['comment_content'];
+                            echo        '</div>';
+                            echo    '</div>';
+                            echo    '</li>';
+                        }   
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -295,7 +191,6 @@
 	include 'footer.php'
 ?>
 <script type="text/javascript">
-	//添加下载按钮时间，添加下载记录
 	function GetRequest() {
     var url = this.location.search; //获取url中"?"符后的字串
     var theRequest = new Object();
@@ -325,6 +220,17 @@
     			}
     		});
 		});
-		$()
 	});
+    //查看评论点击查看和隐藏评论
+    $("#look_comments").click(function(){
+        $(".container").toggle();
+        if(this.innerText==='显示评论'){
+            this.innerText='隐藏评论';
+        }else if(this.innerText==='隐藏评论'){
+            this.innerText="显示评论";
+        }else{
+            console.log("hello word");
+        }
+    });
+
 </script>

@@ -51,6 +51,7 @@ console.log(editor.txt.text());
 console.log(editor.txt.getJSON());
 //设置样式
 $("#my_change").css("display", "inherit");
+
 $("#look_comments").click(function () {
     var container=$(".container")[0];
     if(container.style.display=="none"){

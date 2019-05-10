@@ -52,7 +52,7 @@ $(function(){
        console.log("nihao "+input_user_name+input_user_passwd);
        var result_string="";
        $.ajax({
-           url:"http://118.24.113.233/PhotoSite/ps_login.php",
+           url:"./ps_login.php",
            type:"post",
            timeout: 1000,
            data:{"user_name":input_user_name,"user_pwd":input_user_passwd },
@@ -121,7 +121,7 @@ $(function(){
        var pwd_confirm=document.getElementById("confirm_password").value;
        var phone=document.getElementById("extend_field5").value;
        $.ajax({
-           url:"http://118.24.113.233/PhotoSite/ps_register.php",
+           url:"./ps_register.php",
            type:"post",
            timeout: 3000,
            data:{"user_name":user_name,"user_pwd":user_pwd,"pwd_confirm":pwd_confirm,"phone":phone},
@@ -167,4 +167,5 @@ $(function(){
         nav_bf.style.display="none";
         user_login(user_id,user_name);
     }
+
 });

@@ -1,7 +1,9 @@
 <?php
 	include 'ps_header.php'; 
 ?>
-
+<?php
+    $user_id=get_user_id($page_query);
+?>
 <div class="container3 wrapper">
     <div class="pop-edit" id="pop-edit" style="display: none;">
         <div class="pop_head">
@@ -14,36 +16,35 @@
     <div class="head">
         <h2>上传图片</h2>
     </div>
-    <form id="edit-form" action="" method="post" onkeydown="if(event.keyCode==13){return false;}">
+    <form id="ImageFrom" action="./receive_photo.php" method="post" enctype="multipart/form-data">
         <div class="body">
             <div class="images-info item">
                 <div class="item-head">
                     <h4>上传图片</h4>
                 </div>
-                <div class="c2-uploadarea">
-                    <div class="plus">
-                        <i></i><br><span>上传作品</span>
-                    </div>
-                    <ul class="images-ul" style="display: none;">
-                        <li>
-                            <div class="mini-plus">
-                                <i></i><br><span>上传作品</span>
-                            </div>
-                        </li>
+              <div class="c2-uploadarea">
+                    <ul class="images-ul">
+                            <li class="image" id="myli_1" style="display: none;">        
+                                <div id="divPreview">
+                                    <img id="imgHeadPhoto" src="noperson.jpg" style="width: 160px; height: 170px; border: solid 1px #d2e2e2;" alt="" />
+                                </div>
+                            </li>
+                            <li id="myli_2">
+                                <div class="mini-plus webuploader-container">
+                                    <div class="webuploader-pick">
+                                        <i></i>
+                                        <br>
+                                        <span>上传作品</span>
+                                    </div>
+                                    <div style="position: absolute; top: 35px; left: 21px; width: 120px; height: 132px; overflow: hidden; bottom: auto; right: auto;">
+                                    </div>
+                                        <input type="file" name="file"  onchange="PreviewImage(this,'imgHeadPhoto','divPreview');">
+                                    
+                                </div>
+                            </li>
                     </ul>
-                </div>
-                <div class="body-foot">
-                    <ul>
-                        <li>涉及到肖像授权，请同时上传PDF格式人像授权书，<a href="/static/front/file/肖像权使用授权声明.docx">下载模板</a>
-                            &nbsp;&nbsp;&nbsp;<a id="upload-pdf-btn">上传授权书</a>
-                            &nbsp;&nbsp;&nbsp;<a class="hide auth-cert-name" target="_blank">证书名称.pdf</a>
-                            &nbsp;&nbsp;&nbsp;<a class="hide auth-cert-del-btn">删除</a>
-                        </li>
-                        <li>图片格式仅限<span style="color: #FC4349">JPG、PNG，不低于400万像素，最大20M</span></li>
-                        <li>可编辑类图需要上传<span style="color: #FC4349">相同命名的“JPG封面图（20M以内）＋EPS/PSD格式源文件”，暂不支持AI格式。</span>
-                        </li>
-                    </ul>
-                </div>
+                </div> 
+
             </div>
             <div class="creation-info item">
                 <div class="item-head">
@@ -51,7 +52,7 @@
                 </div>
                 <div class="item-body">
                     <dl class="prod-type">
-                        <dd>
+                        <dd style="display: none;">
                             <label class="label">作品类型
                                 <div class="prod-type-hint">
                                     <em id="pth-em"></em>
@@ -137,7 +138,7 @@
                         </dd>
                     </dl>
                     <dl class="publish">
-                        <dd class="whether">
+                        <dd class="whether" style="display: none;">
                             <label class="label">是否发表</label>
                             <ul>
                                 <li class="on last"><a href="#" id="nopub">未曾发表</a></li>
@@ -176,6 +177,8 @@
                                        value="北京市">
                                 <input type="text" name="firstPublishCity" id="firstPublishCity" value="北京市"
                                        placeholder="城市"/>
+                                       <!--隐藏信息用户id-->
+                                <input type="text" name="user_id" id="user_id" value="<?php echo $user_id ?>">
                             </div>
                         </dd>
                     </dl>
@@ -186,11 +189,18 @@
                                       placeholder="创作目的：为了更好的将美好的艺术形象留存在照相机镜头中，从而达到让广大的让对摄影作品有广泛认同的人，有所认知。独创性描述：该作品经过作者的独特构思，充分运用美术，画面内容形象生动的体现出太极弘图形文字Logo设计的特点。作品整体独特设计精巧，使整幅作品更容易识别和记忆，具有独创性和显著性两大特征。"></textarea>
                         </dd>
                     </dl>
+                    <dl class="explain">
+                        <dd>
+                            <label class="label">作品标签</label>
+                            <textarea id="creationDesc" name="mainFeatures2" rows="" cols=""
+                                      placeholder="作品标签内容:请将标签以“;”字符分割排列"></textarea>
+                        </dd>
+                    </dl>
                 </div>
             </div>
             <div class="btns">
                 <ul>
-                    <li class="next-btn"><a href="./html/Information_confirm.html"><input type="submit" value="确定提交"/></a>
+                    <li class="next-btn"><input type="submit" value="确定提交" /></a>
                     </li>
                 </ul>
             </div>

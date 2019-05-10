@@ -154,10 +154,6 @@
                     <input type="button" name="" class="btn btn1" id="" value=""/>
                     <input type="text" name="" class="txt txt1" value="" placeholder="按住滑块，拖动到最右边"/>
                 </li>
-                <li class="d_none">
-                    <input type="button" name="" class="btn btn2" id="" value=""/>
-                    <input type="text" name="" class="txt txt2" value="验证通过"/>
-                </li>
                 <li>
                     <div id="drag"></div>
                 </li>
@@ -532,7 +528,7 @@ echo '</script>';
 echo '<!--<script type="text/javascript" src="http://www.meisubq.com/static/front/js/config.js"></script>-->';
 echo '<script type="text/javascript" src="http://www.meisubq.com/static/front/js/lib/jquery.easydropdown.min.js"></script>';
 echo '<script type="text/javascript" src="http://www.meisubq.com/static/front/js/jsAddress.js"></script>';
-echo '<script type="text/javascript" src="http://www.meisubq.com/static/front/webuploader/webuploader.js"></script>';
+echo '<script type="text/javascript" src="./javascript/webuploader.js"></script>';
 echo '<script type="text/javascript" src="./js/WdatePicker.js"></script>';
 echo '<script type="text/javascript">';
 echo '    layui.use("worksedit");';

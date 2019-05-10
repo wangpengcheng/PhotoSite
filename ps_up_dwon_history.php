@@ -17,5 +17,4 @@
 		$history_insert = $conn->query($histroy_insert_sql);
 		echo urldecode(json_encode($history_insert->fetch_all(MYSQLI_ASSOC))); ;
 	}
-	//print_r($histroy_insert_sql);
 ?>

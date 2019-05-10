@@ -115,7 +115,7 @@ header("Content-type: text/html; charset=utf-8");
             echo  '<script src="./js/common.js"></script>';
             echo  '<link rel="stylesheet" href="./css/style.css">';
             echo  '<link href="./js/skin/WdatePicker.css" rel="stylesheet" type="text/css"><link id="layuicss-layer" rel="stylesheet" href="http://www.meisubq.com/static/common/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">';
-            echo '<script src="//sgoutong.baidu.com/embed/1551246754/asset/embed/pc_nb.js" charset="UTF-8"></script><link rel="stylesheet" type="text/css" href="//sgoutong.baidu.com/embed/1551246754/asset/embed/css/pc/main.css"><script type="text/javascript" src="//p.qiao.baidu.com/cps2/site/poll?cb=jsonp_bridge_1552472494793_5763948735983571&amp;l=1&amp;v=9117938710011960896&amp;s=11960896&amp;e=24453643&amp;dev=0&amp;auth=%7B%22anonym%22%3A0%2C%22key%22%3A%226848769569247111791eapm9732111027%22%2C%22sn%22%3A%22729123861%22%2C%22id%22%3A%229117938710011960896%22%2C%22from%22%3A4%2C%22token%22%3A%22bridge%22%7D&amp;_time=1552472494793" id="id_jsonp_bridge_1552472494793_5763948735983571" charset="utf-8"></script>';
+            //echo '<script src="//sgoutong.baidu.com/embed/1551246754/asset/embed/pc_nb.js" charset="UTF-8"></script><link rel="stylesheet" type="text/css" href="//sgoutong.baidu.com/embed/1551246754/asset/embed/css/pc/main.css"><script type="text/javascript" src="//p.qiao.baidu.com/cps2/site/poll?cb=jsonp_bridge_1552472494793_5763948735983571&amp;l=1&amp;v=9117938710011960896&amp;s=11960896&amp;e=24453643&amp;dev=0&amp;auth=%7B%22anonym%22%3A0%2C%22key%22%3A%226848769569247111791eapm9732111027%22%2C%22sn%22%3A%22729123861%22%2C%22id%22%3A%229117938710011960896%22%2C%22from%22%3A4%2C%22token%22%3A%22bridge%22%7D&amp;_time=1552472494793" id="id_jsonp_bridge_1552472494793_5763948735983571" charset="utf-8"></script>';
             echo  '<link rel="stylesheet" href="./css/css.css">';
         }else{
             echo  '<link rel="stylesheet" href="./css/slicy.css">';
@@ -138,7 +138,75 @@ header("Content-type: text/html; charset=utf-8");
              echo '<link rel="stylesheet" href="./css/new_style.css"/>';
         }
     ?>
-    
+    <!--上传图片页面功能-->
+    <script type="text/javascript" src="./javascript/jquery.form.js"></script>
+    <script type="text/javascript">
+         //预览图片
+         //js本地图片预览，兼容ie[6-9]、火狐、Chrome17+、Opera11+、Maxthon3
+        function PreviewImage(fileObj, imgPreviewId, divPreviewId) {
+            var allowExtention = ".jpg,.bmp,.gif,.png"; //允许上传文件的后缀名document.getElementById("hfAllowPicSuffix").value;
+            var extention = fileObj.value.substring(fileObj.value.lastIndexOf(".") + 1).toLowerCase();
+            var browserVersion = window.navigator.userAgent.toUpperCase();
+            if (allowExtention.indexOf(extention) > -1) {
+                if (fileObj.files) {//HTML5实现预览，兼容chrome、火狐7+等
+                    if (window.FileReader) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById(imgPreviewId).setAttribute("src", e.target.result);
+                        }
+                        reader.readAsDataURL(fileObj.files[0]);
+                    } else if (browserVersion.indexOf("SAFARI") > -1) {
+                        alert("不支持Safari6.0以下浏览器的图片预览!");
+                    }
+                } else if (browserVersion.indexOf("MSIE") > -1) {
+                    if (browserVersion.indexOf("MSIE 6") > -1) {//ie6
+                        document.getElementById(imgPreviewId).setAttribute("src", fileObj.value);
+                    } else {//ie[7-9]
+                        fileObj.select();
+                        if (browserVersion.indexOf("MSIE 9") > -1)
+                            fileObj.blur(); //不加上document.selection.createRange().text在ie9会拒绝访问
+                        var newPreview = document.getElementById(divPreviewId + "New");
+                        if (newPreview == null) {
+                            newPreview = document.createElement("div");
+                            newPreview.setAttribute("id", divPreviewId + "New");
+                            newPreview.style.width = document.getElementById(imgPreviewId).width + "px";
+                            newPreview.style.height = document.getElementById(imgPreviewId).height + "px";
+                            newPreview.style.border = "solid 1px #d2e2e2";
+                        }
+                        newPreview.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src='" + document.selection.createRange().text + "')";
+                        var tempDivPreview = document.getElementById(divPreviewId);
+                        tempDivPreview.parentNode.insertBefore(newPreview, tempDivPreview);
+                        tempDivPreview.style.display = "none";
+                    }
+                } else if (browserVersion.indexOf("FIREFOX") > -1) {//firefox
+                    var firefoxVersion = parseFloat(browserVersion.toLowerCase().match(/firefox\/([\d.]+)/)[1]);
+                    if (firefoxVersion < 7) {//firefox7以下版本
+                        document.getElementById(imgPreviewId).setAttribute("src", fileObj.files[0].getAsDataURL());
+                    } else {//firefox7.0+                    
+                        document.getElementById(imgPreviewId).setAttribute("src", window.URL.createObjectURL(fileObj.files[0]));
+                    }
+                } else {
+                    document.getElementById(imgPreviewId).setAttribute("src", fileObj.value);
+                }
+            } else {
+                alert("仅支持" + allowExtention + "为后缀名的文件!");
+                fileObj.value = ""; //清空选中文件
+                if (browserVersion.indexOf("MSIE") > -1) {
+                    fileObj.select();
+                    document.selection.clear();
+                }
+                fileObj.outerHTML = fileObj.outerHTML;
+            }
+            //$("#imageform").submit();
+            var li1=document.getElementById("myli_1");
+            var li2=document.getElementById("myli_2");
+            li2.style="display: none;";
+            li1.style="";
+
+            console.log("执行");
+            return fileObj.value;    //返回路径
+        };
+    </script>
     <script src="./js/common.js"></script>
     <!--css link end-->
     <meta name="viewport" content="width=1366"/>
@@ -216,7 +284,7 @@ header("Content-type: text/html; charset=utf-8");
             <a href="./index.php#h_row3">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="./hand_photo.php?user_id=">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">上传图片</a>-->
-            <a href="./researcher_relsult.html"><font color="#FC4349">校园风景</font><i class="huodong_top_hot"></i></a>
+            <a href="./researcher_relsult.php?keyword=蓝色"><font color="#FC4349">蓝色</font><i class="huodong_top_hot"></i></a>
             <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <font id="ECS_MEMBERZONE">
@@ -236,9 +304,7 @@ header("Content-type: text/html; charset=utf-8");
                         <span class="arr"></span>
                         <div class="hdn">
                             <dl>
-                                <dd><a href="./user.php?user_id=&act=down_list">下载记录</a></dd>
-                                <dd><a href="./user.php?user_id=&act=collection_list">收藏夹</a></dd>
-                                <dd><a href="./user.php?user_id=&act=history_list">我的足迹</a></dd>
+                                <dd><a href="./user.php?user_id=&act=down_list">相关记录</a></dd>
                                 <dd><a href="./user.php?user_id=&act=profile">账户管理</a></dd>
                                 <dd><a id="logout_button" class="last">退出</a></dd>
                             </dl>
