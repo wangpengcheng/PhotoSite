@@ -76,7 +76,7 @@ header("Content-type: text/html; charset=utf-8");
             return "empty";
         }
     }
-    $my_user_id=get_topic_id($page_query);
+    $my_user_id=get_user_id($page_query);
 ?>
 <!DOCTYPE html>
 <html>
