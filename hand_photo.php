@@ -84,6 +84,7 @@ function get_topic_list(){
                                 <input type="hidden" name="worksType" id="worksType" value="photoProductRegist"/>
                                 <input type="hidden" name="creativePurpose" id="creativePurpose"/>
                                 <input type="hidden" name="topic_id" id="topic_id" value="text" />
+                                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                             </ul>
                         </dd>
                     </dl>
