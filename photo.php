@@ -127,7 +127,7 @@
                 <div class="btns">
                     <ul>
                         <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a href=<?php echo "\"".$photo_array['photo_big_address']."\"";?> id="goodsinfo_add" target="_blank">
-                            查看原图</a></li>
+                            收藏图片</a></li>
                         <li sn="88344662" title=<?php echo "\"".$photo_array['photo_name']."\"";?>><a class="red" id="look_comments">隐藏评论</a>
                         </li>
                     </ul>

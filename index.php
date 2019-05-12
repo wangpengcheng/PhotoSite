@@ -259,7 +259,7 @@ $user_array=get_users();
             <div class="h_row3_main">
                 <ul>
                 <?php
-                        for($i=0;$i<count($topic_list_array);++$i) {
+                        for($i=0;$i<count($topic_list_array)&&$i<12;++$i) {
                             $temp=$topic_list_array[$i];
                             $li=$i+1;
                             echo '<li class="l'.$li.'">';

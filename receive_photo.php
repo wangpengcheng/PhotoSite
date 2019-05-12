@@ -7,10 +7,12 @@
 
 	//定义全局变量file_name
 	$filename="";
+	$user_id="";//预定义user_id
     $work_photo_name=$_POST["worksFullName"];//名称
     $creation_date=$_POST["creationDate"];//日期
     $main_features=$_POST["mainFeatures"];//描述和
     $main_features2=$_POST["mainFeatures2"];//主要标签
+    $topic_id=$_POST["topic_id"];//专题id
     if($_POST["user_id"]!==""){
     	$user_id=$_POST["user_id"];
 	}else{
@@ -70,7 +72,7 @@
 	list($width, $height, $type, $attr)=getimagesize($filename);
     //数据收集完毕准备插入输入库，图片库和标签库；
     //先插入图片库
-    $photo_sql_insert="INSERT INTO ps_photos (photo_media_id,photo_message,photo_name,photo_address,photo_big_address,photo_width,photo_height,user_id,create_time) VALUES('".$media_id."','".$main_features."','".$work_photo_name."','".$filename."','".$filename."','".$width."','".$height."','".$user_id."','".date('Y-m-d h:i:s', time())."')";
+    $photo_sql_insert="INSERT INTO ps_photos (photo_media_id,photo_message,photo_name,photo_address,photo_big_address,photo_width,photo_height,user_id,photo_topic_id,create_time) VALUES('".$media_id."','".$main_features."','".$work_photo_name."','".$filename."','".$filename."','".$width."','".$height."','".$user_id."','".$topic_id."','".date('Y-m-d h:i:s', time())."')";
     //执行插入操作;
     	if($conn->query($photo_sql_insert) === TRUE) {
 	    	$photo_id=mysqli_insert_id($conn);

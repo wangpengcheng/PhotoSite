@@ -1,8 +1,23 @@
 <?php
-	include 'ps_header.php'; 
+	include 'ps_header.php';
+    include 'ps_connect.php';
 ?>
 <?php
     $user_id=get_user_id($page_query);
+function get_topic_list(){
+        global $conn;
+        $topic_list_array=[];
+        $topic_list_sql="SELECT * FROM ps_topics";
+        $topic_list_result=$conn->query($topic_list_sql);
+        $topic_list_count= mysqli_num_rows($topic_list_result);
+        //print_r($topic_list_result);
+                if($topic_list_count!==0){
+                    //将结果转化为数组
+                    $topic_list_array = $topic_list_result->fetch_all(MYSQLI_ASSOC);
+                    return $topic_list_array;
+                }
+    };
+    $topic_list_array=get_topic_list();
 ?>
 <div class="container3 wrapper">
     <div class="pop-edit" id="pop-edit" style="display: none;">
@@ -51,48 +66,24 @@
                     <h4>创作信息</h4>
                 </div>
                 <div class="item-body">
-                    <dl class="prod-type">
-                        <dd style="display: none;">
-                            <label class="label">作品类型
-                                <div class="prod-type-hint">
-                                    <em id="pth-em"></em>
-                                    <div class="hint-content" style="">
-                                        <ul>
-                                            <li>
-                                                <h2>摄影</h2>
-                                                <p>人物照片、动植物照片、风景照片、艺术摄影等</p>
-                                            </li>
-                                            <li>
-                                                <h2>美术作品</h2>
-                                                <p>绘画、插画、漫画、海报、书法、字体、雕塑、表情包、工业设计、陶瓷类工艺品等</p>
-                                            </li>
-                                            <li>
-                                                <h2>工程图</h2>
-                                                <p>工程设计图、产品设计图等施工图纸</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <dl class="prod-type" style="display: none;">
+                        <dd style="">
+                            <label class="label">专题类型
                             </label>
                             <ul>
-                                <li class="on photoProductRegist"><a href="#" data-id="photoProductRegist"
-                                                                     class="p-type-a">摄影</a></li>
                                 <li class="artProductRegist sublist">
-                                    <a href="#" data-id="artProductRegist" class="p-type-a">美术作品</a>
+                                    <a href="#" data-id="artProductRegist" class="p-type-a">专题类型</a>
                                     <dl>
-                                        <dd><a href="javascript:void(0)">全部美术作品</a></dd>
-                                        <dd><a href="javascript:void(0)">绘画</a></dd>
-                                        <dd><a href="javascript:void(0)">海报</a></dd>
-                                        <dd><a href="javascript:void(0)">UI设计</a></dd>
-                                        <dd><a href="javascript:void(0)">VI设计</a></dd>
-                                        <dd><a href="javascript:void(0)">字体</a></dd>
-                                        <dd><a href="javascript:void(0)">室内设计</a></dd>
+                                        <?php
+                                        foreach ($topic_list_array as $temp) {
+                                            echo '<dd><a href="javascript:void(0)">'.$temp['topic_id'].$temp['topic_name'].'</a></dd>';
+                                        }
+                                        ?>
                                     </dl>
                                 </li>
-                                <li class="chartProductRegist"><a href="#" data-id="chartProductRegist"
-                                                                  class="p-type-a">工程图</a></li>
-                                <input type="hidden" name="worksType" value="photoProductRegist"/>
+                                <input type="hidden" name="worksType" id="worksType" value="photoProductRegist"/>
                                 <input type="hidden" name="creativePurpose" id="creativePurpose"/>
+                                <input type="hidden" name="topic_id" id="topic_id" value="text" />
                             </ul>
                         </dd>
                     </dl>
@@ -138,7 +129,7 @@
                         </dd>
                     </dl>
                     <dl class="publish">
-                        <dd class="whether" style="display: none;">
+                        <!-- <dd class="whether" style="display: none;">
                             <label class="label">是否发表</label>
                             <ul>
                                 <li class="on last"><a href="#" id="nopub">未曾发表</a></li>
@@ -147,39 +138,21 @@
                             <input type="hidden" name="publishStatus" value="2">
                         </dd>
                         <dd class="first-date" id="first-date" style="display: none">
-                            <label>首次发表日期</label>
+                            <label>首次发表日期</label>-->
                             <!--日历-->
-                            <input type="text" name="firstPublishDate" id="firstPublishDate" value=""
+                            <!-- <input type="text" name="firstPublishDate" id="firstPublishDate" value=""
                                    onClick="WdatePicker()"/>
-                        </dd>
-                        <dd class="addr" id="addr2" style="display: none;">
-                            <label>发表地点</label>
+                        </dd> --> 
+                        <dd class="addr" id="addr2" style="margin-left: 0px;">
+                            <label style="margin-right: 30px;">专题类型</label>
                             <!--级联-->
-                            <select name="" class="first-select">
-                                <option value="中国">中国</option>
-                                <option value="海外">海外</option>
+                            <select name="" class="first-select1" onchange="checkField(this.value)">
+                                <?php
+                                    foreach ($topic_list_array as $temp) {
+                                        echo '<option value="'.$temp['topic_id'].'">'.$temp['topic_name'].'</option>';
+                                    }
+                                ?>
                             </select>
-                            <div class="div-select">
-                                <select name="" id="dd3" class="province1">
-                                    <!--<option value="">省/市</option>-->
-                                </select>
-                                <select name="" id="dd4" class="last-select city1">
-                                    <!--<option value="">市/区</option>-->
-                                </select>
-                                <select name="" class="district1" style="display: none;">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                            <div class="div-input" style="display: none;">
-                                <input type="text" class="txt1" name="firstPublishCountry" id="firstPublishCountry"
-                                       value="中国" placeholder="国家"/>
-                                <input type="hidden" name="firstPublishProvince" id="firstPublishProvince"
-                                       value="北京市">
-                                <input type="text" name="firstPublishCity" id="firstPublishCity" value="北京市"
-                                       placeholder="城市"/>
-                                       <!--隐藏信息用户id-->
-                                <input type="text" name="user_id" id="user_id" value="<?php echo $user_id ?>">
-                            </div>
                         </dd>
                     </dl>
                     <dl class="explain">
@@ -213,3 +186,8 @@
 <?php
 	include 'footer.php' 
 ?>
+<script type="text/javascript">
+    function checkField(value1){
+        document.getElementById("topic_id").value=value1; 
+    }
+</script>

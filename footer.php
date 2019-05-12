@@ -483,7 +483,7 @@
 </div>
 <div id="profile_avatar" style="display: none;">
     <div class="profile_avatar_wrap">
-        <form id="ECS_PROFILE_AVATAR" name="ECS_PROFILE_AVATAR" action="user.php" method="post"
+        <form id="ECS_PROFILE_AVATAR" name="ECS_PROFILE_AVATAR" action="./receive_user_head_photo.php" method="post"
               enctype="multipart/form-data">
             <div class="body" style="">
                 <div class="upload">
@@ -491,6 +491,7 @@
                     </div>
                     <h4>选择图片</h4>
                     <input type="hidden" name="upload_avatar" value="1"/>
+                    <input type="hidden" name="user_id" value=<?php echo $user_id;?>>
                     <input type="file" name="avatar" class="file" id="" value="" onchange="this.form.submit();"/>
                 </div>
             </div>
@@ -525,7 +526,7 @@ echo '<script type="text/javascript">';
 echo '    layui.use("common");';
 echo '</script>';
 
-echo '<!--<script type="text/javascript" src="http://www.meisubq.com/static/front/js/config.js"></script>-->';
+echo '<!--<script type="text/javascript" src="./js/config.js"></script>-->';
 echo '<script type="text/javascript" src="http://www.meisubq.com/static/front/js/lib/jquery.easydropdown.min.js"></script>';
 echo '<script type="text/javascript" src="http://www.meisubq.com/static/front/js/jsAddress.js"></script>';
 echo '<script type="text/javascript" src="./javascript/webuploader.js"></script>';

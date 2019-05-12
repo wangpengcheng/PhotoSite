@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2019-04-16 11:22:53
+-- Generation Time: 2019-05-10 09:12:12
 -- 服务器版本： 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -30,29 +30,31 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `ps_comments` (
   `comment_id` bigint(20) UNSIGNED NOT NULL,
-  `comment_author_system` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT 'windows',
-  `comment_author_location` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT '北京市朝阳区',
-  `comment_author_photo_url` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `comment_author_software_tool` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'Chrome 15.0.0.12',
+  `photo_id` bigint(20) UNSIGNED NOT NULL COMMENT '图片id',
   `comment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `comment_content` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `comment_karma` int(11) NOT NULL DEFAULT '0',
   `comment_approved` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '1',
   `comment_agent` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `comment_type` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `comment_parent` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
-  `author_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'comment user id',
-  `author_name` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '游客' COMMENT 'author name '
+  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'comment user id',
+  `user_name` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '游客' COMMENT 'author name '
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
 -- 转存表中的数据 `ps_comments`
 --
 
-INSERT INTO `ps_comments` (`comment_id`, `comment_author_system`, `comment_author_location`, `comment_author_photo_url`, `comment_author_software_tool`, `comment_date`, `comment_date_gmt`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `comment_parent`, `author_id`, `author_name`) VALUES
-(1, '一位WordPress评论者', 'wapuu@wordpress.example', 'https://wordpress.org/', '', '2018-03-05 00:25:47', '2018-03-04 16:25:47', '嗨，这是一条评论。\n要开始审核、编辑及删除评论，请访问仪表盘的“评论”页面。\n评论者头像来自<a href=\"https://gravatar.com\">Gravatar</a>。', 0, '1', '', '', 0, 0, '游客'),
-(2, '1095905081', '1095905081@qq.com', '', '171.88.83.22', '2018-06-15 19:36:22', '2018-06-15 11:36:22', 'while(1)alert(\'1095905081\')', 0, '0', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', '', 0, 0, '游客');
+INSERT INTO `ps_comments` (`comment_id`, `photo_id`, `comment_date`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `user_id`, `user_name`) VALUES
+(1, 0, '2018-03-05 00:25:47', '嗨，这是一条评论。\n要开始审核、编辑及删除评论，请访问仪表盘的“评论”页面。\n评论者头像来自<a href=\"https://gravatar.com\">Gravatar</a>。', 0, '1', '', '', 0, '游客'),
+(2, 0, '2018-06-15 19:36:22', 'while(1)alert(\'1095905081\')', 0, '0', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', '', 0, '游客'),
+(3, 140, '0000-00-00 00:00:00', '测试逆向干啥子', 0, '1', '', '', 3, '游客'),
+(4, 100, '2019-05-09 11:31:40', '年和平', 0, '1', '', '', 1, '游客'),
+(5, 463, '2019-05-09 11:32:24', '<p>请输入评论</p><p>发很饿的白色吧<br></p>', 0, '1', '', '', 19, '游客'),
+(6, 463, '2019-05-09 11:48:26', '<p>请输入评论</p><p>撒VR埃尔文共同热巴恩<br></p>', 0, '1', '', '', 19, '游客'),
+(7, 463, '2019-05-09 14:34:10', '不练让恩德放年假<p><br></p>', 0, '1', '', '', 19, '游客'),
+(8, 463, '2019-05-09 14:35:04', '<p>请输入评论</p><p>太慢阋 76 仪表5也能6丶<br></p>', 0, '1', '', '', 19, '游客'),
+(9, 462, '2019-05-09 14:36:12', '<p>请输入评论</p><p>要呢容易嘛如意书؏؏☝ᖗ乛◡乛ᖘ☝؏؏7余4你家<br></p>', 0, '1', '', '', 19, '游客');
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,9 @@ CREATE TABLE `ps_load_history` (
 INSERT INTO `ps_load_history` (`load_id`, `user_id`, `photo_id`, `load_time`, `load_type`) VALUES
 (1, 19, 119, '2019-03-17 20:14:25', 0),
 (2, 18, 119, '2019-03-17 20:15:26', 0),
-(3, 19, 1119, '2019-03-17 20:17:01', 0);
+(3, 19, 1119, '2019-03-17 20:17:01', 0),
+(4, 19, 1411, '2019-05-09 17:24:35', 1),
+(5, 19, 462, '2019-05-09 20:47:56', 0);
 
 -- --------------------------------------------------------
 
@@ -134,13 +138,13 @@ INSERT INTO `ps_photos` (`photo_id`, `photo_name`, `photo_message`, `photo_addre
 (16, '蝴蝶', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2Fthumbs%2F1002578%2Fimage%2F1678%2F16785491%2Fapi_thumb_450.jpg&id=16785491&userid=1002578&imgfile=thumbs', 3284, 3619, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2F1002578%2F1678%2Fi%2F950%2Fdepositphotos_16785491-stock-photo-butterfly.jpg&id=16785491&userid=1002578&imgfile=thumb_max', 16785491, '2019-03-10 02:18:57'),
 (17, '蓝蓝的天空云重复模式', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2Fthumbs%2F2192188%2Fvector%2F2277%2F22771582%2Fapi_thumb_450.jpg&id=22771582&userid=2192188&imgfile=thumbs', 2500, 2500, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2F2192188%2F2277%2Fv%2F950%2Fdepositphotos_22771582-stock-illustration-blue-sky-with-clouds-repeating.jpg&id=22771582&userid=2192188&imgfile=thumb_max', 22771582, '2019-03-10 02:18:57'),
 (18, '鸢尾花在桌子上', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst3.depositphotos.com%2Fthumbs%2F11433364%2Fimage%2F14126%2F141261896%2Fapi_thumb_450.jpg&id=141261896&userid=11433364&imgfile=thumbs', 7259, 4845, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst3.depositphotos.com%2F11433364%2F14126%2Fi%2F950%2Fdepositphotos_141261896-stock-photo-irises-flowers-on-table.jpg&id=141261896&userid=11433364&imgfile=thumb_max', 141261896, '2019-03-10 02:18:58'),
-(19, '抽象与电路板纹理电子蓝色背景-矢量', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic7.depositphotos.com%2Fthumbs%2F1003229%2Fvector%2F779%2F7793837%2Fapi_thumb_450.jpg&id=7793837&userid=1003229&imgfile=thumbs', 4500, 3890, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic7.depositphotos.com%2F1003229%2F779%2Fv%2F950%2Fdepositphotos_7793837-stock-illustration-abstract-electronics-blue-background-with.jpg&id=7793837&userid=1003229&imgfile=thumb_max', 7793837, '2019-03-10 02:18:58'),
+(19, '抽象与电路板纹理电子蓝色背景-矢量', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic7.depositphotos.com%2Fthumbs%2F1003229%2Fvector%2F779%2F7793837%2Fapi_thumb_450.jpg&id=7793837&userid=1003229&imgfile=thumbs', 4500, 3890, 2, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic7.depositphotos.com%2F1003229%2F779%2Fv%2F950%2Fdepositphotos_7793837-stock-illustration-abstract-electronics-blue-background-with.jpg&id=7793837&userid=1003229&imgfile=thumb_max', 7793837, '2019-03-10 02:18:58'),
 (20, '飘落的雪花，在蓝色背景上', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst2.depositphotos.com%2Fthumbs%2F3730721%2Fimage%2F8744%2F87443548%2Fapi_thumb_450.jpg&id=87443548&userid=3730721&imgfile=thumbs', 2978, 2960, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst2.depositphotos.com%2F3730721%2F8744%2Fi%2F950%2Fdepositphotos_87443548-stock-photo-falling-snow-on-the-blue.jpg&id=87443548&userid=3730721&imgfile=thumb_max', 87443548, '2019-03-10 02:18:58'),
 (21, '美丽的黄色花朵', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst3.depositphotos.com%2Fthumbs%2F12039120%2Fimage%2F15239%2F152395822%2Fapi_thumb_450.jpg&id=152395822&userid=12039120&imgfile=thumbs', 6720, 4480, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst3.depositphotos.com%2F12039120%2F15239%2Fi%2F950%2Fdepositphotos_152395822-stock-photo-beautiful-yellow-flowers.jpg&id=152395822&userid=12039120&imgfile=thumb_max', 152395822, '2019-03-10 02:18:59'),
 (22, '几何蓝色背景', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic4.depositphotos.com%2Fthumbs%2F1003536%2Fvector%2F347%2F3478531%2Fapi_thumb_450.jpg&id=3478531&userid=1003536&imgfile=thumbs', 2501, 3051, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic4.depositphotos.com%2F1003536%2F347%2Fv%2F950%2Fdepositphotos_3478531-stock-illustration-geometric-blue-background.jpg&id=3478531&userid=1003536&imgfile=thumb_max', 3478531, '2019-03-10 02:18:59'),
-(23, '在设计中使用抽象矢量背景', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2Fthumbs%2F1679906%2Fvector%2F3102%2F31021737%2Fapi_thumb_450.jpg&id=31021737&userid=1679906&imgfile=thumbs', 2642, 1546, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2F1679906%2F3102%2Fv%2F950%2Fdepositphotos_31021737-stock-illustration-abstract-vector-background-for-use.jpg&id=31021737&userid=1679906&imgfile=thumb_max', 31021737, '2019-03-10 02:19:00'),
-(24, 'Cranesbill flower (Geranium)  against a purple blue background', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst2.depositphotos.com%2Fthumbs%2F3765293%2Fimage%2F7847%2F78470454%2Fapi_thumb_450.jpg&id=78470454&userid=3765293&imgfile=thumbs', 4000, 2667, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst2.depositphotos.com%2F3765293%2F7847%2Fi%2F950%2Fdepositphotos_78470454-stock-photo-cranesbill-flower-geranium-against-a.jpg&id=78470454&userid=3765293&imgfile=thumb_max', 78470454, '2019-03-10 02:19:00'),
-(25, '空间背景', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic5.depositphotos.com%2Fthumbs%2F1026931%2Fvector%2F477%2F4775700%2Fapi_thumb_450.jpg&id=4775700&userid=1026931&imgfile=thumbs', 7311, 5906, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic5.depositphotos.com%2F1026931%2F477%2Fv%2F950%2Fdepositphotos_4775700-stock-illustration-space-background.jpg&id=4775700&userid=1026931&imgfile=thumb_max', 4775700, '2019-03-10 02:19:01'),
+(23, '在设计中使用抽象矢量背景', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2Fthumbs%2F1679906%2Fvector%2F3102%2F31021737%2Fapi_thumb_450.jpg&id=31021737&userid=1679906&imgfile=thumbs', 2642, 1546, 2, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2F1679906%2F3102%2Fv%2F950%2Fdepositphotos_31021737-stock-illustration-abstract-vector-background-for-use.jpg&id=31021737&userid=1679906&imgfile=thumb_max', 31021737, '2019-03-10 02:19:00'),
+(24, 'Cranesbill flower (Geranium)  against a purple blue background', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst2.depositphotos.com%2Fthumbs%2F3765293%2Fimage%2F7847%2F78470454%2Fapi_thumb_450.jpg&id=78470454&userid=3765293&imgfile=thumbs', 4000, 2667, 2, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst2.depositphotos.com%2F3765293%2F7847%2Fi%2F950%2Fdepositphotos_78470454-stock-photo-cranesbill-flower-geranium-against-a.jpg&id=78470454&userid=3765293&imgfile=thumb_max', 78470454, '2019-03-10 02:19:00'),
+(25, '空间背景', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic5.depositphotos.com%2Fthumbs%2F1026931%2Fvector%2F477%2F4775700%2Fapi_thumb_450.jpg&id=4775700&userid=1026931&imgfile=thumbs', 7311, 5906, 2, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic5.depositphotos.com%2F1026931%2F477%2Fv%2F950%2Fdepositphotos_4775700-stock-illustration-space-background.jpg&id=4775700&userid=1026931&imgfile=thumb_max', 4775700, '2019-03-10 02:19:01'),
 (26, '南方和北方杆和有关的所有东西', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2Fthumbs%2F2063219%2Fimage%2F2222%2F22229967%2Fapi_thumb_450.jpg&id=22229967&userid=2063219&imgfile=thumbs', 3872, 2592, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fst.depositphotos.com%2F2063219%2F2222%2Fi%2F950%2Fdepositphotos_22229967-stock-photo-south-and-north-pole-and.jpg&id=22229967&userid=2063219&imgfile=thumb_max', 22229967, '2019-03-10 02:19:01'),
 (27, '冰背景', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic8.depositphotos.com%2Fthumbs%2F1408467%2Fvector%2F1066%2F10663358%2Fapi_thumb_450.jpg&id=10663358&userid=1408467&imgfile=thumbs', 4024, 4014, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic8.depositphotos.com%2F1408467%2F1066%2Fv%2F950%2Fdepositphotos_10663358-stock-illustration-ice-background.jpg&id=10663358&userid=1408467&imgfile=thumb_max', 10663358, '2019-03-10 02:19:01'),
 (28, '云团', NULL, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic6.depositphotos.com%2Fthumbs%2F1021124%2Fimage%2F554%2F5542374%2Fapi_thumb_450.jpg&id=5542374&userid=1021124&imgfile=thumbs', 3734, 2437, 1, '照片', '25,36,75,66,99,44,55,88,11', 1, 'http://api.meisupic.com/getImg.php?imgurl=https%3A%2F%2Fstatic6.depositphotos.com%2F1021124%2F554%2Fi%2F950%2Fdepositphotos_5542374-stock-photo-clouds.jpg&id=5542374&userid=1021124&imgfile=thumb_max', 5542374, '2019-03-10 02:19:02'),
@@ -1535,7 +1539,12 @@ INSERT INTO `ps_photos` (`photo_id`, `photo_name`, `photo_message`, `photo_addre
 (1403, '小满插画之捉蝴蝶的父子', NULL, '', 0, 0, 1, '照片', '25,36,75,66,99,44,55,88,11', 12, 'http://meisudci.oss-cn-beijing.aliyuncs.com/huge/MSBQ13715300042282.jpg', 0, '2019-03-10 02:43:22'),
 (1404, '小暑插画之西瓜上乘凉的小熊', NULL, '', 0, 0, 1, '照片', '25,36,75,66,99,44,55,88,11', 12, 'http://meisudci.oss-cn-beijing.aliyuncs.com/huge/MSBQ13715300042283.jpg', 0, '2019-03-10 02:43:25'),
 (1405, '小雪插画之吃糖葫芦的小女孩', NULL, '', 0, 0, 1, '照片', '25,36,75,66,99,44,55,88,11', 12, 'http://meisudci.oss-cn-beijing.aliyuncs.com/huge/MSBQ13715300042474.jpg', 0, '2019-03-10 02:43:31'),
-(1406, '雨水插画之雨中疾步行走的女孩', NULL, '', 0, 0, 1, '照片', '25,36,75,66,99,44,55,88,11', 12, 'http://meisudci.oss-cn-beijing.aliyuncs.com/huge/MSBQ13715300042284.jpg', 0, '2019-03-10 02:43:34');
+(1406, '雨水插画之雨中疾步行走的女孩', NULL, '', 0, 0, 1, '照片', '25,36,75,66,99,44,55,88,11', 12, 'http://meisudci.oss-cn-beijing.aliyuncs.com/huge/MSBQ13715300042284.jpg', 0, '2019-03-10 02:43:34'),
+(1407, '地图', NULL, './upfile/1557321840地图显示.png', 1917, 1015, 1, '照片', '25,36,75,66,99,44,55,88,11', NULL, './upfile/1557321840地图显示.png', 0, '2019-05-08 09:24:00'),
+(1408, '地图', NULL, './upfile/1557322089地图显示.png', 1917, 1015, 1, '照片', '25,36,75,66,99,44,55,88,11', NULL, './upfile/1557322089地图显示.png', 0, '2019-05-08 09:28:09'),
+(1409, '地图', '这个是么牛逼', './upfile/1557322414地图显示.png', 1917, 1015, 1, '照片', '25,36,75,66,99,44,55,88,11', NULL, './upfile/1557322414地图显示.png', 0, '2019-05-08 09:33:34'),
+(1410, '地图', '这个是么牛逼', './upfile/1557322648地图显示.png', 1917, 1015, 1, '照片', '25,36,75,66,99,44,55,88,11', NULL, './upfile/1557322648地图显示.png', 0, '2019-05-08 09:37:28'),
+(1411, '', '', '', 0, 0, 19, '照片', '25,36,75,66,99,44,55,88,11', NULL, '', 0, '2019-05-09 05:24:35');
 
 -- --------------------------------------------------------
 
@@ -61310,7 +61319,14 @@ INSERT INTO `ps_targets` (`target_link_id`, `target_name`, `photo_id`, `target_m
 (59693, '土地', 1310, NULL, '2019-04-15 12:15:10'),
 (59694, '母親の母乳', 1310, NULL, '2019-04-15 12:15:10'),
 (59695, '节点', 1310, NULL, '2019-04-15 12:15:10'),
-(59696, '网络空间', 1310, NULL, '2019-04-15 12:15:10');
+(59696, '网络空间', 1310, NULL, '2019-04-15 12:15:10'),
+(59697, '你好', 1409, NULL, '2019-05-08 09:33:34'),
+(59698, '老子最牛逼', 1409, NULL, '2019-05-08 09:33:34'),
+(59699, '逆向干啥', 1409, NULL, '2019-05-08 09:33:34'),
+(59700, '你好', 1410, NULL, '2019-05-08 09:37:28'),
+(59701, '老子最牛逼', 1410, NULL, '2019-05-08 09:37:28'),
+(59702, '逆向干啥', 1410, NULL, '2019-05-08 09:37:28'),
+(59703, '', 1411, NULL, '2019-05-09 05:24:35');
 
 -- --------------------------------------------------------
 
@@ -61364,7 +61380,7 @@ CREATE TABLE `ps_users` (
   `user_register_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'users_register time',
   `user_state` int(5) NOT NULL DEFAULT '0' COMMENT 'check the user ''s state avoid again login',
   `user_company` varchar(100) NOT NULL DEFAULT '' COMMENT 'uers compauny name',
-  `user_head_image` varchar(150) NOT NULL DEFAULT '' COMMENT 'user head image link',
+  `user_head_image` varchar(150) NOT NULL DEFAULT './htmlimg/1534062878.048771.png' COMMENT 'user head image link',
   `user_download_number` bigint(100) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'users down load number',
   `user_upload_number` bigint(100) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='photo site user information to help us ';
@@ -61374,12 +61390,13 @@ CREATE TABLE `ps_users` (
 --
 
 INSERT INTO `ps_users` (`user_id`, `user_name`, `user_phone_number`, `user_little_name`, `user_real_name`, `user_qq`, `user_email`, `user_pwd`, `user_register_time`, `user_state`, `user_company`, `user_head_image`, `user_download_number`, `user_upload_number`) VALUES
-(1, 'wangpengcheng', 18117842737, '王鹏程', '王鹏程', 0, '673018396@qq.com', 'wang123!', '2019-02-16 00:00:00', 0, 'sichuan ', 'www.baidu.com', 0, 0),
-(2, '王鹏程', 18117842737, '王鹏程', '王鹏程', 0, '673018396@qq.com', 'wang123!', '2019-02-16 00:00:00', 0, 'sichuan ', 'www.baidu.com', 0, 0),
-(16, 'wuyunfo', 18117842737, '', '', 0, '', 'wpc123', '2019-03-08 09:40:55', 0, '', '', 0, 0),
-(17, 'wuyunfo', 18117842737, '', '', 0, '', 'wpc123', '2019-03-08 09:40:55', 0, '', '', 0, 0),
-(18, 'wuyunfo5', 18117842737, '', '', 0, '', 'wpc123', '2019-03-08 09:42:23', 0, '', '', 0, 0),
-(19, 'wang123', 18117842737, '', '', 0, '', '123', '2019-03-08 09:43:18', 0, '', '', 0, 0),
+(1, 'wangpengcheng', 18117842737, '王鹏程', '王鹏程', 0, '673018396@qq.com', 'wang123!', '2019-02-16 00:00:00', 0, 'sichuan ', './htmlimg/1534062878.048771.png', 0, 0),
+(2, '王鹏程', 18117842737, '王鹏程', '王鹏程', 0, '673018396@qq.com', 'wang123!', '2019-02-16 00:00:00', 0, 'sichuan ', './htmlimg/1529477739.976632.png', 0, 0),
+(3, '游客', 110, '游客', '游客', 0, '', '', '2019-05-01 00:00:00', 0, '', './htmlimg/1534062878.048771.png', 0, 0),
+(16, 'wuyunfo', 18117842737, '', '', 0, '', 'wpc123', '2019-03-08 09:40:55', 0, '', './htmlimg/1529477760.045744.png', 0, 0),
+(17, 'wuyunfo', 18117842737, '', '', 0, '', 'wpc123', '2019-03-08 09:40:55', 0, '', './htmlimg/1529477855.560860.png', 0, 0),
+(18, 'wuyunfo5', 18117842737, '', '', 0, '', 'wpc123', '2019-03-08 09:42:23', 0, '', './htmlimg/1529477968.717942.png', 0, 0),
+(19, 'wang123', 18117842737, '', '', 0, '', '123', '2019-03-08 09:43:18', 0, '', './htmlimg/1529477994.661877.png', 0, 0),
 (20, 'wang1234', 18117842737, '', '', 0, '', '123', '2019-03-08 09:44:57', 0, '', '', 0, 0);
 
 -- --------------------------------------------------------
@@ -61420,7 +61437,87 @@ INSERT INTO `ps_user_browserecord` (`record_id`, `user_id`, `photo_id`, `record_
 (18, 0, 97, '2019-04-16 16:14:52'),
 (19, 0, 22, '2019-04-16 16:20:08'),
 (20, 0, 1119, '2019-04-16 16:34:43'),
-(21, 0, 1119, '2019-04-16 16:34:49');
+(21, 0, 1119, '2019-04-16 16:34:49'),
+(22, 19, 419, '2019-05-05 09:49:33'),
+(23, 19, 419, '2019-05-05 09:50:17'),
+(24, 19, 685, '2019-05-07 01:47:11'),
+(25, 19, 296, '2019-05-07 01:51:38'),
+(26, 19, 2, '2019-05-08 20:19:48'),
+(27, 1, 1410, '2019-05-08 21:37:28'),
+(28, 1, 1410, '2019-05-08 21:38:25'),
+(29, 1, 20, '2019-05-08 21:38:40'),
+(30, 19, 1139, '2019-05-09 10:20:25'),
+(31, 19, 1139, '2019-05-09 10:27:46'),
+(32, 19, 1139, '2019-05-09 10:28:41'),
+(33, 19, 1139, '2019-05-09 10:30:02'),
+(34, 19, 1139, '2019-05-09 10:32:38'),
+(35, 19, 1139, '2019-05-09 10:35:39'),
+(36, 19, 1139, '2019-05-09 10:44:04'),
+(37, 19, 1139, '2019-05-09 10:46:36'),
+(38, 19, 1139, '2019-05-09 11:08:12'),
+(39, 19, 1139, '2019-05-09 11:10:14'),
+(40, 19, 1139, '2019-05-09 11:10:58'),
+(41, 19, 1139, '2019-05-09 11:11:52'),
+(42, 19, 463, '2019-05-09 11:11:55'),
+(43, 19, 463, '2019-05-09 11:13:04'),
+(44, 19, 463, '2019-05-09 11:19:23'),
+(45, 19, 463, '2019-05-09 11:31:21'),
+(46, 19, 463, '2019-05-09 11:33:04'),
+(47, 19, 463, '2019-05-09 11:36:35'),
+(48, 19, 463, '2019-05-09 11:37:10'),
+(49, 19, 2, '2019-05-09 16:32:54'),
+(50, 19, 463, '2019-05-09 17:14:13'),
+(51, 19, 463, '2019-05-09 17:14:45'),
+(52, 19, 463, '2019-05-09 17:16:31'),
+(53, 0, 463, '2019-05-09 17:16:42'),
+(54, 19, 463, '2019-05-09 17:18:12'),
+(55, 19, 463, '2019-05-09 17:19:20'),
+(56, 19, 463, '2019-05-09 17:23:16'),
+(57, 19, 463, '2019-05-09 17:24:18'),
+(58, 19, 463, '2019-05-09 17:25:19'),
+(59, 19, 463, '2019-05-09 17:32:05'),
+(60, 19, 463, '2019-05-09 17:32:25'),
+(61, 19, 463, '2019-05-09 17:48:05'),
+(62, 19, 463, '2019-05-09 17:48:27'),
+(63, 19, 463, '2019-05-09 17:51:19'),
+(64, 19, 463, '2019-05-09 17:51:39'),
+(65, 19, 463, '2019-05-09 17:53:23'),
+(66, 19, 463, '2019-05-09 17:56:08'),
+(67, 19, 463, '2019-05-09 19:56:28'),
+(68, 19, 463, '2019-05-09 19:58:32'),
+(69, 19, 463, '2019-05-09 20:00:15'),
+(70, 19, 463, '2019-05-09 20:07:21'),
+(71, 19, 463, '2019-05-09 20:07:25'),
+(72, 19, 463, '2019-05-09 20:08:08'),
+(73, 19, 463, '2019-05-09 20:08:17'),
+(74, 19, 463, '2019-05-09 20:08:38'),
+(75, 19, 463, '2019-05-09 20:09:12'),
+(76, 0, 463, '2019-05-09 20:09:36'),
+(77, 19, 463, '2019-05-09 20:09:40'),
+(78, 19, 463, '2019-05-09 20:10:23'),
+(79, 19, 1103, '2019-05-09 20:10:27'),
+(80, 19, 1103, '2019-05-09 20:11:51'),
+(81, 19, 463, '2019-05-09 20:14:36'),
+(82, 19, 463, '2019-05-09 20:15:00'),
+(83, 19, 463, '2019-05-09 20:17:10'),
+(84, 19, 463, '2019-05-09 20:18:43'),
+(85, 19, 2, '2019-05-09 20:19:55'),
+(86, 19, 2, '2019-05-09 20:20:51'),
+(87, 19, 2, '2019-05-09 20:22:14'),
+(88, 19, 2, '2019-05-09 20:22:15'),
+(89, 19, 2, '2019-05-09 20:22:16'),
+(90, 19, 2, '2019-05-09 20:22:17'),
+(91, 1, 2, '2019-05-09 20:22:44'),
+(92, 1, 2, '2019-05-09 20:27:46'),
+(93, 1, 2, '2019-05-09 20:28:31'),
+(94, 1, 2, '2019-05-09 20:29:57'),
+(95, 19, 463, '2019-05-09 20:33:03'),
+(96, 19, 463, '2019-05-09 20:33:37'),
+(97, 19, 463, '2019-05-09 20:34:11'),
+(98, 19, 463, '2019-05-09 20:35:05'),
+(99, 19, 462, '2019-05-09 20:36:00'),
+(100, 19, 462, '2019-05-09 20:36:13'),
+(101, 19, 509, '2019-05-10 15:10:39');
 
 -- --------------------------------------------------------
 
@@ -61457,10 +61554,7 @@ CREATE TABLE `ps_user_favorites_folder` (
 --
 ALTER TABLE `ps_comments`
   ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`),
-  ADD KEY `comment_date_gmt` (`comment_date_gmt`),
-  ADD KEY `comment_parent` (`comment_parent`),
-  ADD KEY `comment_author_email` (`comment_author_location`(10));
+  ADD KEY `comment_approved_date_gmt` (`comment_approved`);
 
 --
 -- Indexes for table `ps_load_history`
@@ -61524,12 +61618,12 @@ ALTER TABLE `ps_user_favorites_folder`
 -- 使用表AUTO_INCREMENT `ps_comments`
 --
 ALTER TABLE `ps_comments`
-  MODIFY `comment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `comment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- 使用表AUTO_INCREMENT `ps_load_history`
 --
 ALTER TABLE `ps_load_history`
-  MODIFY `load_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the main download id', AUTO_INCREMENT=4;
+  MODIFY `load_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'the main download id', AUTO_INCREMENT=6;
 --
 -- 使用表AUTO_INCREMENT `ps_photo2targets`
 --
@@ -61539,12 +61633,12 @@ ALTER TABLE `ps_photo2targets`
 -- 使用表AUTO_INCREMENT `ps_photos`
 --
 ALTER TABLE `ps_photos`
-  MODIFY `photo_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'photo id', AUTO_INCREMENT=1407;
+  MODIFY `photo_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'photo id', AUTO_INCREMENT=1412;
 --
 -- 使用表AUTO_INCREMENT `ps_targets`
 --
 ALTER TABLE `ps_targets`
-  MODIFY `target_link_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT 'target id ', AUTO_INCREMENT=59697;
+  MODIFY `target_link_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT 'target id ', AUTO_INCREMENT=59704;
 --
 -- 使用表AUTO_INCREMENT `ps_topics`
 --
@@ -61554,12 +61648,12 @@ ALTER TABLE `ps_topics`
 -- 使用表AUTO_INCREMENT `ps_users`
 --
 ALTER TABLE `ps_users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'users id', AUTO_INCREMENT=21;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'users id', AUTO_INCREMENT=22;
 --
 -- 使用表AUTO_INCREMENT `ps_user_browserecord`
 --
 ALTER TABLE `ps_user_browserecord`
-  MODIFY `record_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'record id', AUTO_INCREMENT=22;
+  MODIFY `record_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'record id', AUTO_INCREMENT=102;
 --
 -- 使用表AUTO_INCREMENT `ps_user_favorites`
 --

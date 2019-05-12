@@ -70,11 +70,14 @@
     $col_1_array=[];
     $col_2_array=[];
     $col_3_array=[];
+    $upload_all_count=0;
+    $download_all_count=0;
     //处理函数；将数据整合成合理的格式,主要上传下载记录，浏览记录
-    for ($i=0; $i <6 ; $i++) { 
+    for ($i=1; $i <=6 ; $i++) { 
         foreach ($upload_record_count_result_2 as $temp_1) {
             if($temp_1['months']==$i){
                 $col_1_array[$i]=$temp_1['count_id'];
+                $upload_all_count+=$temp_1['count_id'];
             }
         }
         if(empty($col_1_array[$i])){
@@ -83,6 +86,7 @@
         foreach ($download_record_count_result_2 as $temp_2) {
             if($temp_2['months']==$i){
                 $col_2_array[$i]=$temp_2['count_id'];
+                $download_all_count+=$temp_2['count_id'];
             }
         }
         if(empty($col_2_array[$i])){
@@ -105,7 +109,7 @@
 
     //显示数据表格
     $updown_record=[];
-    $updown_record_sql="SELECT photo_id ,load_time,load_type FROM ps_load_history WHERE user_id='".$user_id."'";
+    $updown_record_sql="SELECT photo_id ,load_time,load_type FROM ps_load_history WHERE user_id='".$user_id."' AND load_type=0;";
     $updown_record_result=$conn->query($updown_record_sql);
     if(mysqli_num_rows($updown_record_result)>0){
         $updown_record_result_2=$updown_record_result->fetch_all(MYSQLI_ASSOC);
@@ -119,6 +123,12 @@
                     $updown_record_result_2[$i]['photo_name']=$photo_temp_result_plus[0]['photo_name'];
                 }
             }
+    }
+    //查询user表更改user基本信息。手机号码，昵称，真实姓名，公司名称，QQ 邮箱 ，密码
+    $user_information_sql="SELECT user_phone_number,user_head_image,user_little_name,user_real_name,user_company,user_qq,user_email,user_pwd,user_state FROM `ps_users` WHERE user_id='".$user_id."'";
+    $user_information_result=$conn->query($user_information_sql);
+    if(mysqli_num_rows($user_information_result)){
+        $user_information=$user_information_result->fetch_array(MYSQLI_ASSOC);
     }
 ?>
  <!--echarts start-->
@@ -181,16 +191,17 @@
         <div class="head">
             <ul class="naver">
                 <li id="my_main" class="c1"><a >我的首页</a></li>
-                <li id="down_load_button"><a>相关记录</a></li>
+                <li id="down_load_button"><a>我的收藏</a></li>
                 <li id="up_load_button" style="display: none;"><a>上传记录</a></li>
                 <li id="collection_manage_button" style="display: none;"><a>我的收藏</a></li>
                 <li id="my_histroy_button" style="display: none;"><a>我的足迹</a></li>
+                <li id="add_topic" style="<?php if($user_information['user_state']!=0){echo 'display: none;';}?>"><a>添加专题</a></li>
                 <li id="my_manage_button" class="last"><a>账户管理</a></li>
             </ul>
             <div class="avatar">
                 <a href="javascript:void(0)">
                     <div class="img" id="changeavatar">
-                        <img src="http://meisupic.com/themes/meisu2017/imgs/img18.jpg">
+                        <img src="<?php echo $user_information['user_head_image']; ?>">
                         <div class="mk">
                             点击修改
                         </div>
@@ -203,10 +214,10 @@
             <div class="state">
                 <ul>
                     <a href="user.php?act=down_list">
-                        <li><big>0</big>已下载</li>
+                        <li><big><?php echo $download_all_count;?></big>已下载</li>
                     </a>
                     <a href="user.php?act=package">
-                        <li><big>0</big>已上传总数</li>
+                        <li><big><?php echo $upload_all_count;?></big>已上传</li>
                     </a>
                 </ul>
             </div>
@@ -231,7 +242,7 @@
                         <?php 
                         foreach ($last_looked_photos as $temp_look) {
                             echo '<li class="item last-row" style="margin-right: 10px;">';
-                            echo    '<a href="'."./photo.php?photo_id=".$temp_look['photo_id']."user_id=".$user_id.'" target="_blank">';
+                            echo    '<a href="'.'./photo.php?photo_id='.$temp_look['photo_id'].'&user_id='.$user_id.'" target="_blank">';
                             echo        '<img src="'.$temp_look['photo_address'].'">';
                             echo     '</a>';
                             echo '</li>';
@@ -315,11 +326,12 @@
                         echo '<td height="170" align="center">'.$temp_key['load_time'].'</td>';
 
                         echo '<td height="170" align="center">';
-                        if($temp_key['load_type']==0){
-                            echo "下载";
-                        }else{
-                            echo "上传";
-                        }
+                        // if($temp_key['load_type']==0){
+                        //     echo "下载";
+                        // }else{
+                        //     echo "上传";
+                        // }
+                        echo "收藏";
                         echo '</td>';
                         echo '</tr>';
                      } 
@@ -621,37 +633,39 @@
                         <ul>
                             <li>
                                 <h5>手机号码</h5>
-                                <input type="text" name="extend_field5" class="p_txt p_txt01" id="" readonly="" value="18117842737">
+                                <input type="text" name="extend_field5" class="p_txt p_txt01" id="user_phone_number" readonly="" value="<?php echo $user_information['user_phone_number'] ?>">
 
                             </li>
                             <li>
                                 <h5>昵称<span>*</span></h5>
-                                <input type="text" name="extend_field102" class="p_txt" id="extend_field102" value="">
+                                <input type="text" name="extend_field102" class="p_txt" id="user_little_name" value="<?php echo $user_information['user_little_name'] ?>">
                             </li>
                             <li>
                                 <h5>真实姓名</h5>
-                                <input type="text" name="extend_field100" class="p_txt" id="" value="">
+                                <input type="text" name="extend_field100" class="p_txt" id="user_real_name" value="<?php echo $user_information['user_real_name'] ?>">
                             </li>
                             <li>
                                 <h5>公司名称</h5>
-                                <input type="text" name="extend_field101" class="p_txt" id="" value="" placeholder="个人用户无需填写">
+                                <input type="text" name="extend_field101" class="p_txt" id="user_company" value="<?php echo $user_information['user_company'] ?>" placeholder="个人用户无需填写">
                             </li>
                             <li>
                                 <h5>QQ</h5>
-                                <input type="text" name="extend_field2" id="" class="p_txt" value="">
+                                <input type="text" name="extend_field2" id="user_qq" class="p_txt" value="<?php echo $user_information['user_qq'] ?>">
                             </li>
                             <li>
                                 <h5>邮箱</h5>
-                                <input type="text" name="email" class="p_txt" id="" value="">
+                                <input type="text" name="email" class="p_txt" id="user_email" value="<?php echo $user_information['user_email'] ?>">
                             </li>
                             <li class="edit_password">
                                 <h5>当前密码</h5>
-                                <input type="password" name="" readonly="" class="p_txt p_txt01 p_txt02" id="" value="* * * * * * * * *">
+                                <!--当前密码输入窗口-->
+                                <input type="password" name="" readonly="" class="p_txt p_txt01 p_txt02" id="now_password" value="<?php echo $user_information['user_pwd'] ?>">
                                 <a href="javascript:void(0)" class="xg_mm">修改密码</a>
                             </li>
                             <li class="last">
                                 <input name="act" type="hidden" value="act_edit_profile">
-                                <input type="submit" class="subm" name="" id="" value="保    存">
+                                <!--保存基本信息按钮-->
+                                <input type="button" class="subm" name="" id="save_inform_button" value="保    存">
                             </li>
                         </ul>
                     </form>
@@ -661,19 +675,58 @@
                         <ul>
                             <li>
                                 <h5>当前密码<span>*</span></h5>
-                                <input type="password" name="old_password" class="p_txt" id="" value="">
+                                <input type="password" name="old_password" class="p_txt" id="old_password" value="">
                             </li>
                             <li>
                                 <h5>新密码<span>*</span></h5>
-                                <input type="password" name="new_password" class="p_txt" id="" value="" placeholder="6-16位数字或英文，暂不支持@#等特殊字符">
+                                <input type="password" name="new_password" class="p_txt" id="new_password1" value="" placeholder="6-16位数字或英文，暂不支持@#等特殊字符">
                             </li>
                             <li>
                                 <h5>确认新密码<span>*</span></h5>
-                                <input type="password" name="comfirm_password" class="p_txt" id="" value="" placeholder="6-16位数字或英文，暂不支持@#等特殊字符">
+                                <input type="password" name="comfirm_password" class="p_txt" id="new_password2" value="" placeholder="6-16位数字或英文，暂不支持@#等特殊字符">
                             </li>
                             <li class="last">
                                 <input name="act" type="hidden" value="act_edit_password">
-                                <input type="submit" class="subm" name="" id="" value="保    存"><a class="ui_btn n2 subm_cancel" href="javascript:void(0)">取消</a>
+                                <input type="button" class="subm" name="" id="save_password_button" value="保    存"><a class="ui_btn n2 subm_cancel" href="javascript:void(0)">取消</a>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--添加专题-->
+        <div class="body user_manage add_topic2" style="display: none;">
+            <div class="hd">
+                <ul>
+                    <li class="c1"><a href="user.php?act=profile">创建专题</a><span></span></li>
+                </ul>
+            </div>
+            <div class="bd user_subaccount">
+                <h3>创建专题，<span>*</span>号为必填项</h3>
+                <div class="result">
+                    <form name="formEdit" action="user.php" method="post" onsubmit="return userEdit()">
+                        <ul>
+                            <li>
+                                <h5>专题名称</h5>
+                                <input type="text" name="topic_name" class="p_txt" id="topic_name"  value="">
+
+                            </li>
+                            <li>
+                                <h5>主页大图URL地址<span>*</span></h5>
+                                <input type="text" name="display_photo_url" class="p_txt" id="display_photo_url" value="">
+                            </li>
+                            <li>
+                                <h5>展示URL地址<span>*</span></h5>
+                                <input type="text" name="display_photo_little_url" class="p_txt" id="display_photo_little_url" value="">
+                            </li>
+                            <li>
+                                <h5>专题描述</h5>
+                                <input type="text" name="topic_message" class="p_txt" id="topic_message" value="">
+                            </li>
+                            <li class="last">
+                                <input name="act" type="hidden" value="act_edit_profile">
+                                <!--保存基本信息按钮-->
+                                <input type="button" class="subm" name="" id="add_topic_button" value="添    加">
                             </li>
                         </ul>
                     </form>
@@ -928,6 +981,8 @@
         });
 
         function hide_all() {
+            //主页隐藏
+            $(".user_home").hide();
             //我的订单隐藏
             $(".user_order").hide();
             //我的下载隐藏
@@ -940,9 +995,10 @@
             $(".user_footprint").hide();
             //账号管理隐藏
             $(".user_manage2").hide();
+            //添加专题隐藏
+            $(".add_topic2").hide();
         }
 
-        hide_all();
         //设置点击切换
         $("#down_load_button").click(function () {
             hide_all();
@@ -984,7 +1040,13 @@
             $(".c1").removeClass("c1");
             $(".user_home").show();
             $("#my_main").addClass("c1");
-        })
+        });
+        $("#add_topic").click(function(){
+            hide_all();
+            $(".c1").removeClass("c1");
+            $(".add_topic2").show();
+            $("#add_topic").addClass("c1");
+        });
     });
 </script>
 <!--echarts-->
@@ -1074,4 +1136,85 @@
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
+</script>
+<!--ajax传输，修改用户基本信息-->
+<script type="text/javascript">
+    $("#save_inform_button").click(function(){
+        var user_id=<?php echo '"'.$user_id.'"';?>;
+        var user_phone_number=document.getElementById("user_phone_number").value;
+        var user_little_name=document.getElementById("user_little_name").value;
+        var user_real_name=document.getElementById("user_real_name").value;
+        var user_company=document.getElementById("user_company").value;
+        var user_qq=document.getElementById("user_qq").value;
+        var user_email=document.getElementById("user_email").value;
+        $.ajax({
+            url:"./receive_user_information.php",
+            type:"post",
+            timeout: 3000,
+            data:{"user_id":user_id,"user_phone_number":user_phone_number,"user_little_name":user_little_name,"user_real_name":user_real_name,"user_company":user_company,"user_qq":user_qq,"user_email":user_email},
+            dataType:"json",
+            success: function(result){
+                console.log(result);
+                
+            },
+            error: function(xhr,state,errorThrown){
+                console.log(xhr);
+            }
+        });
+    });
+    //保存密码
+    $("#save_password_button").click(function(){
+        var user_id=<?php echo '"'.$user_id.'"';?>;
+        var user_old_password=document.getElementById("now_password").value;//旧密码
+        var user_old_password2=document.getElementById("old_password").value;//旧密码
+        var user_new_password1=document.getElementById("new_password1").value;//新密码1
+        var user_new_password2=document.getElementById("new_password2").value;//新密码1
+        if(user_old_password!=user_old_password2){
+            alert("当前密码错误");
+        }else if(user_new_password1==user_new_password2&&(user_new_password1!="")){
+            $.ajax({
+                url:"./change_password.php",
+                type:"post",
+                timeout: 3000,
+                data:{"user_id":user_id,"user_password":user_new_password1},
+                dataType:"json",
+                success: function(result){
+                    console.log(result);
+                    
+                },
+                error: function(xhr,state,errorThrown){
+                    console.log(xhr);
+                }
+            })
+        }else{
+            alert("新两次密码错误，请再次输入");
+        }
+    });
+    $("#add_topic_button").click(function(){
+        var topic_name=document.getElementById("topic_name").value;//专题名称
+        var display_photo_url=document.getElementById("display_photo_url").value;//专题展示图片
+        var display_photo_little_url=document.getElementById("display_photo_little_url").value;//专题小图片地址
+        var topic_message=document.getElementById("topic_message").value;
+        var data1={"topic_name":topic_name,"display_photo_url":display_photo_url,"display_photo_little_url":display_photo_little_url,"topic_message":topic_message};
+        console.log(data1);
+        if(topic_name!=""&&display_photo_url!=""&&display_photo_url!=""&&topic_message!=""){
+            $.ajax({
+                url:"./add_topic.php",
+                type:"post",
+                timeout: 3000,
+                data:{"topic_name":topic_name,"display_photo_url":display_photo_url,"display_photo_little_url":display_photo_little_url,"topic_message":topic_message},
+                dataType:"json",
+                success: function(result){
+                    console.log(result);
+                    
+                },
+                error: function(xhr,state,errorThrown){
+                    console.log("error xhr"+xhr);
+                    console.log("error state"+state);
+                }
+            });
+        }else{
+            alert("输入不完全，请重新输入");
+        }
+    });
 </script>
