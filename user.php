@@ -1,135 +1,137 @@
 <?php
-	include "ps_header.php";
+include "ps_header.php";
 ?>
 <?php
-    include 'ps_connect.php';
-    function get_history($user_id){
-        global $conn;//设置全局变量
-        $get_histroy_sql="SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='".$user_id."' and ps_user_browserecord.photo_id=ps_photos.photo_id"; 
-        //SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='1' and ps_user_browserecord.photo_id=ps_photos.photo_id
-        $user_history_result=$conn->query($get_histroy_sql);
-        $histroy_row_count=mysqli_num_rows($user_history_result);
-        $result=$user_history_result->fetch_all(MYSQLI_ASSOC);
-        return $result;
-    }
-    $user_id=get_user_id($page_query);
-    $user_history_result=get_history($user_id);
+include 'ps_connect.php';
+function get_history($user_id) {
+	global $conn;//设置全局变量
+	$get_histroy_sql = "SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='".$user_id."' and ps_user_browserecord.photo_id=ps_photos.photo_id";
+	//SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='1' and ps_user_browserecord.photo_id=ps_photos.photo_id
+	$user_history_result = $conn->query($get_histroy_sql);
+	$histroy_row_count   = mysqli_num_rows($user_history_result);
+	$result              = $user_history_result->fetch_all(MYSQLI_ASSOC);
+	return $result;
+}
+$user_id             = get_user_id($page_query);
+$user_history_result = get_history($user_id);
 
-    //最近浏览图片
-    $last_looked_photos=[];
-    //sql示例： SELECT photo_id,record_time FROM ps_user_browserecord WHERE user_id=0 ORDER BY record_time DESC LIMIT 10 
-    //抽取10个
-    $looked_sql="SELECT photo_id FROM ps_user_browserecord WHERE user_id='".$user_id."' GROUP BY photo_id ORDER BY record_time DESC LIMIT 10 ;";
-    $looked_result=$conn->query($looked_sql);
-    if(mysqli_num_rows($looked_result)>0){
-        $last_looked_photos=$looked_result->fetch_all(MYSQLI_ASSOC);
-        for ($i=0; $i <count($last_looked_photos) ; $i++) { 
-            $new_sql="SELECT photo_address FROM ps_photos WHERE photo_id='".$last_looked_photos[$i]['photo_id']."'";
-            $temp_result=$conn->query($new_sql);
-            if(mysqli_num_rows($temp_result)>0){
-                $temp_result_plus=$temp_result->fetch_all(MYSQLI_ASSOC);
-                $last_looked_photos[$i]['photo_address']=$temp_result_plus[0]['photo_address'];
-            }
-        }
-    }
-    
-    //数据显示数组，3行6例。
-    $data_show=[];
-    //获取上传下载和浏览;
-    $upload_record_count=[];
-    $brower_record=[];
-    //获取上传记录 SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;
-    $upload_record_sql="SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;";
+//最近浏览图片
+$last_looked_photos = [];
+//sql示例： SELECT photo_id,record_time FROM ps_user_browserecord WHERE user_id=0 ORDER BY record_time DESC LIMIT 10
+//抽取10个
+$looked_sql    = "SELECT photo_id FROM ps_user_browserecord WHERE user_id='".$user_id."' GROUP BY photo_id ORDER BY record_time DESC LIMIT 10 ;";
+$looked_result = $conn->query($looked_sql);
+if (mysqli_num_rows($looked_result) > 0) {
+	$last_looked_photos = $looked_result->fetch_all(MYSQLI_ASSOC);
+	for ($i = 0; $i < count($last_looked_photos); $i++) {
+		$new_sql     = "SELECT photo_address FROM ps_photos WHERE photo_id='".$last_looked_photos[$i]['photo_id']."'";
+		$temp_result = $conn->query($new_sql);
+		if (mysqli_num_rows($temp_result) > 0) {
+			$temp_result_plus                        = $temp_result->fetch_all(MYSQLI_ASSOC);
+			$last_looked_photos[$i]['photo_address'] = $temp_result_plus[0]['photo_address'];
+		}
+	}
+}
 
-    //获取上传记录统计
-    //select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id=19 AND load_type=0 GROUP BY months
-    //获取上传统计
-    $upload_record_count_sql="select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id='".$user_id."' AND load_type=1 GROUP BY months";
-    $upload_record_count_result=$conn->query($upload_record_count_sql);//查询结果
-    if(mysqli_num_rows($upload_record_count_result)>0){
-        $upload_record_count_result_2=$upload_record_count_result->fetch_all(MYSQLI_ASSOC);
-        //print_r($upload_record_count_result_2);
-    }
-    //获取下载统计数据
-    $download_record_count_sql="select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id='".$user_id."' AND load_type=0 GROUP BY months";
-    $download_record_count_result=$conn->query($download_record_count_sql);//查询结果
-    if(mysqli_num_rows($download_record_count_result)>0){
-        $download_record_count_result_2=$download_record_count_result->fetch_all(MYSQLI_ASSOC);
-        //print_r($download_record_count_result_2);
-    }
+//数据显示数组，3行6例。
+$data_show = [];
+//获取上传下载和浏览;
+$upload_record_count = [];
+$brower_record       = [];
+//获取上传记录 SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;
+$upload_record_sql = "SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;";
 
-    //获取浏览统计数据
-    //select CONCAT(DATE_FORMAT(record_time,'%m')) months ,COUNT(record_id) as count_id from ps_user_browserecord WHERE user_id=19 GROUP BY months
-    $brower_record_count_sql="select CONCAT(DATE_FORMAT(record_time,'%m')) months ,COUNT(record_id) as count_record from ps_user_browserecord WHERE user_id='".$user_id."'GROUP BY months";
-    $brower_record_count_result=$conn->query($brower_record_count_sql);//查询结果
-    if(mysqli_num_rows($brower_record_count_result)>0){
-        $brower_record_count_result_2=$brower_record_count_result->fetch_all(MYSQLI_ASSOC);
-        //print_r($brower_record_count_result_2);
-    }
+//获取上传记录统计
+//select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id=19 AND load_type=0 GROUP BY months
+//获取上传统计
+$upload_record_count_sql    = "select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id='".$user_id."' AND load_type=1 GROUP BY months";
+$upload_record_count_result = $conn->query($upload_record_count_sql);//查询结果
+if (mysqli_num_rows($upload_record_count_result) > 0) {
+	$upload_record_count_result_2 = $upload_record_count_result->fetch_all(MYSQLI_ASSOC);
+	//print_r($upload_record_count_result_2);
+}
+//获取下载统计数据
+$download_record_count_sql    = "select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id='".$user_id."' AND load_type=0 GROUP BY months";
+$download_record_count_result = $conn->query($download_record_count_sql);//查询结果
+if (mysqli_num_rows($download_record_count_result) > 0) {
+	$download_record_count_result_2 = $download_record_count_result->fetch_all(MYSQLI_ASSOC);
+	//print_r($download_record_count_result_2);
+}
 
-    $col_1_array=[];
-    $col_2_array=[];
-    $col_3_array=[];
-    $upload_all_count=0;
-    $download_all_count=0;
-    //处理函数；将数据整合成合理的格式,主要上传下载记录，浏览记录
-    for ($i=1; $i <=6 ; $i++) { 
-        foreach ($upload_record_count_result_2 as $temp_1) {
-            if($temp_1['months']==$i){
-                $col_1_array[$i]=$temp_1['count_id'];
-                $upload_all_count+=$temp_1['count_id'];
-            }
-        }
-        if(empty($col_1_array[$i])){
-            $col_1_array[$i]=0;
-        }
-        foreach ($download_record_count_result_2 as $temp_2) {
-            if($temp_2['months']==$i){
-                $col_2_array[$i]=$temp_2['count_id'];
-                $download_all_count+=$temp_2['count_id'];
-            }
-        }
-        if(empty($col_2_array[$i])){
-            $col_2_array[$i]=0;
-        }
-        foreach ($brower_record_count_result_2 as $temp_3) {
-            if($temp_3['months']==$i){
-                $col_3_array[$i]=$temp_3['count_record'];
-            }
-        }
-        if(empty($col_3_array[$i])){
-            $col_3_array[$i]=0;
-        }
+//获取浏览统计数据
+//select CONCAT(DATE_FORMAT(record_time,'%m')) months ,COUNT(record_id) as count_id from ps_user_browserecord WHERE user_id=19 GROUP BY months
+$brower_record_count_sql    = "select CONCAT(DATE_FORMAT(record_time,'%m')) months ,COUNT(record_id) as count_record from ps_user_browserecord WHERE user_id='".$user_id."'GROUP BY months";
+$brower_record_count_result = $conn->query($brower_record_count_sql);//查询结果
+if (mysqli_num_rows($brower_record_count_result) > 0) {
+	$brower_record_count_result_2 = $brower_record_count_result->fetch_all(MYSQLI_ASSOC);
+	//print_r($brower_record_count_result_2);
+}
 
-    }
+$col_1_array        = [];
+$col_2_array        = [];
+$col_3_array        = [];
+$upload_all_count   = 0;
+$download_all_count = 0;
+//处理函数；将数据整合成合理的格式,主要上传下载记录，浏览记录
+for ($i = 1; $i <= 6; $i++) {
+	if (count($upload_record_count_result_2 > 0)) {
+		foreach ($upload_record_count_result_2 as $temp_1) {
+			if ($temp_1['months'] == $i) {
+				$col_1_array[$i] = $temp_1['count_id'];
+				$upload_all_count += $temp_1['count_id'];
+			}
+		}
+	}
+	if (empty($col_1_array[$i])) {
+		$col_1_array[$i] = 0;
+	}
+	foreach ($download_record_count_result_2 as $temp_2) {
+		if ($temp_2['months'] == $i) {
+			$col_2_array[$i] = $temp_2['count_id'];
+			$download_all_count += $temp_2['count_id'];
+		}
+	}
+	if (empty($col_2_array[$i])) {
+		$col_2_array[$i] = 0;
+	}
+	foreach ($brower_record_count_result_2 as $temp_3) {
+		if ($temp_3['months'] == $i) {
+			$col_3_array[$i] = $temp_3['count_record'];
+		}
+	}
+	if (empty($col_3_array[$i])) {
+		$col_3_array[$i] = 0;
+	}
 
-    array_push($data_show,$col_1_array);//上传
-    array_push($data_show,$col_2_array);//下载
-    array_push($data_show,$col_3_array);//浏览
+}
 
-    //显示数据表格
-    $updown_record=[];
-    $updown_record_sql="SELECT photo_id ,load_time,load_type FROM ps_load_history WHERE user_id='".$user_id."' AND load_type=0;";
-    $updown_record_result=$conn->query($updown_record_sql);
-    if(mysqli_num_rows($updown_record_result)>0){
-        $updown_record_result_2=$updown_record_result->fetch_all(MYSQLI_ASSOC);
-        //查询图片表，获得图片 name,address,
-            for ($i=0; $i <count($updown_record_result_2) ; $i++) {
-                $photo_message_sql="SELECT photo_address,photo_name FROM ps_photos WHERE photo_id='".$updown_record_result_2[$i]['photo_id']."'";
-                $photo_temp_result=$conn->query($photo_message_sql); 
-                if(mysqli_num_rows($photo_temp_result)>0){
-                    $photo_temp_result_plus=$photo_temp_result->fetch_all(MYSQLI_ASSOC);
-                    $updown_record_result_2[$i]['photo_address']=$photo_temp_result_plus[0]['photo_address'];
-                    $updown_record_result_2[$i]['photo_name']=$photo_temp_result_plus[0]['photo_name'];
-                }
-            }
-    }
-    //查询user表更改user基本信息。手机号码，昵称，真实姓名，公司名称，QQ 邮箱 ，密码
-    $user_information_sql="SELECT user_phone_number,user_head_image,user_little_name,user_real_name,user_company,user_qq,user_email,user_pwd,user_state FROM `ps_users` WHERE user_id='".$user_id."'";
-    $user_information_result=$conn->query($user_information_sql);
-    if(mysqli_num_rows($user_information_result)){
-        $user_information=$user_information_result->fetch_array(MYSQLI_ASSOC);
-    }
+array_push($data_show, $col_1_array);//上传
+array_push($data_show, $col_2_array);//下载
+array_push($data_show, $col_3_array);//浏览
+
+//显示数据表格
+$updown_record        = [];
+$updown_record_sql    = "SELECT photo_id ,load_time,load_type FROM ps_load_history WHERE user_id='".$user_id."' AND load_type=0;";
+$updown_record_result = $conn->query($updown_record_sql);
+if (mysqli_num_rows($updown_record_result) > 0) {
+	$updown_record_result_2 = $updown_record_result->fetch_all(MYSQLI_ASSOC);
+	//查询图片表，获得图片 name,address,
+	for ($i = 0; $i < count($updown_record_result_2); $i++) {
+		$photo_message_sql = "SELECT photo_address,photo_name FROM ps_photos WHERE photo_id='".$updown_record_result_2[$i]['photo_id']."'";
+		$photo_temp_result = $conn->query($photo_message_sql);
+		if (mysqli_num_rows($photo_temp_result) > 0) {
+			$photo_temp_result_plus                      = $photo_temp_result->fetch_all(MYSQLI_ASSOC);
+			$updown_record_result_2[$i]['photo_address'] = $photo_temp_result_plus[0]['photo_address'];
+			$updown_record_result_2[$i]['photo_name']    = $photo_temp_result_plus[0]['photo_name'];
+		}
+	}
+}
+//查询user表更改user基本信息。手机号码，昵称，真实姓名，公司名称，QQ 邮箱 ，密码
+$user_information_sql    = "SELECT user_phone_number,user_head_image,user_little_name,user_real_name,user_company,user_qq,user_email,user_pwd,user_state FROM `ps_users` WHERE user_id='".$user_id."'";
+$user_information_result = $conn->query($user_information_sql);
+if (mysqli_num_rows($user_information_result)) {
+	$user_information = $user_information_result->fetch_array(MYSQLI_ASSOC);
+}
 ?>
  <!--echarts start-->
     <script type="text/javascript" src="./js/echarts/echarts.min.js"></script>
@@ -195,13 +197,13 @@
                 <li id="up_load_button" style="display: none;"><a>上传记录</a></li>
                 <li id="collection_manage_button" style="display: none;"><a>我的收藏</a></li>
                 <li id="my_histroy_button" style="display: none;"><a>我的足迹</a></li>
-                <li id="add_topic" style="<?php if($user_information['user_state']!=0){echo 'display: none;';}?>"><a>添加专题</a></li>
+                <li id="add_topic" style="<?php if ($user_information['user_state'] != 0) {echo 'display: none;';}?>"><a>添加专题</a></li>
                 <li id="my_manage_button" class="last"><a>账户管理</a></li>
             </ul>
             <div class="avatar">
                 <a href="javascript:void(0)">
                     <div class="img" id="changeavatar">
-                        <img src="<?php echo $user_information['user_head_image']; ?>">
+                        <img src="<?php echo $user_information['user_head_image'];?>">
                         <div class="mk">
                             点击修改
                         </div>
@@ -239,18 +241,17 @@
                 </div>
                 <div class="ui_imgs mt30">
                     <ul class="container">
-                        <?php 
-                        foreach ($last_looked_photos as $temp_look) {
-                            echo '<li class="item last-row" style="margin-right: 10px;">';
-                            echo    '<a href="'.'./photo.php?photo_id='.$temp_look['photo_id'].'&user_id='.$user_id.'" target="_blank">';
-                            echo        '<img src="'.$temp_look['photo_address'].'">';
-                            echo     '</a>';
-                            echo '</li>';
-                        }
+<?php
+foreach ($last_looked_photos as $temp_look) {
+	echo '<li class="item last-row" style="margin-right: 10px;">';
+	echo '<a href="'.'./photo.php?photo_id='.$temp_look['photo_id'].'&user_id='.$user_id.'" target="_blank">';
+	echo '<img src="'.$temp_look['photo_address'].'">';
+	echo '</a>';
+	echo '</li>';
+}
 
-                        ?>
-
-                    </ul>
+?>
+</ul>
                 </div>
             </div>
             <div class="item mt60" style="display: none;">
@@ -309,33 +310,33 @@
                         <td width="15%" height="55" align="center">时间<span>|</span></td>
                         <td width="15%" height="55" align="center">类型<span>|</span></td>
                     </tr>
-                    <?php
-                    foreach ($updown_record_result_2 as $temp_key) {
-                        echo '<tr>';
-                        echo '<td height="170" align="center">';
-                        echo     '<div class="img left">';
-                        echo         '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'user_id='.$user_id.'" target="_blank">';
-                        echo             '<img src="'.$temp_key['photo_address'].'" style="height: 100px;max-width: 100px">';
-                        echo        '</a>';
-                        echo    '</div>';
-                        echo    '<div class="txt left max-350">';
-                        echo        '<p>图片ID：'.$temp_key['photo_id'].'</p>';
-                        echo        '<p>'.$temp_key['photo_name'].'</p>';
-                        echo    '</div>';
-                        echo '</td>';
-                        echo '<td height="170" align="center">'.$temp_key['load_time'].'</td>';
+<?php
+foreach ($updown_record_result_2 as $temp_key) {
+	echo '<tr>';
+	echo '<td height="170" align="center">';
+	echo '<div class="img left">';
+	echo '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'user_id='.$user_id.'" target="_blank">';
+	echo '<img src="'.$temp_key['photo_address'].'" style="height: 100px;max-width: 100px">';
+	echo '</a>';
+	echo '</div>';
+	echo '<div class="txt left max-350">';
+	echo '<p>图片ID：'.$temp_key['photo_id'].'</p>';
+	echo '<p>'.$temp_key['photo_name'].'</p>';
+	echo '</div>';
+	echo '</td>';
+	echo '<td height="170" align="center">'.$temp_key['load_time'].'</td>';
 
-                        echo '<td height="170" align="center">';
-                        // if($temp_key['load_type']==0){
-                        //     echo "下载";
-                        // }else{
-                        //     echo "上传";
-                        // }
-                        echo "收藏";
-                        echo '</td>';
-                        echo '</tr>';
-                     } 
-                    ?>
+	echo '<td height="170" align="center">';
+	// if($temp_key['load_type']==0){
+	//     echo "下载";
+	// }else{
+	//     echo "上传";
+	// }
+	echo "收藏";
+	echo '</td>';
+	echo '</tr>';
+}
+?>
                     </tbody>
                 </table>
             </div>
@@ -633,33 +634,33 @@
                         <ul>
                             <li>
                                 <h5>手机号码</h5>
-                                <input type="text" name="extend_field5" class="p_txt p_txt01" id="user_phone_number" readonly="" value="<?php echo $user_information['user_phone_number'] ?>">
+                                <input type="text" name="extend_field5" class="p_txt p_txt01" id="user_phone_number" readonly="" value="<?php echo $user_information['user_phone_number']?>">
 
                             </li>
                             <li>
                                 <h5>昵称<span>*</span></h5>
-                                <input type="text" name="extend_field102" class="p_txt" id="user_little_name" value="<?php echo $user_information['user_little_name'] ?>">
+                                <input type="text" name="extend_field102" class="p_txt" id="user_little_name" value="<?php echo $user_information['user_little_name']?>">
                             </li>
                             <li>
                                 <h5>真实姓名</h5>
-                                <input type="text" name="extend_field100" class="p_txt" id="user_real_name" value="<?php echo $user_information['user_real_name'] ?>">
+                                <input type="text" name="extend_field100" class="p_txt" id="user_real_name" value="<?php echo $user_information['user_real_name']?>">
                             </li>
                             <li>
                                 <h5>公司名称</h5>
-                                <input type="text" name="extend_field101" class="p_txt" id="user_company" value="<?php echo $user_information['user_company'] ?>" placeholder="个人用户无需填写">
+                                <input type="text" name="extend_field101" class="p_txt" id="user_company" value="<?php echo $user_information['user_company']?>" placeholder="个人用户无需填写">
                             </li>
                             <li>
                                 <h5>QQ</h5>
-                                <input type="text" name="extend_field2" id="user_qq" class="p_txt" value="<?php echo $user_information['user_qq'] ?>">
+                                <input type="text" name="extend_field2" id="user_qq" class="p_txt" value="<?php echo $user_information['user_qq']?>">
                             </li>
                             <li>
                                 <h5>邮箱</h5>
-                                <input type="text" name="email" class="p_txt" id="user_email" value="<?php echo $user_information['user_email'] ?>">
+                                <input type="text" name="email" class="p_txt" id="user_email" value="<?php echo $user_information['user_email']?>">
                             </li>
                             <li class="edit_password">
                                 <h5>当前密码</h5>
                                 <!--当前密码输入窗口-->
-                                <input type="password" name="" readonly="" class="p_txt p_txt01 p_txt02" id="now_password" value="<?php echo $user_information['user_pwd'] ?>">
+                                <input type="password" name="" readonly="" class="p_txt p_txt01 p_txt02" id="now_password" value="<?php echo $user_information['user_pwd']?>">
                                 <a href="javascript:void(0)" class="xg_mm">修改密码</a>
                             </li>
                             <li class="last">
@@ -736,9 +737,8 @@
     </div>
 </div>
 <?php
-	include "footer.php"
+include "footer.php"
 ?>
-
 <!--我的收藏 start-->
 <style>
     .modal-content {
@@ -1068,22 +1068,22 @@
                 source: [
                     ['product','1月','2月', '3月', '4月', '5月', '6月'],
                     ['上传'
-                    <?php foreach ($data_show[0] as $temp) {
-                        echo ",".$temp;
-                    } 
-                    ?>
-                     ],
-                    ['下载'
-                    <?php foreach ($data_show[1] as $temp) {
-                        echo ",".$temp;
-                    } 
-                    ?>
-                    ],
-                    ['浏览' 
-                    <?php foreach ($data_show[2] as $temp) {
-                        echo ",".$temp;
-                    } 
-                    ?>
+<?php foreach ($data_show[0] as $temp) {
+	echo ",".$temp;
+}
+?>
+],
+                    ['收藏'
+<?php foreach ($data_show[1] as $temp) {
+	echo ",".$temp;
+}
+?>
+],
+                    ['浏览'
+<?php foreach ($data_show[2] as $temp) {
+	echo ",".$temp;
+}
+?>
                     ]
                 ]
             },
@@ -1140,7 +1140,8 @@
 <!--ajax传输，修改用户基本信息-->
 <script type="text/javascript">
     $("#save_inform_button").click(function(){
-        var user_id=<?php echo '"'.$user_id.'"';?>;
+        var user_id=<?php echo '"'.$user_id.'"';
+?>;
         var user_phone_number=document.getElementById("user_phone_number").value;
         var user_little_name=document.getElementById("user_little_name").value;
         var user_real_name=document.getElementById("user_real_name").value;
@@ -1155,7 +1156,8 @@
             dataType:"json",
             success: function(result){
                 console.log(result);
-                
+                window.location.reload();
+
             },
             error: function(xhr,state,errorThrown){
                 console.log(xhr);
@@ -1164,7 +1166,8 @@
     });
     //保存密码
     $("#save_password_button").click(function(){
-        var user_id=<?php echo '"'.$user_id.'"';?>;
+        var user_id=<?php echo '"'.$user_id.'"';
+?>;
         var user_old_password=document.getElementById("now_password").value;//旧密码
         var user_old_password2=document.getElementById("old_password").value;//旧密码
         var user_new_password1=document.getElementById("new_password1").value;//新密码1
@@ -1180,7 +1183,8 @@
                 dataType:"json",
                 success: function(result){
                     console.log(result);
-                    
+                    window.location.reload();
+
                 },
                 error: function(xhr,state,errorThrown){
                     console.log(xhr);
@@ -1206,7 +1210,7 @@
                 dataType:"json",
                 success: function(result){
                     console.log(result);
-                    
+
                 },
                 error: function(xhr,state,errorThrown){
                     console.log("error xhr"+xhr);

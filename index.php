@@ -1,99 +1,96 @@
 <?php
-    include 'ps_header.php'
+include 'ps_header.php'
 ?>
 <?php
-     
-    include 'ps_connect.php';
-   function get_topic_list(){
-        global $conn;
-        $topic_list_array=[];
-        $topic_list_sql="SELECT * FROM ps_topics LIMIT 12 ";
-        $topic_list_result=$conn->query($topic_list_sql);
-        $topic_list_count= mysqli_num_rows($topic_list_result);
-        //print_r($topic_list_result);
-                if($topic_list_count!==0){
-                    //将结果转化为数组
-                    $topic_list_array = $topic_list_result->fetch_all(MYSQLI_ASSOC);
-                    return $topic_list_array;
-                }
-    };
-    $topic_list_array=get_topic_list();
-    /*
-    * array unique_rand( int $min, int $max, int $num )
-    * 生成一定数量的不重复随机数，指定的范围内整数的数量必须
-    * 比要生成的随机数数量大
-    * $min 和 $max: 指定随机数的范围
-    * $num: 指定生成数量
-    */
-    function unique_rand($min, $max, $num) {
-      $count = 0;
-      $return = array();
-      while ($count < $num) {
-        $return[] = mt_rand($min, $max);
-        $return = array_flip(array_flip($return));
-        $count = count($return);
-      }
-      //打乱数组，重新赋予数组新的下标
-      shuffle($return);
-      return $return;
-    }
- 
-    function get_random_pictures()
-    {
-        global $conn;
-        //返回结果
-        $pictures_array=[];
-        //产生3个随机数
-        //获取3个随机数
-        $temp_random= unique_rand(1, 1406, 3);
-        for($i=0;$i<3;++$i)
-        {
-            $temp_array=[];
-            //sql  SELECT photo_address FROM `ps_photos` WHERE photo_id='1'
-            $temp_query_sql="SELECT photo_address FROM ps_photos "." WHERE photo_id = '".$temp_random[$i]."'";
-            $temp_result=$conn->query($temp_query_sql);
-            if(mysqli_num_rows($temp_result)!==0)
-            {
-                //获取搜索结果
-                $temp_results=$temp_result->fetch_array(MYSQLI_ASSOC);
-                $temp_array['photo_address']=$temp_results['photo_address'];
-                $temp_array['photo_id']=$temp_random[$i];
 
-            }
-            array_push($pictures_array,$temp_array);
-        }
-        return $pictures_array;
+include 'ps_connect.php';
+function get_topic_list() {
+	global $conn;
+	$topic_list_array  = [];
+	$topic_list_sql    = "SELECT * FROM ps_topics LIMIT 12 ";
+	$topic_list_result = $conn->query($topic_list_sql);
+	$topic_list_count  = mysqli_num_rows($topic_list_result);
+	//print_r($topic_list_result);
+	if ($topic_list_count !== 0) {
+		//将结果转化为数组
+		$topic_list_array = $topic_list_result->fetch_all(MYSQLI_ASSOC);
+		return $topic_list_array;
+	}
+};
+$topic_list_array = get_topic_list();
+/*
+ * array unique_rand( int $min, int $max, int $num )
+ * 生成一定数量的不重复随机数，指定的范围内整数的数量必须
+ * 比要生成的随机数数量大
+ * $min 和 $max: 指定随机数的范围
+ * $num: 指定生成数量
+ */
+function unique_rand($min, $max, $num) {
+	$count  = 0;
+	$return = array();
+	while ($count < $num) {
+		$return[] = mt_rand($min, $max);
+		$return   = array_flip(array_flip($return));
+		$count    = count($return);
+	}
+	//打乱数组，重新赋予数组新的下标
+	shuffle($return);
+	return $return;
+}
 
-    }
-  $rand_pictures=get_random_pictures();
-  //上传图片数量最多的前5个用户；获取名称,用户id和作品数量; 
-  function get_users(){
-    global $conn;
-    $result=[];
-    //样例sql: SELECT user_id,COUNT(1) from ps_photos GROUP BY user_id
-    $get_user_sql="SELECT user_id, COUNT(photo_id) AS photo_count from ps_photos GROUP BY user_id";
-    $user_query_result=$conn->query($get_user_sql);
-    if(mysqli_num_rows($user_query_result)!==0){
-        $result=$user_query_result->fetch_all(MYSQLI_ASSOC);
-    };
-    //遍历查找用户基本信息
-    //名称、head_image、
-    for ($i=0; $i < count($result); $i++ ) { 
-         # code...
-        $temp_user_id=$result[$i]['user_id'];
-        //sql样例： SELECT user_name,user_head_image FROM `ps_users` WHERE user_id=1
-        $get_user_sql_2="SELECT user_name,user_head_image FROM `ps_users` WHERE user_id='".$temp_user_id."';";
-        $user_query_result_2=$conn->query($get_user_sql_2);
-        if(mysqli_num_rows($user_query_result_2)!==0){
-            $result2=$user_query_result_2->fetch_array(MYSQLI_ASSOC);
-            $result[$i]['user_name']=$result2['user_name'];
-            $result[$i]['user_head_image']=$result2['user_head_image'];
-        }
+function get_random_pictures() {
+	global $conn;
+	//返回结果
+	$pictures_array = [];
+	//产生3个随机数
+	//获取3个随机数
+	$temp_random = unique_rand(1, 1406, 3);
+	for ($i = 0; $i < 3; ++$i) {
+		$temp_array = [];
+		//sql  SELECT photo_address FROM `ps_photos` WHERE photo_id='1'
+		$temp_query_sql = "SELECT photo_address FROM ps_photos "." WHERE photo_id = '".$temp_random[$i]."'";
+		$temp_result    = $conn->query($temp_query_sql);
+		if (mysqli_num_rows($temp_result) !== 0) {
+			//获取搜索结果
+			$temp_results                = $temp_result->fetch_array(MYSQLI_ASSOC);
+			$temp_array['photo_address'] = $temp_results['photo_address'];
+			$temp_array['photo_id']      = $temp_random[$i];
 
-    }
-    return $result;
-  }
-$user_array=get_users();
+		}
+		array_push($pictures_array, $temp_array);
+	}
+	return $pictures_array;
+
+}
+$rand_pictures = get_random_pictures();
+//上传图片数量最多的前5个用户；获取名称,用户id和作品数量;
+function get_users() {
+	global $conn;
+	$result = [];
+	//样例sql: SELECT user_id,COUNT(1) from ps_photos GROUP BY user_id
+	$get_user_sql      = "SELECT user_id, COUNT(photo_id) AS photo_count from ps_photos GROUP BY user_id";
+	$user_query_result = $conn->query($get_user_sql);
+	if (mysqli_num_rows($user_query_result) !== 0) {
+		$result = $user_query_result->fetch_all(MYSQLI_ASSOC);
+	};
+	//遍历查找用户基本信息
+	//名称、head_image、
+	for ($i = 0; $i < count($result); $i++) {
+		# code...
+		$temp_user_id = $result[$i]['user_id'];
+		//sql样例： SELECT user_name,user_head_image FROM `ps_users` WHERE user_id=1
+		$get_user_sql_2      = "SELECT user_name,user_head_image FROM `ps_users` WHERE user_id='".$temp_user_id."';";
+		$user_query_result_2 = $conn->query($get_user_sql_2);
+		if (mysqli_num_rows($user_query_result_2) !== 0) {
+			$result2                       = $user_query_result_2->fetch_array(MYSQLI_ASSOC);
+			$result[$i]['user_name']       = $result2['user_name'];
+			$result[$i]['user_head_image'] = $result2['user_head_image'];
+		}
+
+	}
+	return $result;
+}
+$user_array = get_users();
 ?>
 <!--高步-->
 <div class="h_slide">
@@ -237,12 +234,12 @@ $user_array=get_users();
                    <!--  <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548729910.485866.jpg"/></a></li>
                     <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548729954.960632.jpg"/></a></li>
                     <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548730000.720496.jpg"/></a></li> -->
-                    <?php
-                        foreach ($rand_pictures as $temp) {
-                            echo '<li class="li"><a href="./photo.php?photo_id='.$temp['photo_id'].'" target="_blank"><img src="'.$temp['photo_address'].'"/></a></li>';
-                        }
-                    ?>
-                    <!--<li class="l1"><a href=""><img src="./htmlimg/h-img5.jpg"/></a></li>-->
+<?php
+foreach ($rand_pictures as $temp) {
+	echo '<li class="li"><a href="./photo.php?photo_id='.$temp['photo_id'].'" target="_blank"><img src="'.$temp['photo_address'].'"/></a></li>';
+}
+?>
+<!--<li class="l1"><a href=""><img src="./htmlimg/h-img5.jpg"/></a></li>-->
                     <!--<li class="l2"><a href=""><img src="./htmlimg/h-img6.jpg"/></a></li>-->
                     <!--<li class="l3"><a href=""><img src="./htmlimg/h-img7.jpg"/></a></li>-->
                 </ul>
@@ -258,22 +255,22 @@ $user_array=get_users();
             </div>
             <div class="h_row3_main">
                 <ul>
-                <?php
-                        for($i=0;$i<count($topic_list_array)&&$i<12;++$i) {
-                            $temp=$topic_list_array[$i];
-                            $li=$i+1;
-                            echo '<li class="l'.$li.'">';
-                            echo '  <a href="'."topic.php?topic_id=".$temp['topic_id']."&user_id=".'" target="_blank">';
-                            echo '     <img src="'.$temp['display_photo_little_url'].'"/>';
-                            echo '     <div class="h_row3_mask">';
-                            echo '          <h3>'.$temp['topic_name'].'</h3>';
-                            echo '          <p><i class="h_ico_album"></i>'.$temp['topic_message'].'</p>';
-                            echo '     </div>';
-                            echo '    </a>';    
-                            echo '</li>';
-                        }
-                ?>
-                </ul>
+<?php
+for ($i = 0; $i < count($topic_list_array) && $i < 12; ++$i) {
+	$temp = $topic_list_array[$i];
+	$li   = $i+1;
+	echo '<li class="l'.$li.'">';
+	echo '  <a href="'."topic.php?topic_id=".$temp['topic_id']."&user_id=".'" target="_blank">';
+	echo '     <img src="'.$temp['display_photo_little_url'].'"/>';
+	echo '     <div class="h_row3_mask">';
+	echo '          <h3>'.$temp['topic_name'].'</h3>';
+	echo '          <p><i class="h_ico_album"></i>'.$temp['topic_message'].'</p>';
+	echo '     </div>';
+	echo '    </a>';
+	echo '</li>';
+}
+?>
+</ul>
             </div>
         </div>
     </div>
@@ -286,20 +283,21 @@ $user_array=get_users();
         </div>
         <div class="h_row5_main">
             <ul>
-                <?php
-                foreach ($user_array as $temp_user) {
-                    echo '<li>';
-                    //echo '<a href="'.'./user.php?user_id='.$temp_user['user_id'].'"  target="_blank">';
-                    echo '<div class="h_row5_img">';
-                    echo       '<img src="'.$temp_user['user_head_image'].'"/>';
-                    echo  '<span class="msg"><big>'.$temp_user['photo_count'].'</big>/作品</span>';
-                    echo  '</div>';
-                    echo  '<p class="h_row5_txt">'.$temp_user['user_name'].'</p>';
-                    //echo '</a>';
-                    echo  '</li>';
-                }
-                ?>
-            </ul>
+                <!--输出用户数组-->
+<?php
+foreach ($user_array as $temp_user) {
+	echo '<li>';
+	//echo '<a href="'.'./user.php?user_id='.$temp_user['user_id'].'"  target="_blank">';
+	echo '<div class="h_row5_img">';
+	echo '<img src="'.$temp_user['user_head_image'].'"/>';
+	echo '<span class="msg"><big>'.$temp_user['photo_count'].'</big>/作品</span>';
+	echo '</div>';
+	echo '<p class="h_row5_txt">'.$temp_user['user_name'].'</p>';
+	//echo '</a>';
+	echo '</li>';
+}
+?>
+</ul>
         </div>
     </div>
 </div>
@@ -360,7 +358,7 @@ $user_array=get_users();
 
 
 <?php
-    include 'footer.php'
+include 'footer.php'
 ?>
 <script type="text/javascript">
 </script>
