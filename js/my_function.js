@@ -127,6 +127,8 @@ $(function(){
        var pwd_confirm=document.getElementById("confirm_password").value;
        var phone=document.getElementById("extend_field5").value;
        var input_user_state_string=document.getElementById("sms_code").value;
+       var test={"user_name":user_name,"user_pwd":user_pwd,"pwd_confirm":pwd_confirm,"phone":phone,"user_state_pwd":input_user_state_string};
+       console.log(test);
        $.ajax({
            url:"./ps_register.php",
            type:"post",

@@ -20,7 +20,7 @@
     $user_pwd = $_POST["user_pwd"];
     $user_pwd_confirm = $_POST["pwd_confirm"];
     $user_phone=intval($_POST["phone"]);
-    $user_state=2；//用户等级
+    $user_state=2;//用户等级
     $user_state_string=$_POST["user_state_pwd"];
 
     if($user_state_string=="xiangtanstate0"){

@@ -190,7 +190,7 @@
                                placeholder="请输入手机号" maxlength="11"/></li>
                     <li>
                         <!--邀请码-->
-                        <input type="text" name="sms_code" class="txt" id="sms_code" value="" placeholder="邀请码/非必填" maxlength="11">
+                        <input type="text" name="sms_code" class="txt" id="sms_code" value="" placeholder="邀请码/非必填" maxlength="20">
                     </li>
                 </ul>
             </div>
