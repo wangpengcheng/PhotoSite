@@ -172,7 +172,6 @@ $(function(){
         nav_af.style.display="inline";
         nav_bf.style.display="none";
         user_login(user_id,user_name);
-        window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id="+user_id;
     }
 
 });
