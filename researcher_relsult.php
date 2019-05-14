@@ -504,7 +504,7 @@
 	                echo '    <a href="';
 	                echo "./photo.php?photo_id=".$photo_temp["photo_id"]."&user_id=".$usr_id;
 	                echo '" target="_blank"><img class="lazyload" data-original="';
-	                echo $photo_temp["photo_address"]."&user_id=".$usr_id;
+	                echo $photo_temp["photo_address"];
 	                echo '"/></a>';
 	                echo '</li>';
                 }
