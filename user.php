@@ -203,7 +203,7 @@
                 <li id="up_load_button" style="display: none;"><a>上传记录</a></li>
                 <li id="collection_manage_button" style="display: none;"><a>我的收藏</a></li>
                 <li id="my_histroy_button" style="display: none;"><a>我的足迹</a></li>
-                <li id="add_topic" style="<?php if($user_information['user_state']!=0){echo 'display: none;';}?>"><a>添加专题</a></li>
+                <li id="add_topic" style="<?php if($user_information['user_state']!==0){echo 'display: none;';}else{echo 'display: block';}?>"><a>添加专题</a></li>
                 <li id="my_manage_button" class="last"><a>账户管理</a></li>
             </ul>
             <div class="avatar">
@@ -221,10 +221,10 @@
         <div class="body user_home">
             <div class="state">
                 <ul>
-                    <a href="user.php?act=down_list">
-                        <li><big><?php echo $download_all_count;?></big>已下载</li>
+                    <a href="./user.php?user_is=<?php echo $my_user_id;?>&act=down_list">
+                        <li><big><?php echo $download_all_count;?></big>已收藏</li>
                     </a>
-                    <a href="user.php?act=package">
+                    <a href="user.php?user_is=<?php echo $my_user_id; ?>&act=package">
                         <li><big><?php echo $upload_all_count;?></big>已上传</li>
                     </a>
                 </ul>
@@ -322,7 +322,7 @@
                         echo '<tr>';
                         echo '<td height="170" align="center">';
                         echo     '<div class="img left">';
-                        echo         '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'user_id='.$user_id.'" target="_blank">';
+                        echo         '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'&user_id='.$user_id.'" target="_blank">';
                         echo             '<img src="'.$temp_key['photo_address'].'" style="height: 100px;max-width: 100px">';
                         echo        '</a>';
                         echo    '</div>';
