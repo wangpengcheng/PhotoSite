@@ -101,13 +101,14 @@ $user_array=get_users();
     <div class="glide">
         <ul class="slides">
             <li class="banner slide"
-                style="background: url(http://meisupic.oss-cn-beijing.aliyuncs.com/topic/e3c7f789-6d76-4a12-83ca-20d075d6cae2.jpg) center center no-repeat;background-size: cover">
+                style="background: url(./upfile/1557803651webwxgetmsgimg.jpg) center center no-repeat;background-size: cover" 
+                data-jump='./photo.php?photo_id=1416?user_id= <?php echo $my_user_id;?>' >
             <li class="banner slide"
-                style="background: url(http://meisupic.oss-cn-beijing.aliyuncs.com/topic/1542881406.849907.jpg) center center no-repeat;background-size: cover"
-                data-jump='http://www.meisupic.com/activity.php?activity.php?id=43&act=sale_list'>
+                style="background: url(./upfile/1557803834webwxgetmsgimg2.jpg) center center no-repeat;background-size: cover"
+                data-jump='./photo.php?photo_id=1417?user_id= <?php echo $my_user_id;?>'>
             <li class="banner slide"
-                style="background: url(http://meisudci.oss-cn-beijing.aliyuncs.com/huge/MSBQ13715300048195.jpg) center center no-repeat;background-size: cover"
-                data-jump='http://www.meisupic.com/activity.php?id=45&act=sale_list'>
+                style="background: url(./upfile/1557804038webwxgetmsgimg3.jpg) center center no-repeat;background-size: cover"
+                data-jump='./photo.php?photo_id=1418?user_id=<?php echo $my_user_id;?>'>
         </ul>
     </div>
     <div class="wrap">
@@ -154,7 +155,7 @@ $user_array=get_users();
                 <li><a target="_blank" href="./researcher_relsult.php?keyword=水墨">水墨</a></li>
             </ul>
         </div>
-        <div class="h_slide_msg">
+        <div class="h_slide_msg" style="display: none;">
             优秀校园摄影图片展示网站！在线2259张图片，本周新增3448张
         </div>
     </div>

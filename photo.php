@@ -111,7 +111,6 @@
                     </p>
                     <p>尺寸：<?php echo $photo_array['photo_width']."x".$photo_array['photo_height'];?>px/dpi</p>
                     <p>格式：<?php echo $photo_array['photo_format'];?></p>
-                    <p>授权：商业用途</p>
                 </div>
                 <div class="ft">
                     <div class="title">
