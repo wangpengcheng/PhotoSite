@@ -34,13 +34,13 @@ header("Content-type: text/html; charset=utf-8");
             $temp_array=[];
             $temp_array['photo_id']="12";
             $temp_array['topic_id']="3";
-            $temp_array['user_id']="19";
+            $temp_array['user_id']="3";
             return $result;
         }else{
              $temp_array=[];
             $temp_array['photo_id']="12";
             $temp_array['topic_id']="3";
-            $temp_array['user_id']="19";
+            $temp_array['user_id']="3";
             return $temp_array;
         };
     }
@@ -64,7 +64,7 @@ header("Content-type: text/html; charset=utf-8");
         if(array_key_exists('user_id', $page_query)){
             return $page_query['user_id'];
         }else{
-            $page_query['user_id']=19;
+            $page_query['user_id']=3;
             return $page_query['user_id'];
         }
     }

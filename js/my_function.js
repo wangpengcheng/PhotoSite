@@ -79,7 +79,8 @@ $(function(){
                            write_cookies("","","");
                        }
                        //重新加载页面
-                       window.location.href="./index.php?user_id="+user_id;
+                       window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id="+user_id;
+                       console.log(window.location.href);
 
                        break;
                    case 1:
@@ -117,6 +118,7 @@ $(function(){
         //         write_cookies("","","");
         //     }
         // }
+        window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id=3";
     });
    $("#register_button").click(function () {
        var user_name=document.getElementById("extend_field102").value;
@@ -170,6 +172,7 @@ $(function(){
         nav_af.style.display="inline";
         nav_bf.style.display="none";
         user_login(user_id,user_name);
+        window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id="+user_id;
     }
 
 });
