@@ -40,7 +40,9 @@
     $brower_record=[];
     //获取上传记录 SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;
     $upload_record_sql="SELECT photo_id ,load_time FROM `ps_load_history` WHERE user_id=19 AND load_type=0;";
-
+    $upload_record_count_result_2=[];
+    $brower_record_count_result_2=[];
+    $download_record_count_result_2=[];
     //获取上传记录统计
     //select CONCAT(DATE_FORMAT(load_time,'%m')) months ,COUNT(load_id) as count_id from ps_load_history WHERE user_id=19 AND load_type=0 GROUP BY months
     //获取上传统计
