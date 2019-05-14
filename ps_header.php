@@ -281,10 +281,10 @@ header("Content-type: text/html; charset=utf-8");
         <!--头部左侧-->
         <div class="copyr">
             <a href="<?php echo './index.php?user_id='.$my_user_id; ?>">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="<?php echo './index.php#h_row3?user_id='.$my_user_id; ?>">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<?php echo './index.php?user_id='.$my_user_id; ?>#h_row3">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="./hand_photo.php?user_id=<?php echo $my_user_id;?>">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">上传图片</a>-->
-            <a href="./researcher_relsult.php?keyword=蓝色&user_id=<?php echo $my_user_id; ?>"><font color="#FC4349">蓝色</font><i class="huodong_top_hot"></i></a>
+            <a href="./topic.php?topic_id=13&user_id=<?php echo $my_user_id; ?>"><font color="#FC4349">湘潭</font><i class="huodong_top_hot"></i></a>
             <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <font id="ECS_MEMBERZONE">
@@ -304,8 +304,8 @@ header("Content-type: text/html; charset=utf-8");
                         <span class="arr"></span>
                         <div class="hdn">
                             <dl>
-                                <dd><a href="./user.php?user_id=&act=down_list">相关记录</a></dd>
-                                <dd><a href="./user.php?user_id=&act=profile">账户管理</a></dd>
+                                <dd><a href="./user.php?ser_id=<?php echo $my_user_id; ?>&act=down_list">相关记录</a></dd>
+                                <dd><a href="./user.php?user_id=<?php echo $my_user_id; ?>&act=profile">账户管理</a></dd>
                                 <dd><a id="logout_button" class="last">退出</a></dd>
                             </dl>
                         </div>

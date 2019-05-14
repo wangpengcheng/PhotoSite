@@ -98,7 +98,7 @@
                     <input name="checkbox" type="checkbox" value="" id="login_remember" name="login_remember">
                     <label for="login_remember"></label>
                     <span class='lt'>记住密码</span>　
-                    <span class='rg'><a href="">忘记密码？</a></span>
+                    <span class='rg' style="display: none;"><a href="">忘记密码？</a></span>
                 </div>
             </div>
             <div class="mt200 btn" style="display:block">

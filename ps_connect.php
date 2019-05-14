@@ -1,10 +1,4 @@
 <?php
-/*
- * main function is to  connect mysql databaseä
- *2018-4-9 15:29
- *çwangpencgheng
- *link url :https://github.com/wangpengcheng/PhotoSite
-*/
 //connect localhost
 $sever_ip="localhost";//sever ip adress
 $mysql_user_name="peng";//mysql user name

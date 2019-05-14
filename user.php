@@ -74,27 +74,33 @@
     $download_all_count=0;
     //处理函数；将数据整合成合理的格式,主要上传下载记录，浏览记录
     for ($i=1; $i <=6 ; $i++) { 
-        foreach ($upload_record_count_result_2 as $temp_1) {
-            if($temp_1['months']==$i){
-                $col_1_array[$i]=$temp_1['count_id'];
-                $upload_all_count+=$temp_1['count_id'];
+        if(count($upload_record_count_result_2)>0){
+            foreach ($upload_record_count_result_2 as $temp_1) {
+                if($temp_1['months']==$i){
+                    $col_1_array[$i]=$temp_1['count_id'];
+                    $upload_all_count+=$temp_1['count_id'];
+                }
             }
         }
         if(empty($col_1_array[$i])){
             $col_1_array[$i]=0;
         }
-        foreach ($download_record_count_result_2 as $temp_2) {
-            if($temp_2['months']==$i){
-                $col_2_array[$i]=$temp_2['count_id'];
-                $download_all_count+=$temp_2['count_id'];
+        if(count($download_record_count_result_2)>0){
+            foreach ($download_record_count_result_2 as $temp_2) {
+                if($temp_2['months']==$i){
+                    $col_2_array[$i]=$temp_2['count_id'];
+                    $download_all_count+=$temp_2['count_id'];
+                }
             }
         }
         if(empty($col_2_array[$i])){
             $col_2_array[$i]=0;
         }
-        foreach ($brower_record_count_result_2 as $temp_3) {
-            if($temp_3['months']==$i){
-                $col_3_array[$i]=$temp_3['count_record'];
+        if(count($brower_record_count_result_2)>0){
+            foreach ($brower_record_count_result_2 as $temp_3) {
+                if($temp_3['months']==$i){
+                    $col_3_array[$i]=$temp_3['count_record'];
+                }
             }
         }
         if(empty($col_3_array[$i])){

@@ -15,14 +15,17 @@
 	//用户表名；
 	$user_table_name="ps_users";
 	//接收数据
-	//$user_name = "王鹏程";
 	$user_name = $_POST["user_name"];
 	//$user_pwd = "wang123!";
     $user_pwd = $_POST["user_pwd"];
-    //$user_pwd_confirm="wang123!";
     $user_pwd_confirm = $_POST["pwd_confirm"];
-    //$user_phone="18117842737";
     $user_phone=intval($_POST["phone"]);
+    $user_state=2；//用户等级
+    $user_state_string=$_POST["user_state_pwd"];
+
+    if($user_state_string=="xiangtanstate0"){
+        $user_state=0;
+    }
     //$user_email=$_POST["email"];
     //$vertificationCode=$_POST["vertificationCode"];
 	$list=[];
@@ -47,7 +50,7 @@
             }else{//不存在当前注册用户名称
 				    //插入数局
 				$time=date('Y-m-d h:i:s', time());
-                $sql_insert = "INSERT INTO ".$user_table_name." (user_name,user_pwd,user_phone_number,user_register_time) VALUES('".$user_name."','".$user_pwd."','".$user_phone."','".$time."')";
+                $sql_insert = "INSERT INTO ".$user_table_name." (user_name,user_pwd,user_phone_number,user_state,user_register_time) VALUES('".$user_name."','".$user_pwd."','".$user_phone."','".$user_state."','".$time."')";
                 $res_insert = $conn->query($sql_insert);
                 $num_insert = mysqli_num_rows($res_insert);
                 if($res_insert)

@@ -102,10 +102,10 @@ $user_array=get_users();
         <ul class="slides">
             <li class="banner slide"
                 style="background: url(./upfile/1557803651webwxgetmsgimg.jpg) center center no-repeat;background-size: cover" 
-                data-jump='./photo.php?photo_id=1416?user_id= <?php echo $my_user_id;?>' >
+                data-jump='./photo.php?photo_id=1416?user_id=<?php echo $my_user_id;?>' >
             <li class="banner slide"
                 style="background: url(./upfile/1557803834webwxgetmsgimg2.jpg) center center no-repeat;background-size: cover"
-                data-jump='./photo.php?photo_id=1417?user_id= <?php echo $my_user_id;?>'>
+                data-jump='./photo.php?photo_id=1417?user_id=<?php echo $my_user_id;?>'>
             <li class="banner slide"
                 style="background: url(./upfile/1557804038webwxgetmsgimg3.jpg) center center no-repeat;background-size: cover"
                 data-jump='./photo.php?photo_id=1418?user_id=<?php echo $my_user_id;?>'>
@@ -145,14 +145,14 @@ $user_array=get_users();
         <div class="keys" style="top: 60%" style="display: none;">
             <ul>
                 关键热词：
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=校园风景">校园风景</a></li>
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=2019">2019</a></li>
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=校园logo">校园logo</a></li>
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=逸夫楼">逸夫楼</a></li>
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=插画">插画</a></li>
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=画册">画册</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=校园风景&user_id=<?php echo $my_user_id;?>">校园风景</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=2019&user_id=<?php echo $my_user_id;?>">2019</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=校园logo&user_id=<?php echo $my_user_id;?>">校园logo</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=逸夫楼&user_id=<?php echo $my_user_id;?>">逸夫楼</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=插画&user_id=<?php echo $my_user_id;?>">插画</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=画册&user_id=<?php echo $my_user_id;?>">画册</a></li>
                 <!--  <li><a target="_blank" href="">背景</a></li> -->
-                <li><a target="_blank" href="./researcher_relsult.php?keyword=水墨">水墨</a></li>
+                <li><a target="_blank" href="./researcher_relsult.php?keyword=水墨&user_id=<?php echo $my_user_id;?>">水墨</a></li>
             </ul>
         </div>
         <div class="h_slide_msg" style="display: none;">
@@ -240,7 +240,7 @@ $user_array=get_users();
                     <li class="li"><a href="" target="_blank"><img src="./htmlimg/1548730000.720496.jpg"/></a></li> -->
                     <?php
                         foreach ($rand_pictures as $temp) {
-                            echo '<li class="li"><a href="./photo.php?photo_id='.$temp['photo_id'].'" target="_blank"><img src="'.$temp['photo_address'].'"/></a></li>';
+                            echo '<li class="li"><a href="./photo.php?photo_id='.$temp['photo_id'].'&user_id='.$my_user_id.'" target="_blank"><img src="'.$temp['photo_address'].'"/></a></li>';
                         }
                     ?>
                     <!--<li class="l1"><a href=""><img src="./htmlimg/h-img5.jpg"/></a></li>-->
@@ -264,7 +264,7 @@ $user_array=get_users();
                             $temp=$topic_list_array[$i];
                             $li=$i+1;
                             echo '<li class="l'.$li.'">';
-                            echo '  <a href="'."topic.php?topic_id=".$temp['topic_id']."&user_id=".'" target="_blank">';
+                            echo '  <a href="'."topic.php?topic_id=".$temp['topic_id']."&user_id=".$my_user_id.'" target="_blank">';
                             echo '     <img src="'.$temp['display_photo_little_url'].'"/>';
                             echo '     <div class="h_row3_mask">';
                             echo '          <h3>'.$temp['topic_name'].'</h3>';
