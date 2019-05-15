@@ -5,7 +5,7 @@
     include 'ps_connect.php';
     function get_history($user_id){
         global $conn;//设置全局变量
-        $get_histroy_sql="SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='".$user_id."' and ps_user_browserecord.photo_id=ps_photos.photo_id"; 
+        $get_histroy_sql="SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='".$user_id."' and ps_user_browserecord.photo_id=ps_photos.photo_id";
         //SELECT ps_photos.photo_id,photo_address,record_time FROM ps_photos,ps_user_browserecord where ps_user_browserecord.user_id='1' and ps_user_browserecord.photo_id=ps_photos.photo_id
         $user_history_result=$conn->query($get_histroy_sql);
         $histroy_row_count=mysqli_num_rows($user_history_result);
@@ -17,13 +17,13 @@
 
     //最近浏览图片
     $last_looked_photos=[];
-    //sql示例： SELECT photo_id,record_time FROM ps_user_browserecord WHERE user_id=0 ORDER BY record_time DESC LIMIT 10 
+    //sql示例： SELECT photo_id,record_time FROM ps_user_browserecord WHERE user_id=0 ORDER BY record_time DESC LIMIT 10
     //抽取10个
     $looked_sql="SELECT photo_id FROM ps_user_browserecord WHERE user_id='".$user_id."' GROUP BY photo_id ORDER BY record_time DESC LIMIT 10 ;";
     $looked_result=$conn->query($looked_sql);
     if(mysqli_num_rows($looked_result)>0){
         $last_looked_photos=$looked_result->fetch_all(MYSQLI_ASSOC);
-        for ($i=0; $i <count($last_looked_photos) ; $i++) { 
+        for ($i=0; $i <count($last_looked_photos) ; $i++) {
             $new_sql="SELECT photo_address FROM ps_photos WHERE photo_id='".$last_looked_photos[$i]['photo_id']."'";
             $temp_result=$conn->query($new_sql);
             if(mysqli_num_rows($temp_result)>0){
@@ -32,7 +32,7 @@
             }
         }
     }
-    
+
     //数据显示数组，3行6例。
     $data_show=[];
     //获取上传下载和浏览;
@@ -75,7 +75,7 @@
     $upload_all_count=0;
     $download_all_count=0;
     //处理函数；将数据整合成合理的格式,主要上传下载记录，浏览记录
-    for ($i=1; $i <=6 ; $i++) { 
+    for ($i=1; $i <=6 ; $i++) {
         if(count($upload_record_count_result_2)>0){
             foreach ($upload_record_count_result_2 as $temp_1) {
                 if($temp_1['months']==$i){
@@ -124,7 +124,7 @@
         //查询图片表，获得图片 name,address,
             for ($i=0; $i <count($updown_record_result_2) ; $i++) {
                 $photo_message_sql="SELECT photo_address,photo_name FROM ps_photos WHERE photo_id='".$updown_record_result_2[$i]['photo_id']."'";
-                $photo_temp_result=$conn->query($photo_message_sql); 
+                $photo_temp_result=$conn->query($photo_message_sql);
                 if(mysqli_num_rows($photo_temp_result)>0){
                     $photo_temp_result_plus=$photo_temp_result->fetch_all(MYSQLI_ASSOC);
                     $updown_record_result_2[$i]['photo_address']=$photo_temp_result_plus[0]['photo_address'];
@@ -203,7 +203,7 @@
                 <li id="up_load_button" style="display: none;"><a>上传记录</a></li>
                 <li id="collection_manage_button" style="display: none;"><a>我的收藏</a></li>
                 <li id="my_histroy_button" style="display: none;"><a>我的足迹</a></li>
-                <li id="add_topic" style="<?php if($user_information['user_state']!==0){echo 'display: none;';}else{echo 'display: block';}?>"><a>添加专题</a></li>
+                <li id="add_topic" style="<?php if($user_information['user_state']!=0){echo 'display: none;';}else{echo 'display: block';}?>"><a>添加专题</a></li>
                 <li id="my_manage_button" class="last"><a>账户管理</a></li>
             </ul>
             <div class="avatar">
@@ -247,7 +247,7 @@
                 </div>
                 <div class="ui_imgs mt30">
                     <ul class="container">
-                        <?php 
+                        <?php
                         foreach ($last_looked_photos as $temp_look) {
                             echo '<li class="item last-row" style="margin-right: 10px;">';
                             echo    '<a href="'.'./photo.php?photo_id='.$temp_look['photo_id'].'&user_id='.$user_id.'" target="_blank">';
@@ -342,7 +342,7 @@
                         echo "收藏";
                         echo '</td>';
                         echo '</tr>';
-                     } 
+                     }
                     ?>
                     </tbody>
                 </table>
@@ -1078,19 +1078,19 @@
                     ['上传'
                     <?php foreach ($data_show[0] as $temp) {
                         echo ",".$temp;
-                    } 
+                    }
                     ?>
                      ],
                     ['下载'
                     <?php foreach ($data_show[1] as $temp) {
                         echo ",".$temp;
-                    } 
+                    }
                     ?>
                     ],
-                    ['浏览' 
+                    ['浏览'
                     <?php foreach ($data_show[2] as $temp) {
                         echo ",".$temp;
-                    } 
+                    }
                     ?>
                     ]
                 ]
@@ -1163,7 +1163,7 @@
             dataType:"json",
             success: function(result){
                 console.log(result);
-                
+
             },
             error: function(xhr,state,errorThrown){
                 console.log(xhr);
@@ -1188,7 +1188,7 @@
                 dataType:"json",
                 success: function(result){
                     console.log(result);
-                    
+
                 },
                 error: function(xhr,state,errorThrown){
                     console.log(xhr);
@@ -1214,7 +1214,7 @@
                 dataType:"json",
                 success: function(result){
                     console.log(result);
-                    
+
                 },
                 error: function(xhr,state,errorThrown){
                     console.log("error xhr"+xhr);

@@ -1,18 +1,18 @@
 <?php
 date_default_timezone_set('PRC');
 header("Content-type: text/html; charset=utf-8");
-    function curPageURL() {    
-        $pageURL = 'http';    
-        $pageURL .= "://";    
+    function curPageURL() {
+        $pageURL = 'http';
+        $pageURL .= "://";
         if ($_SERVER["SERVER_PORT"] != "80"){
-            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];    
+            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
         }else {
             $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
         }
          $result=parse_url($pageURL);
         return $result;
     }
-   
+
     function is_index(){//名字起错了，就这个样子吧
          $temp=curPageURL()["path"];
         $result=explode('/', $temp);
@@ -182,7 +182,7 @@ header("Content-type: text/html; charset=utf-8");
                     var firefoxVersion = parseFloat(browserVersion.toLowerCase().match(/firefox\/([\d.]+)/)[1]);
                     if (firefoxVersion < 7) {//firefox7以下版本
                         document.getElementById(imgPreviewId).setAttribute("src", fileObj.files[0].getAsDataURL());
-                    } else {//firefox7.0+                    
+                    } else {//firefox7.0+
                         document.getElementById(imgPreviewId).setAttribute("src", window.URL.createObjectURL(fileObj.files[0]));
                     }
                 } else {
@@ -304,8 +304,8 @@ header("Content-type: text/html; charset=utf-8");
                         <span class="arr"></span>
                         <div class="hdn">
                             <dl>
-                                <dd><a href="./user.php?ser_id=<?php echo $my_user_id; ?>&act=down_list">相关记录</a></dd>
-                                <dd><a href="./user.php?user_id=<?php echo $my_user_id; ?>&act=profile">账户管理</a></dd>
+                                <dd><a href="./user.php?user_id=&act=down_list">相关记录</a></dd>
+                                <dd><a href="./user.php?user_id=&act=profile">账户管理</a></dd>
                                 <dd><a id="logout_button" class="last">退出</a></dd>
                             </dl>
                         </div>
@@ -315,7 +315,7 @@ header("Content-type: text/html; charset=utf-8");
         </font>
     </div>
 </div>
-<?php if(is_index()!=="index.php"&&is_index()!==""&&is_index()!=="researcher_relsult.php"){ 
+<?php if(is_index()!=="index.php"&&is_index()!==""&&is_index()!=="researcher_relsult.php"){
 echo '<div class="toper">';
 echo '    <div class="wrapper">';
 echo '        <h2 style="margin-top: 0px;">探索我们的世界！</h2>';

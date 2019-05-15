@@ -119,6 +119,7 @@ $(function(){
         //     }
         // }
         window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id=3";
+        console.log(window.location.href);
         window.event.returnValue=false;
     });
    $("#register_button").click(function () {
