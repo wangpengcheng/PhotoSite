@@ -1,18 +1,18 @@
 <?php
 date_default_timezone_set('PRC');
 header("Content-type: text/html; charset=utf-8");
-    function curPageURL() {    
-        $pageURL = 'http';    
-        $pageURL .= "://";    
+    function curPageURL() {
+        $pageURL = 'http';
+        $pageURL .= "://";
         if ($_SERVER["SERVER_PORT"] != "80"){
-            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];    
+            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
         }else {
             $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
         }
          $result=parse_url($pageURL);
         return $result;
     }
-   
+
     function is_index(){//名字起错了，就这个样子吧
          $temp=curPageURL()["path"];
         $result=explode('/', $temp);
@@ -34,13 +34,13 @@ header("Content-type: text/html; charset=utf-8");
             $temp_array=[];
             $temp_array['photo_id']="12";
             $temp_array['topic_id']="3";
-            $temp_array['user_id']="19";
+            $temp_array['user_id']="3";
             return $result;
         }else{
              $temp_array=[];
             $temp_array['photo_id']="12";
             $temp_array['topic_id']="3";
-            $temp_array['user_id']="19";
+            $temp_array['user_id']="3";
             return $temp_array;
         };
     }
@@ -64,7 +64,7 @@ header("Content-type: text/html; charset=utf-8");
         if(array_key_exists('user_id', $page_query)){
             return $page_query['user_id'];
         }else{
-            $page_query['user_id']=19;
+            $page_query['user_id']=3;
             return $page_query['user_id'];
         }
     }
@@ -182,7 +182,7 @@ header("Content-type: text/html; charset=utf-8");
                     var firefoxVersion = parseFloat(browserVersion.toLowerCase().match(/firefox\/([\d.]+)/)[1]);
                     if (firefoxVersion < 7) {//firefox7以下版本
                         document.getElementById(imgPreviewId).setAttribute("src", fileObj.files[0].getAsDataURL());
-                    } else {//firefox7.0+                    
+                    } else {//firefox7.0+
                         document.getElementById(imgPreviewId).setAttribute("src", window.URL.createObjectURL(fileObj.files[0]));
                     }
                 } else {
@@ -281,10 +281,10 @@ header("Content-type: text/html; charset=utf-8");
         <!--头部左侧-->
         <div class="copyr">
             <a href="<?php echo './index.php?user_id='.$my_user_id; ?>">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="<?php echo './index.php#h_row3?user_id='.$my_user_id; ?>">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<?php echo './index.php?user_id='.$my_user_id; ?>#h_row3">精选专辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="./hand_photo.php?user_id=<?php echo $my_user_id;?>">上传图片</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <!--<a href="./zhuanti.html">上传图片</a>-->
-            <a href="./researcher_relsult.php?keyword=蓝色&user_id=<?php echo $my_user_id; ?>"><font color="#FC4349">蓝色</font><i class="huodong_top_hot"></i></a>
+            <a href="./topic.php?topic_id=13&user_id=<?php echo $my_user_id; ?>"><font color="#FC4349">湘潭</font><i class="huodong_top_hot"></i></a>
             <!-- <a href="">最新活动</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <font id="ECS_MEMBERZONE">
@@ -315,7 +315,7 @@ header("Content-type: text/html; charset=utf-8");
         </font>
     </div>
 </div>
-<?php if(is_index()!=="index.php"&&is_index()!==""&&is_index()!=="researcher_relsult.php"){ 
+<?php if(is_index()!=="index.php"&&is_index()!==""&&is_index()!=="researcher_relsult.php"){
 echo '<div class="toper">';
 echo '    <div class="wrapper">';
 echo '        <h2 style="margin-top: 0px;">探索我们的世界！</h2>';

@@ -78,6 +78,10 @@ $(function(){
                        }else {
                            write_cookies("","","");
                        }
+                       //重新加载页面
+                       window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id="+user_id;
+                       console.log(window.location.href);
+
                        break;
                    case 1:
                        result_string="密码错误";
@@ -114,17 +118,23 @@ $(function(){
         //         write_cookies("","","");
         //     }
         // }
+        window.location.href="http://118.24.113.233/PhotoSite/index.php?user_id=3";
+        console.log(window.location.href);
+        window.event.returnValue=false;
     });
    $("#register_button").click(function () {
        var user_name=document.getElementById("extend_field102").value;
        var user_pwd=document.getElementById("password").value;
        var pwd_confirm=document.getElementById("confirm_password").value;
        var phone=document.getElementById("extend_field5").value;
+       var input_user_state_string=document.getElementById("sms_code").value;
+       var test={"user_name":user_name,"user_pwd":user_pwd,"pwd_confirm":pwd_confirm,"phone":phone,"user_state_pwd":input_user_state_string};
+       console.log(test);
        $.ajax({
            url:"./ps_register.php",
            type:"post",
            timeout: 3000,
-           data:{"user_name":user_name,"user_pwd":user_pwd,"pwd_confirm":pwd_confirm,"phone":phone},
+           data:{"user_name":user_name,"user_pwd":user_pwd,"pwd_confirm":pwd_confirm,"phone":phone,"user_state_pwd":input_user_state_string},
            dataType:"json",
            success:function(result){
                //$("#div1").html(result);

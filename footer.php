@@ -98,7 +98,7 @@
                     <input name="checkbox" type="checkbox" value="" id="login_remember" name="login_remember">
                     <label for="login_remember"></label>
                     <span class='lt'>记住密码</span>　
-                    <span class='rg'><a href="">忘记密码？</a></span>
+                    <span class='rg' style="display: none;"><a href="">忘记密码？</a></span>
                 </div>
             </div>
             <div class="mt200 btn" style="display:block">
@@ -189,9 +189,8 @@
                     <li><input type="text" name="extend_field5" class="txt" id="extend_field5" value=""
                                placeholder="请输入手机号" maxlength="11"/></li>
                     <li>
-                        <input type="text" name="sms_code" class="txt txt01" id="sms_code" value="" placeholder="手机验证码"
-                               style="border-right: 0;width: 216px !important" maxlength="6"/>
-                        <input type="button" id="getcode" name="" class="btn_n" id="" value="获取验证码"/>
+                        <!--邀请码-->
+                        <input type="text" name="sms_code" class="txt" id="sms_code" value="" placeholder="邀请码/非必填" maxlength="20">
                     </li>
                 </ul>
             </div>

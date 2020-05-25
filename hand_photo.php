@@ -39,7 +39,7 @@ function get_topic_list(){
                 </div>
               <div class="c2-uploadarea">
                     <ul class="images-ul">
-                            <li class="image" id="myli_1" style="display: none;">        
+                            <li class="image" id="myli_1" style="display: none;">
                                 <div id="divPreview">
                                     <img id="imgHeadPhoto" src="noperson.jpg" style="width: 160px; height: 170px; border: solid 1px #d2e2e2;" alt="" />
                                 </div>
@@ -54,11 +54,11 @@ function get_topic_list(){
                                     <div style="position: absolute; top: 35px; left: 21px; width: 120px; height: 132px; overflow: hidden; bottom: auto; right: auto;">
                                     </div>
                                         <input type="file" name="file"  onchange="PreviewImage(this,'imgHeadPhoto','divPreview');">
-                                    
+
                                 </div>
                             </li>
                     </ul>
-                </div> 
+                </div>
 
             </div>
             <div class="creation-info item">
@@ -83,7 +83,7 @@ function get_topic_list(){
                                 </li>
                                 <input type="hidden" name="worksType" id="worksType" value="photoProductRegist"/>
                                 <input type="hidden" name="creativePurpose" id="creativePurpose"/>
-                                <input type="hidden" name="topic_id" id="topic_id" value="text" />
+                                <input type="hidden" name="topic_id" id="topic_id" value="1" />
                                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                             </ul>
                         </dd>
@@ -143,7 +143,7 @@ function get_topic_list(){
                             <!--日历-->
                             <!-- <input type="text" name="firstPublishDate" id="firstPublishDate" value=""
                                    onClick="WdatePicker()"/>
-                        </dd> --> 
+                        </dd> -->
                         <dd class="addr" id="addr2" style="margin-left: 0px;">
                             <label style="margin-right: 30px;">专题类型</label>
                             <!--级联-->
@@ -185,10 +185,10 @@ function get_topic_list(){
 
 
 <?php
-	include 'footer.php' 
+	include 'footer.php'
 ?>
 <script type="text/javascript">
     function checkField(value1){
-        document.getElementById("topic_id").value=value1; 
+        document.getElementById("topic_id").value=value1;
     }
 </script>
