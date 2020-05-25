@@ -315,7 +315,7 @@ foreach ($updown_record_result_2 as $temp_key) {
 	echo '<tr>';
 	echo '<td height="170" align="center">';
 	echo '<div class="img left">';
-	echo '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'user_id='.$user_id.'" target="_blank">';
+	echo '<a href="./photo.php?photo_id='.$temp_key['photo_id'].'&user_id='.$user_id.'" target="_blank">';
 	echo '<img src="'.$temp_key['photo_address'].'" style="height: 100px;max-width: 100px">';
 	echo '</a>';
 	echo '</div>';
@@ -1210,6 +1210,7 @@ include "footer.php"
                 dataType:"json",
                 success: function(result){
                     console.log(result);
+                    window.location.reload();
 
                 },
                 error: function(xhr,state,errorThrown){
